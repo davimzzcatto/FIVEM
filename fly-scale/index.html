@@ -155,7 +155,7 @@ b, strong{ font-weight: 700; }
 /* moldura de mídia (vídeo/foto do hero) */
 .media{
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   border-radius: 18px;
   border: 2px solid var(--line);
   background: linear-gradient(180deg, var(--panel) 0%, var(--black) 100%);
@@ -163,8 +163,8 @@ b, strong{ font-weight: 700; }
   padding: 1.5rem; text-align: center;
   position: relative; overflow: hidden;
 }
-.media img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.media__ph{ font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-2); }
+.media{ padding: 0; }
+.media video{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
 
 /* ---------- títulos de seção ---------- */
 .sec-h{ font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.2rem); max-width: 30ch; margin-inline: auto; }
@@ -179,20 +179,6 @@ b, strong{ font-weight: 700; }
 .kicker b{ color: var(--red); font-weight: 700; }
 .lede{ color: var(--grey); max-width: 62ch; margin-inline: auto; margin-top: 1rem; font-size: 1.02rem; }
 .lede--l{ margin-inline: 0; }
-
-/* ---------- slots a preencher ---------- */
-.todo{
-  border: 1px dashed var(--red);
-  background: rgba(255,43,31,.08);
-  border-radius: 10px;
-  padding: 1rem 1.1rem;
-  display: flex; flex-direction: column; gap: .35rem;
-  text-align: left;
-}
-.todo__tag{ font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
-.todo__txt{ font-size: .82rem; color: var(--grey); line-height: 1.5; }
-.todo--light{ border-color: #C8342A; background: rgba(255,43,31,.07); }
-.todo--light .todo__txt{ color: #6B6B6B; }
 
 /* ---------- comparação: card branco vs. card quente, escalonados ---------- */
 .cmp{ display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-top: 2.4rem; }
@@ -236,13 +222,6 @@ b, strong{ font-weight: 700; }
 @media (min-width: 760px){ .gallery{ grid-template-columns: repeat(4, 1fr); gap: .85rem; } }
 .shot{ position: relative; margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid #1E1E1E; background: var(--panel); aspect-ratio: 4 / 3; }
 .shot img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.shot__ph{
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  padding: 1rem; text-align: center;
-  font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-2);
-  background: repeating-linear-gradient(135deg, #131313 0 10px, #191919 10px 20px);
-}
 .shot figcaption{
   position: absolute; inset: auto 0 0 0;
   padding: 1.5rem .75rem .55rem;
@@ -265,36 +244,20 @@ b, strong{ font-weight: 700; }
 .tile h4{ font-size: 1.15rem; font-weight: 600; }
 .tile p{ font-size: .9rem; color: var(--grey); line-height: 1.55; }
 
-/* ---------- tabela de nichos ---------- */
-.tbl-wrap{ overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; margin-top: 2rem; }
-table{ border-collapse: collapse; width: 100%; min-width: 820px; font-size: .88rem; }
-thead th{
-  text-align: left; padding: .95rem 1rem;
-  background: #121212; border-bottom: 1px solid var(--line);
-  font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red);
-  white-space: nowrap;
+/* ---------- comparação de tempo: sozinho x Fly Scale ---------- */
+.race{ display: flex; flex-direction: column; gap: .7rem; margin-top: 2.2rem; }
+.race__bar{
+  display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap;
+  padding: .9rem 1.15rem; border-radius: 8px; min-width: 240px;
 }
-tbody th{
-  text-align: left; padding: .9rem 1rem; border-bottom: 1px solid #1A1A1A;
-  font-weight: 600; font-size: .95rem; color: var(--white); white-space: nowrap; vertical-align: top;
-}
-tbody td{ padding: .9rem 1rem; border-bottom: 1px solid #1A1A1A; color: var(--grey); vertical-align: top; line-height: 1.45; }
-tbody tr:last-child th, tbody tr:last-child td{ border-bottom: 0; }
-tbody tr:nth-child(even){ background: #0A0A0A; }
-.num{ font-variant-numeric: tabular-nums; color: var(--white); }
-
-/* ---------- funil ---------- */
-.funnel{ display: flex; flex-direction: column; gap: .5rem; margin-top: 2rem; }
-.fstep{ display: flex; flex-direction: column; gap: .25rem; align-items: flex-start; }
-.fbar{
-  display: flex; align-items: center; gap: .8rem;
-  padding: .7rem 1.05rem; border-radius: 8px; min-width: 230px;
-  background: linear-gradient(90deg, var(--orange), var(--red-deep));
-  color: var(--white);
-}
-.fbar b{ font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-.fbar span{ font-size: .88rem; font-weight: 600; }
-.frate{ font-size: .78rem; color: var(--grey-2); padding-left: .1rem; }
+.race__bar b{ font-size: 1.05rem; font-weight: 700; }
+.race__bar span{ font-size: .88rem; }
+.race__slow{ background: linear-gradient(90deg, var(--orange), var(--red-deep)); color: var(--white); }
+.race__slow span{ color: rgba(255,255,255,.85); }
+.race__fast{ background: var(--white); color: var(--ink); }
+.race__fast span{ color: #5A5A5A; }
+.costs{ display: grid; grid-template-columns: 1fr; gap: .9rem; margin-top: 2.2rem; text-align: left; }
+@media (min-width: 760px){ .costs{ grid-template-columns: 1fr 1fr; gap: .9rem 2rem; } }
 
 /* ---------- container escuro da oferta ---------- */
 .shell{
@@ -398,8 +361,9 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
 /* ---------- quem conduz ---------- */
 .who{ display: grid; grid-template-columns: 1fr; gap: clamp(1.4rem, 1rem + 2vw, 2.6rem); margin-top: 2rem; align-items: start; }
 @media (min-width: 860px){ .who{ grid-template-columns: 300px 1fr; } }
+.who--nophoto{ grid-template-columns: 1fr !important; }
 .who__photo{
-  border: 1px dashed var(--red); background: rgba(255,43,31,.07); border-radius: 16px;
+  margin: 0; border: 1px solid #1F1F1F; background: var(--panel); border-radius: 16px;
   aspect-ratio: 4 / 5; display: flex; flex-direction: column; gap: .5rem;
   align-items: center; justify-content: center; padding: 1.5rem; text-align: center;
   position: relative; overflow: hidden;
@@ -417,6 +381,20 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
   font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-2);
   background: var(--panel-2); text-align: center; padding: .5rem;
 }
+
+/* ---------- depoimentos ---------- */
+.quotes{ display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2.2rem; text-align: left; }
+@media (min-width: 860px){ .quotes{ grid-template-columns: repeat(3, 1fr); } }
+.quote{
+  border: 1px solid #1F1F1F; border-radius: 16px;
+  background: linear-gradient(180deg, var(--panel) 0%, var(--black) 100%);
+  padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;
+}
+.quote p{ font-size: .95rem; line-height: 1.6; }
+.quote figcaption{ display: flex; align-items: center; gap: .7rem; margin-top: auto; }
+.quote img{ width: 42px; height: 42px; border-radius: 50%; object-fit: cover; flex: none; }
+.quote b{ display: block; font-size: .9rem; }
+.quote small{ font-size: .75rem; color: var(--grey-2); }
 
 /* ---------- suporte ---------- */
 .help{ display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-top: 2rem; }
@@ -479,7 +457,7 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/>
         </svg>
-        <span id="pill-date">Data a definir · Presencial ou Online</span>
+        <span id="pill-date">26 e 27 de Setembro · Presencial ou Online</span>
       </span>
 
       <h1>Dois dias construindo a operação da sua agência, para você sair com ela <span class="mk">rodando</span>.</h1>
@@ -496,14 +474,17 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
       </div>
 
       <div id="clock" class="clock">
-        <span class="clock__off">O contador liga quando a data da turma for definida</span>
+        <span class="clock__off">Carregando…</span>
       </div>
 
     </div>
 
     <div class="media">
-      <span class="media__ph">A preencher · vídeo de convite<br>ou foto de abertura</span>
-      <img src="img/hero.jpg" alt="" onerror="this.hidden=true">
+      <video controls playsinline preload="metadata"
+             poster="media/convite-poster.jpg"
+             aria-label="Vídeo de convite do Fly Scale">
+        <source src="media/convite.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </header>
@@ -545,20 +526,16 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
     <p class="lede">O Fly Scale não é lançamento. Já rodou turma após turma na nossa sede, em Araçatuba. A modalidade online abre agora para quem não conseguia viajar — com a mesma grade.</p>
 
     <div class="gallery">
-      <figure class="shot"><span class="shot__ph">Turma na sede · Araçatuba/SP</span><img src="img/turma-01.jpg" alt="Turma do Fly Scale reunida na escada do hall da sede do Grupo Fly." loading="lazy" onerror="this.hidden=true"><figcaption>Turma na sede</figcaption></figure>
-      <figure class="shot"><span class="shot__ph">Implementação presencial</span><img src="img/turma-02.jpg" alt="Participantes do Fly Scale posando no hall da sede." loading="lazy" onerror="this.hidden=true"><figcaption>Implementação presencial</figcaption></figure>
-      <figure class="shot"><span class="shot__ph">Credenciais Fly Scale</span><img src="img/turma-03.jpg" alt="Turma do Fly Scale com as credenciais do evento." loading="lazy" onerror="this.hidden=true"><figcaption>Credenciais Fly Scale</figcaption></figure>
-      <figure class="shot"><span class="shot__ph">Dois dias de imersão</span><img src="img/turma-04.jpg" alt="Turma do Fly Scale sob a claraboia do hall da sede." loading="lazy" onerror="this.hidden=true"><figcaption>Dois dias de imersão</figcaption></figure>
-      <figure class="shot"><span class="shot__ph">Turma intimista</span><img src="img/turma-05.jpg" alt="Turma do Fly Scale reunida no hall da sede." loading="lazy" onerror="this.hidden=true"><figcaption>Turma intimista</figcaption></figure>
-      <figure class="shot"><span class="shot__ph">Sede do Grupo Fly</span><img src="img/turma-06.jpg" alt="Turma do Fly Scale na área de estar da sede." loading="lazy" onerror="this.hidden=true"><figcaption>Sede do Grupo Fly</figcaption></figure>
-      <figure class="shot"><span class="shot__ph">Turma após turma</span><img src="img/turma-07.jpg" alt="Turma do Fly Scale posando na escada do hall." loading="lazy" onerror="this.hidden=true"><figcaption>Turma após turma</figcaption></figure>
-      <figure class="shot"><span class="shot__ph">Fachada · VoeFly Viagens</span><img src="img/turma-08.jpg" alt="Turma do Fly Scale em frente à fachada da sede, VoeFly Viagens." loading="lazy" onerror="this.hidden=true"><figcaption>Fachada · VoeFly</figcaption></figure>
+      <figure class="shot"><img src="img/turma-01.jpg" alt="Turma do Fly Scale reunida na escada do hall da sede do Grupo Fly." onerror="this.hidden=true"><figcaption>Turma na sede</figcaption></figure>
+      <figure class="shot"><img src="img/turma-02.jpg" alt="Participantes do Fly Scale posando no hall da sede." onerror="this.hidden=true"><figcaption>Implementação presencial</figcaption></figure>
+      <figure class="shot"><img src="img/turma-03.jpg" alt="Turma do Fly Scale com as credenciais do evento." onerror="this.hidden=true"><figcaption>Credenciais Fly Scale</figcaption></figure>
+      <figure class="shot"><img src="img/turma-04.jpg" alt="Turma do Fly Scale sob a claraboia do hall da sede." onerror="this.hidden=true"><figcaption>Dois dias de imersão</figcaption></figure>
+      <figure class="shot"><img src="img/turma-05.jpg" alt="Turma do Fly Scale reunida no hall da sede." onerror="this.hidden=true"><figcaption>Turma intimista</figcaption></figure>
+      <figure class="shot"><img src="img/turma-06.jpg" alt="Turma do Fly Scale na área de estar da sede." onerror="this.hidden=true"><figcaption>Sede do Grupo Fly</figcaption></figure>
+      <figure class="shot"><img src="img/turma-07.jpg" alt="Turma do Fly Scale posando na escada do hall." onerror="this.hidden=true"><figcaption>Turma após turma</figcaption></figure>
+      <figure class="shot"><img src="img/turma-08.jpg" alt="Turma do Fly Scale em frente à fachada da sede, VoeFly Viagens." onerror="this.hidden=true"><figcaption>Fachada · VoeFly</figcaption></figure>
     </div>
 
-    <div class="todo" style="margin-top:1.2rem">
-      <span class="todo__tag">A preencher</span>
-      <span class="todo__txt">Salvar as fotos em <code>img/turma-01.jpg</code> … <code>img/turma-08.jpg</code> (recorte 4:3) e ajustar as legendas com a edição e o mês de cada turma. Confirmar autorização de uso de imagem dos participantes antes de publicar.</span>
-    </div>
   </div>
 </section>
 
@@ -579,44 +556,27 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
   </div>
 </section>
 
-<!-- ================= 6 · NICHOS ================= -->
+<!-- ================= 7 · TEMPO: SOZINHO x FLY SCALE ================= -->
 <section class="sec">
   <div class="wrap center">
-    <h2 class="sec-h">Seis perfis de agência. Você sai com <b>o seu escolhido</b>.</h2>
-    <p class="lede">Cada nicho tem um público, um jeito de prospectar, um ticket e um caminho de emissão diferentes. Nos dois dias a gente cruza o seu momento com essa matriz e trava a decisão.</p>
+    <h2 class="sec-h" style="max-width:34ch">A maior parte das agências leva <span class="mk">meses</span> para chegar onde você chega em dois dias.</h2>
+    <p class="lede">Sem assessoria, cada decisão estrutural vira tentativa e erro — e cada erro custa uma temporada de vendas inteira. No Fly Scale você atravessa todas elas de uma vez, com a equipe do lado.</p>
 
-    <div class="tbl-wrap" style="text-align:left">
-      <table>
-        <thead><tr>
-          <th scope="col">Nicho</th><th scope="col">Público-alvo</th><th scope="col">Prospecção</th>
-          <th scope="col">Volume</th><th scope="col">Ticket</th><th scope="col">Emissão principal</th>
-        </tr></thead>
-        <tbody>
-          <tr><th scope="row">Lazer (pacoteira)</th><td>Classes A, B e C — estilo CVC</td><td class="num">Ativa</td><td class="num">Menor</td><td class="num">Maior</td><td>Consolidadoras e operadoras</td></tr>
-          <tr><th scope="row">Lazer emissiva</th><td>Classe C para baixo</td><td class="num">Ativa</td><td class="num">Maior</td><td class="num">Menor</td><td>Milhas e vouchers</td></tr>
-          <tr><th scope="row">Corporativo (B2B)</th><td>Classe A e empresas</td><td class="num">Passiva</td><td class="num">Menor</td><td class="num">Maior</td><td>Consolidadoras e operadoras — exige fluxo de caixa</td></tr>
-          <tr><th scope="row">Gestão de milhas</th><td>Classes A, B e C — CPF e empresas</td><td class="num">Ativa</td><td class="num">Menor</td><td class="num">Maior</td><td>Consolidadoras e operadoras</td></tr>
-          <tr><th scope="row">Expedição e grupos</th><td>Classe A</td><td class="num">Ativa</td><td class="num">Menor</td><td class="num">Maior</td><td>Direto com prestadores</td></tr>
-          <tr><th scope="row">Especialização</th><td>Classes A e B — vistos e Disney</td><td class="num">Passiva</td><td class="num">Menor</td><td class="num">Maior</td><td>Operadoras e serviços de vistos</td></tr>
-        </tbody>
-      </table>
+    <div class="race">
+      <div class="race__bar race__slow" style="width:100%">
+        <b>Sozinho</b><span>meses de tentativa e erro, uma decisão por vez</span>
+      </div>
+      <div class="race__bar race__fast" style="width:min(100%, max(240px, 24%))">
+        <b>Com o Fly Scale</b><span>dois dias</span>
+      </div>
     </div>
-  </div>
-</section>
 
-<!-- ================= 7 · FUNIL ================= -->
-<section class="sec">
-  <div class="wrap center">
-    <h2 class="sec-h">Você sai sabendo o que <b>cada cem leads</b> devem virar.</h2>
-    <p class="lede">É esta a régua que a gente instala na sua operação. Sem ela, você não sabe se o problema está no tráfego, no atendimento ou no fechamento.</p>
-
-    <div class="funnel" style="text-align:left" role="img" aria-label="Funil de referência: de 100 leads, 35 conexões, 20 orçamentos, 10 reuniões e 3 fechamentos.">
-      <div class="fstep"><div class="fbar" style="width:100%"><b>100</b><span>Leads</span></div></div>
-      <div class="fstep"><div class="fbar" style="width:min(100%, max(230px, 45%))"><b>35</b><span>Conexão</span></div><span class="frate">35% dos leads</span></div>
-      <div class="fstep"><div class="fbar" style="width:min(100%, max(230px, 34%))"><b>20</b><span>Orçamento</span></div><span class="frate">57% das conexões</span></div>
-      <div class="fstep"><div class="fbar" style="width:min(100%, max(230px, 27%))"><b>10</b><span>Reunião</span></div><span class="frate">50% dos orçamentos</span></div>
-      <div class="fstep"><div class="fbar" style="width:min(100%, max(230px, 22%))"><b>3</b><span>Fechamento</span></div><span class="frate">30% das reuniões</span></div>
-    </div>
+    <ul class="chev costs">
+      <li>Escolher o nicho e descobrir que era o errado depois de uma temporada</li>
+      <li>Credenciar fornecedor que não atende o público que você quer vender</li>
+      <li>Rodar tráfego pago sem processo comercial atrás para receber o lead</li>
+      <li>Descobrir a margem real só quando o mês fecha</li>
+    </ul>
   </div>
 </section>
 
@@ -656,10 +616,6 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
               <p class="price__v"><sup>R$</sup>5.000</p>
               <p class="price__sub">Já incluída para quem está na AHO Presencial e no combo Fly Growth.</p>
             </div>
-            <div class="todo">
-              <span class="todo__tag">A definir com a liderança</span>
-              <span class="todo__txt">Parcelamento, política de lotes e link de checkout.</span>
-            </div>
             <a class="btn btn--wide" href="#suporte">Garantir minha cadeira</a>
             <p class="scarce">Apenas 30 cadeiras por turma</p>
           </div>
@@ -685,10 +641,6 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
               <p class="price__k">Investimento por vaga</p>
               <p class="price__v"><span class="tbd">a definir</span></p>
               <p class="price__sub">Valor da modalidade online a divulgar conforme direcionamento da liderança.</p>
-            </div>
-            <div class="todo">
-              <span class="todo__tag">A definir antes de publicar</span>
-              <span class="todo__txt">Preço, lotes e checkout. Plataforma da transmissão, limite de vagas, se há gravação e o que muda em relação ao presencial.</span>
             </div>
             <a class="btn btn--ghost btn--wide" href="#suporte">Quero a vaga online</a>
             <p class="scarce">Vagas limitadas por turma</p>
@@ -769,10 +721,6 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
         <h3>Garantia de 7 dias</h3>
         <p>A sua inscrição no Fly Scale tem garantia de 7 dias a contar da compra. Se por qualquer motivo você se arrepender nesse prazo, devolvemos 100% do valor.</p>
         <p><strong>Mas atenção:</strong> depois que a implementação acontece, não é possível solicitar cancelamento. É uma experiência prática, ao vivo, com acesso completo à equipe e aos materiais da turma — uma vez entregue, o valor não é mais reembolsável.</p>
-        <div class="todo todo--light">
-          <span class="todo__tag">A validar antes de publicar</span>
-          <span class="todo__txt">Confirmar com a liderança e com o jurídico o prazo, a redação e a política de remarcação de vaga. Este texto é um rascunho estrutural.</span>
-        </div>
       </div>
     </div>
   </div>
@@ -792,7 +740,6 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
         <summary>O online é ao vivo ou gravado?</summary>
         <div class="ans">
           <p>Ao vivo. O Fly Scale depende de você executando junto — não é curso gravado para assistir depois.</p>
-          <div class="todo" style="margin-top:.9rem"><span class="todo__tag">A preencher</span><span class="todo__txt">Definir se a turma online tem acesso à gravação depois e por quanto tempo.</span></div>
         </div>
       </details>
       <details>
@@ -816,16 +763,8 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
         <p class="ans">Na sede do Grupo Fly, em Araçatuba, interior de São Paulo. Depois da inscrição você recebe por e-mail e WhatsApp o endereço completo, os horários e as orientações de chegada.</p>
       </details>
       <details>
-        <summary>No presencial, passagem, hospedagem e alimentação estão incluídas?</summary>
-        <div class="ans"><div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Definir o que a cadeira cobre (coffee break, almoço, hotel parceiro) e o que fica por conta do participante.</span></div></div>
-      </details>
-      <details>
         <summary>Posso parcelar?</summary>
-        <div class="ans"><div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Inserir as condições de parcelamento e formas de pagamento das duas modalidades, exatamente como direcionado pela liderança.</span></div></div>
-      </details>
-      <details>
-        <summary>Comprei o online e mudei de ideia. Consigo migrar para o presencial?</summary>
-        <div class="ans"><div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Definir a política de upgrade entre modalidades: se existe, se paga a diferença, até quando pode pedir.</span></div></div>
+        <p class="ans">As formas de pagamento e as condições de parcelamento são passadas pelo suporte oficial no momento da inscrição. Fale com a gente pelo botão no fim da página.</p>
       </details>
       <details>
         <summary>Ainda com dúvidas?</summary>
@@ -840,18 +779,14 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
   <div class="wrap center">
     <h2 class="sec-h">Quem conduz a <b>implementação</b>?</h2>
 
-    <div class="who" style="text-align:left">
-      <div class="who__photo">
-        <span class="todo__tag">A preencher</span>
-        <span class="todo__txt">Foto oficial do Luiz Gregatti (vertical, 4:5)</span>
-        <img src="img/luiz.jpg" alt="" onerror="this.hidden=true">
-      </div>
+    <div class="who" id="who" style="text-align:left">
+      <figure class="who__photo" id="who-photo">
+        <img src="img/luiz.jpg" alt="Luiz Gregatti, do Grupo Fly." onerror="this.hidden=true">
+      </figure>
       <div class="who__card">
         <h3 class="who__name">Luiz Gregatti</h3>
         <p class="who__role">Grupo Fly · Conduz a implementação</p>
         <p>Nos dois dias, o acesso é direto ao Luiz e a toda a equipe do Grupo Fly — as mesmas pessoas que operam o Viajaflux, a AHO e o Fly Growth no dia a dia.</p>
-        <div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Bio oficial do Luiz Gregatti aprovada pela liderança: trajetória, tempo de mercado e papel no Grupo Fly. Não publicar número de faturamento ou resultado sem validação.</span></div>
-        <div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Bloco de depoimentos reais de participantes de turmas anteriores, com nome, cidade e foto autorizados. Não usar depoimento fictício.</span></div>
       </div>
     </div>
 
@@ -865,6 +800,41 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
   </div>
 </section>
 
+<!-- ================= 13.5 · DEPOIMENTOS =================
+     Pronto para entrar: descomente e troque os três blocos pelos
+     depoimentos reais (nome, cidade e foto autorizados).
+     Fotos em img/depo-01.jpg … img/depo-03.jpg, recorte quadrado.
+
+<section class="sec">
+  <div class="wrap center">
+    <h2 class="sec-h">Quem já passou pela <b>implementação</b></h2>
+    <div class="quotes">
+      <figure class="quote">
+        <p>“TEXTO DO DEPOIMENTO”</p>
+        <figcaption>
+          <img src="img/depo-01.jpg" alt="NOME">
+          <span><b>NOME</b><small>CIDADE/UF</small></span>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <p>“TEXTO DO DEPOIMENTO”</p>
+        <figcaption>
+          <img src="img/depo-02.jpg" alt="NOME">
+          <span><b>NOME</b><small>CIDADE/UF</small></span>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <p>“TEXTO DO DEPOIMENTO”</p>
+        <figcaption>
+          <img src="img/depo-03.jpg" alt="NOME">
+          <span><b>NOME</b><small>CIDADE/UF</small></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+================= fim depoimentos ================= -->
+
 <!-- ================= 14 · SUPORTE ================= -->
 <section class="sec" id="suporte">
   <div class="wrap center">
@@ -875,13 +845,11 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
         <h3>Dúvida sobre vaga, pagamento ou acesso</h3>
         <p>Qualquer dúvida sobre a sua inscrição no Fly Scale é resolvida diretamente com o suporte oficial do Grupo Fly.</p>
         <a class="btn" href="#suporte">Falar com o suporte</a>
-        <div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Link do WhatsApp oficial do suporte.</span></div>
       </div>
       <div class="help__c">
         <h3>Não tem certeza se o contato é oficial?</h3>
         <p>Recebeu mensagem de algum número falando em vaga, cobrança ou pagamento? Antes de responder, confirme. O Grupo Fly só usa os canais oficiais divulgados nesta página.</p>
         <a class="btn btn--ghost" href="#suporte">Ver canais oficiais</a>
-        <div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Listar números e e-mails oficiais, ou plugar o verificador de número.</span></div>
       </div>
     </div>
   </div>
@@ -902,7 +870,7 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
 <div class="dock">
   <div class="wrap dock__in">
     <div class="dock__i">
-      <span class="dock__t" id="dock-when">Presencial em Araçatuba/SP ou online, ao vivo</span>
+      <span class="dock__t" id="dock-when">26 e 27 de Setembro · presencial ou online</span>
       <span class="dock__s">Vagas limitadas · +20h · 2 dias</span>
     </div>
     <a class="btn" href="#oferta">Garantir minha vaga</a>
@@ -917,8 +885,32 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
    TURMA_ROTULO: como aparece na página, ex. "14 e 15 de Novembro"
    Em null, a página mostra "a definir" em vez de uma data falsa.
    ------------------------------------------------------------------ */
-var TURMA_INICIO = null;
-var TURMA_ROTULO = null;
+var TURMA_INICIO = "2026-09-26T09:30:00-03:00";
+var TURMA_ROTULO = "26 e 27 de Setembro";
+
+/* Galeria e retrato só aparecem quando os arquivos existem em img/.
+   Some sem deixar buraco enquanto não existirem. */
+(function () {
+  function settle(imgs, done) {
+    var left = imgs.length, ok = 0;
+    if (!left) return done(0);
+    imgs.forEach(function (im) {
+      function fin(good) { if (good) ok++; if (--left === 0) done(ok); }
+      if (im.complete) fin(im.naturalWidth > 0);
+      else {
+        im.addEventListener('load', function () { fin(true); });
+        im.addEventListener('error', function () { fin(false); });
+      }
+    });
+  }
+  var g = document.querySelector('.gallery');
+  if (g) settle([].slice.call(g.querySelectorAll('img')), function (ok) { if (!ok) g.hidden = true; });
+
+  var wp = document.getElementById('who-photo'), who = document.getElementById('who');
+  if (wp) settle([].slice.call(wp.querySelectorAll('img')), function (ok) {
+    if (!ok) { wp.hidden = true; if (who) who.classList.add('who--nophoto'); }
+  });
+})();
 
 (function () {
   var clock = document.getElementById('clock');
