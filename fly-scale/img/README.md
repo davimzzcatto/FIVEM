@@ -1,10 +1,14 @@
-# Fotos das turmas
+# Imagens da PV
 
-Salve aqui as fotos das turmas anteriores do Fly Scale, recorte 4:3:
+Salve aqui, com estes nomes exatos (a PV referencia eles diretamente):
 
-- `turma-01.jpg` … `turma-06.jpg`
+| Arquivo | Uso | Recorte |
+|---|---|---|
+| `hero.jpg` | mídia de abertura do hero | 16:10 |
+| `turma-01.jpg` … `turma-08.jpg` | galeria das turmas anteriores | 4:3 |
+| `luiz.jpg` | foto do Luiz Gregatti | 4:5 vertical |
 
-A galeria da PV referencia exatamente esses nomes. Enquanto o arquivo não existir,
-o slot mostra um rótulo tracejado no lugar da foto (não quebra o layout).
+Enquanto o arquivo não existir, o slot mostra um rótulo no lugar da imagem
+e o layout não quebra.
 
 Confirmar autorização de uso de imagem dos participantes antes de publicar.

@@ -15,15 +15,15 @@ A PV de referência foi mapeada função por função. A coluna da direita é o 
 
 | # | Função na PV de referência | Fly Scale |
 |---|---|---|
-| 1 | Hero: público + data/formato + headline + CTA + escassez + contador | Marca, tags de público, headline, bordão, painel de embarque com as 2 modalidades, CTA e contador |
-| 2 | Pergunta de transição | “Como você sai da teoria e coloca a sua agência rodando em um único fim de semana?” |
-| 3 | Comparação Sem/Com plano de vendas | **Agência passiva vs. agência ativa** (vem da própria grade do treinamento) |
+| 1 | Faixa vermelha de topo com o público | “Exclusivo para donos de agência de viagens” |
+| 2 | Hero: marca, pill de data, headline com destaque, CTA, escassez, barra de vagas, contador | Igual, com moldura de mídia à direita |
+| 3 | Pergunta de transição + comparação Sem/Com | **Agência passiva** (card branco) vs. **agência ativa** (card vermelho→laranja), escalonados |
 | 4 | Prova social (logos de clientes) | **Galeria das turmas anteriores** — fotos reais na sede |
 | 5 | — | **Matriz dos 6 nichos** (tabela real, com scroll horizontal) |
 | 6 | O que você vai implementar em dois dias | 6 cards de entregável |
 | 7 | — | **Funil**: 100 leads → 35 → 20 → 10 → 3 |
-| 8 | Ancoragem de valor | “Quanto vale parar de adivinhar e passar a ter processo?” |
-| 9 | Oferta + preço + CTA | **Dois bilhetes**: presencial (papel) e online (digital) |
+| 8 | Ancoragem de valor | “Quanto vale transformar sua agência em uma operação previsível?” |
+| 9 | Oferta + preço + CTA dentro do container escuro | **Dois cards de modalidade**: presencial (gradiente quente) e online (escuro) |
 | 10 | Cronograma | Horários do dia + **itinerário completo dos 2 dias** (11 módulos) |
 | 11 | “Por que tão barato?” | **“Por que só 30 cadeiras — e por que agora tem online?”** (mesma função: quebra a objeção central, invertida porque aqui o preço é premium) |
 | 12 | Garantia 7 dias | Garantia (texto em rascunho, precisa de validação) |
@@ -32,37 +32,45 @@ A PV de referência foi mapeada função por função. A coluna da direita é o 
 | 15 | Verificador de número oficial | Canais oficiais / antifraude |
 | 16 | Rodapé | Rodapé Grupo Fly |
 
-CTAs: hero, barra fixa (sempre visível), ancoragem, os dois bilhetes, objeção e suporte.
+CTAs: hero, barra fixa (sempre visível), os dois cards de modalidade, a faixa de objeção e o suporte.
 
 ---
 
 ## Identidade
 
-Mundo visual único e escuro — commitado, sem tema claro, como uma PV de marca. Os tokens
-estão todos no `:root` do `index.html`.
-
-**Cores** — tiradas do logo Fly Scale (taupe + creme sobre fundo escuro):
+O sistema visual é modelado 1:1 na PV de referência (evento da Sand Academy), com os
+valores medidos direto do CSS dela. Tokens todos no `:root` do `index.html`.
 
 | Token | Valor | Uso |
 |---|---|---|
-| `--ink` / `--ink-2` | `#100F0C` / `#0A0908` | chão (near-black de viés quente) |
-| `--cream` | `#E8E2D5` | wordmark, títulos, cor de ação (botões) |
-| `--taupe` | `#B8B1A3` | símbolo, eyebrows, detalhes |
-| `--paper` | `#E8E2D5` | papel do bilhete presencial (é o próprio creme da marca) |
-| `--rust` | `#C1614A` | semântico: agência passiva, escassez, slots a preencher |
-| `--sage` | `#7D9471` | semântico: agência ativa |
+| `--black` | `#000000` | fundo da página, preto puro |
+| `--red` | `#FF2B1F` | caixa de destaque inline no título, bullets `›`, faixa de topo |
+| `--red-2` | `#E8290F` | topo da faixa vermelho→preto |
+| `--orange` / `--red-deep` | `#FE4717` / `#8B0C09` | gradiente do card "agência ativa" |
+| `--green-1` / `--green-2` | `#15EA5F` / `#45FDA4` | gradiente do botão CTA |
+| `--panel` / `--line` | `#141414` / `#2D2D2D` | container escuro e bordas finas |
+| `--grey` / `--grey-2` | `#929292` / `#6C6C6C` | texto de apoio |
+| `--ink` | `#333333` | texto sobre o card branco |
 
-**Tipografia**: Nunito (display — geométrica arredondada, casa com o wordmark),
-Instrument Sans (corpo), IBM Plex Mono (códigos, horários, preços — vernáculo de e-ticket).
+Padrões copiados da referência:
 
-**Conceito**: o material codifica a modalidade. O bilhete **presencial** é um cartão de
-embarque em papel creme, com picotado; o **online** é um cartão digital, escuro, como tela.
+- **Headings em weight 400**, grandes. O peso vem do `<b>` inline e da caixa vermelha
+  `.mk`, não do próprio heading — é a assinatura tipográfica da página.
+- **CTA**: `linear-gradient(116deg, #15EA5F, #45FDA4)`, texto preto, radius 10px,
+  padding 20px 23px.
+- **Comparação**: card branco (radius 20px, padding 33/30/30) contra card em gradiente
+  vermelho→laranja, escalonados verticalmente no desktop.
+- **Container da oferta**: `linear-gradient(#141414, #000)`, radius 26px,
+  borda `2px solid #2D2D2D`.
+- **Quebra de objeção**: faixa full-bleed em gradiente vermelho→preto.
+- **Bullets**: chevron `›` vermelho.
 
-O símbolo Fly Scale está reconstruído em SVG inline (`<symbol id="fs-mark">`).
-**Substituir pelo arquivo oficial de marca antes de publicar** — foi remontado a partir de
-uma imagem de referência, não é o vetor original.
+**Tipografia**: a referência usa Switzer, que não está no Google Fonts. Substituída por
+**Figtree**, a grotesca geométrica mais próxima disponível. Se quiserem fidelidade total,
+licenciar Switzer e trocar a `--f` mais o `@font-face`.
 
----
+O símbolo Fly Scale está reconstruído em SVG inline (`<symbol id="fs-mark">`) a partir de
+uma imagem de referência. **Substituir pelo arquivo oficial de marca antes de publicar.**
 
 ## O que falta preencher
 
@@ -85,9 +93,10 @@ Busque por `class="todo` no `index.html`.
 - Link do WhatsApp oficial do suporte e lista de canais oficiais
 
 ### Depende de conteúdo
-- Fotos das turmas em `img/turma-01.jpg` … `img/turma-06.jpg`, recorte 4:3
+- Fotos das turmas em `img/turma-01.jpg` … `img/turma-08.jpg`, recorte 4:3
   — **confirmar autorização de uso de imagem dos participantes**
-- Foto oficial do Luiz Gregatti (vertical, 4:5)
+- Foto oficial do Luiz Gregatti em `img/luiz.jpg` (vertical, 4:5)
+- Vídeo de convite ou foto de abertura do hero em `img/hero.jpg` (16:10)
 - Bio oficial do Luiz aprovada pela liderança
 - Depoimentos reais de participantes (nome, cidade, foto autorizados)
 - Arquivos oficiais de marca: Fly Scale, Grupo Fly, Viajaflux, AHO, Fly Growth

@@ -1,1884 +1,860 @@
 <title>Fly Scale</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&display=swap">
 
 <style>
 /* ============================================================
-   FLY SCALE — Página de vendas (implementação presencial)
-   Identidade: marca Fly Scale (taupe + creme) sobre chão warm-dark.
-   Mundo visual único e commitado; todos os tokens no :root.
+   FLY SCALE — PV
+   Sistema visual modelado 1:1 na PV de referência:
+   preto puro, headings leves com caixas vermelhas inline,
+   CTA em gradiente verde, cards branco vs. vermelho-laranja,
+   container escuro de borda fina e faixa vermelho→preto.
    ============================================================ */
 :root{
-  /* chão e superfícies — near-black de viés quente, para casar com o creme */
-  --ink:        #100F0C;
-  --ink-2:      #0A0908;
-  --panel:      #1A1814;
-  --panel-2:    #23201A;
-  --line:       #302C24;
-  --line-soft:  #24211B;
+  --black:      #000000;
+  --panel:      #141414;
+  --panel-2:    #0D0D0D;
+  --line:       #2D2D2D;
 
-  /* marca */
-  --cream:      #E8E2D5;   /* wordmark Fly Scale */
-  --cream-hi:   #F4F0E7;
-  --taupe:      #B8B1A3;   /* símbolo Fly Scale */
-  --taupe-lo:   #8B8578;
+  --red:        #FF2B1F;   /* caixa de destaque / bullets */
+  --red-2:      #E8290F;   /* topo da faixa */
+  --red-deep:   #8B0C09;   /* base do card quente */
+  --orange:     #FE4717;   /* topo do card quente */
 
-  /* papel do cartão de embarque = o próprio creme da marca */
-  --paper:      #E8E2D5;
-  --paper-2:    #D7D0BF;
-  --paper-ink:  #17150F;
-  --paper-mut:  #6A6355;
+  --green-1:    #15EA5F;
+  --green-2:    #45FDA4;
 
-  /* texto — neutros quentes, escolhidos e não herdados */
-  --text:       #EDE8DD;
-  --text-2:     #B3ABA0;
-  --muted:      #8A8377;
+  --white:      #FFFFFF;
+  --grey:       #929292;
+  --grey-2:     #6C6C6C;
+  --ink:        #333333;   /* texto sobre card branco */
 
-  /* semânticos (família quente, separados da marca) */
-  --rust:       #C1614A;
-  --rust-soft:  rgba(193,97,74,.10);
-  --sage:       #7D9471;
-  --sage-soft:  rgba(125,148,113,.10);
-
-  /* tipografia */
-  --f-display: "Nunito", "Segoe UI", system-ui, sans-serif;
-  --f-body:    "Instrument Sans", "Segoe UI", system-ui, sans-serif;
-  --f-mono:    "IBM Plex Mono", ui-monospace, "Courier New", monospace;
-
-  --step--1: clamp(.78rem, .76rem + .1vw, .84rem);
-  --step-0:  clamp(1rem, .97rem + .15vw, 1.08rem);
-  --step-1:  clamp(1.18rem, 1.1rem + .4vw, 1.4rem);
-  --step-2:  clamp(1.45rem, 1.3rem + .8vw, 1.95rem);
-  --step-3:  clamp(1.85rem, 1.55rem + 1.5vw, 2.9rem);
-  --step-4:  clamp(2.3rem, 1.7rem + 2.9vw, 4.35rem);
+  --f: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
   --wrap: 1140px;
-  --pad: clamp(1.15rem, .6rem + 2.4vw, 2.5rem);
-  --sec-y: clamp(3.6rem, 2rem + 6vw, 6.75rem);
-  --r: 4px;
+  --pad: clamp(1.1rem, .5rem + 2.4vw, 2.5rem);
+  --sec-y: clamp(3.4rem, 2rem + 5.5vw, 6.5rem);
 }
 
 *, *::before, *::after{ box-sizing: border-box; }
 
 body{
   margin: 0;
-  background: var(--ink);
-  color: var(--text);
-  font-family: var(--f-body);
-  font-size: var(--step-0);
-  line-height: 1.62;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--f);
+  font-size: 16px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  padding-bottom: 5.5rem; /* espaço para a barra fixa */
+  padding-bottom: 5.5rem;
   overflow-x: hidden;
 }
 
-h1,h2,h3,h4{
-  font-family: var(--f-display);
-  font-weight: 800;
-  line-height: 1.06;
-  letter-spacing: -.02em;
-  text-wrap: balance;
-  margin: 0;
-  color: var(--text);
-}
+/* headings leves, como na referência — o peso vem do destaque inline */
+h1,h2,h3,h4{ font-family: var(--f); font-weight: 400; line-height: 1.16; margin: 0; color: var(--white); }
 p{ margin: 0; }
 a{ color: inherit; }
-strong{ font-weight: 600; color: var(--text); }
+b, strong{ font-weight: 700; }
 
-:where(a,button,input,summary):focus-visible{
-  outline: 2px solid var(--cream);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
+:where(a,button,summary,input):focus-visible{ outline: 2px solid var(--green-1); outline-offset: 3px; }
 
-/* ---------- layout ---------- */
-.wrap{
-  width: 100%;
-  max-width: var(--wrap);
-  margin-inline: auto;
-  padding-inline: var(--pad);
-}
-.band{ padding-block: var(--sec-y); border-top: 1px solid var(--line-soft); }
-.band--flush{ border-top: 0; }
-.head-block{ display: flex; flex-direction: column; gap: 1.1rem; }
+.wrap{ width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: var(--pad); }
+.sec{ padding-block: var(--sec-y); }
+.center{ text-align: center; }
 
-/* eyebrow */
-.eyebrow{
-  font-family: var(--f-mono);
-  font-size: var(--step--1);
-  font-weight: 500;
-  letter-spacing: .17em;
-  text-transform: uppercase;
-  color: var(--taupe);
-  display: flex;
-  align-items: center;
-  gap: .7rem;
-  margin: 0;
-}
-.eyebrow::after{
-  content: "";
-  height: 1px;
-  flex: 1;
-  background: linear-gradient(90deg, var(--taupe-lo), transparent);
-  opacity: .5;
-}
-.eyebrow--mut{ color: var(--muted); }
-.eyebrow--mut::after{ background: linear-gradient(90deg, var(--line), transparent); }
+/* caixa vermelha inline no meio do título — a assinatura da referência */
+.mk{ background: var(--red); color: var(--white); padding: 0 .18em; }
 
-.h-sec{ font-size: var(--step-3); }
-.lede{ color: var(--text-2); max-width: 62ch; font-size: var(--step-1); line-height: 1.5; }
-.body-copy{ color: var(--text-2); max-width: 66ch; }
-
-/* ---------- marca ---------- */
-.brand{ display: inline-flex; align-items: center; gap: .8rem; text-decoration: none; }
-.brand__mark{ width: 46px; height: auto; aspect-ratio: 118 / 116; flex: none; display: block; }
-.brand__word{
-  font-family: var(--f-display);
-  font-weight: 800;
-  font-size: var(--step-2);
-  letter-spacing: -.035em;
-  color: var(--cream);
-  line-height: 1;
-}
-
-/* ---------- botão ---------- */
+/* botão CTA em gradiente verde */
 .btn{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: .65rem;
-  padding: 1.05rem 1.9rem;
-  background: var(--cream);
-  color: var(--ink-2);
-  font-family: var(--f-display);
-  font-size: var(--step-0);
-  font-weight: 800;
-  letter-spacing: .01em;
-  text-decoration: none;
-  border: 0;
-  border-radius: var(--r);
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-  cursor: pointer;
   text-align: center;
+  padding: 20px 23px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(116deg, var(--green-1) 0%, var(--green-2) 100%);
+  color: #000;
+  font-family: var(--f);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter .18s ease, transform .18s ease;
 }
-.btn:hover{ background: var(--cream-hi); transform: translateY(-2px); box-shadow: 0 14px 32px -14px rgba(232,226,213,.3); }
-.btn:active{ transform: translateY(0); }
+.btn:hover{ filter: brightness(1.08); transform: translateY(-1px); }
+.btn--wide{ width: 100%; }
 .btn--ghost{
   background: transparent;
-  color: var(--text);
+  color: var(--white);
   border: 1px solid var(--line);
-  font-weight: 700;
-}
-.btn--ghost:hover{ background: var(--panel-2); border-color: var(--taupe-lo); transform: none; box-shadow: none; }
-.btn--wide{ width: 100%; }
-
-.cta-note{
-  font-family: var(--f-mono);
-  font-size: var(--step--1);
-  color: var(--muted);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-/* ---------- slot a preencher (rascunho) ---------- */
-.todo{
-  border: 1px dashed var(--rust);
-  background: var(--rust-soft);
-  border-radius: var(--r);
-  padding: 1.1rem 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: .4rem;
-}
-.todo__tag{
-  font-family: var(--f-mono);
-  font-size: .7rem;
-  font-weight: 600;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--rust);
-}
-.todo__txt{ font-size: var(--step--1); color: var(--text-2); line-height: 1.5; }
-
-/* ============================================================
-   1 · HERO
-   ============================================================ */
-.hero{
-  position: relative;
-  padding-block: clamp(2rem, 1rem + 3vw, 3rem) clamp(3rem, 1.5rem + 5vw, 5rem);
-  background:
-    radial-gradient(115% 80% at 8% 0%, rgba(184,177,163,.10), transparent 58%),
-    linear-gradient(180deg, var(--ink-2), var(--ink) 72%);
-  overflow: hidden;
-}
-.hero::before{ /* hachura de rota, ao fundo */
-  content: "";
-  position: absolute;
-  inset: auto -12% -32% 46%;
-  height: 62%;
-  background: repeating-linear-gradient(115deg, var(--line-soft) 0 1px, transparent 1px 22px);
-  opacity: .55;
-  pointer-events: none;
-}
-.hero > .wrap{ position: relative; }
-.hero__grid{ display: flex; flex-direction: column; gap: clamp(1.5rem, 1rem + 1.8vw, 2.2rem); }
-
-.tag-row{ display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
-.tag{
-  font-family: var(--f-mono);
-  font-size: var(--step--1);
   font-weight: 500;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  padding: .42rem .78rem;
-  border: 1px solid var(--line);
-  border-radius: 2px;
-  color: var(--text-2);
-  background: var(--panel);
 }
-.tag--hot{ border-color: var(--taupe-lo); color: var(--cream); background: rgba(184,177,163,.09); }
+.btn--ghost:hover{ background: #101010; filter: none; }
 
-.hero h1{
-  font-size: var(--step-4);
-  font-weight: 900;
-  max-width: 20ch;
-  letter-spacing: -.032em;
-}
-.hero h1 em{
-  font-style: normal;
-  box-shadow: inset 0 -.13em 0 var(--rust);
-}
-.hero__sub{ color: var(--text-2); font-size: var(--step-1); max-width: 54ch; line-height: 1.5; }
-.hero__slogan{
-  font-family: var(--f-display);
-  font-size: var(--step-1);
-  font-weight: 700;
-  color: var(--cream);
-  letter-spacing: -.015em;
-  padding-left: 1rem;
-  border-left: 3px solid var(--taupe);
-}
-.hero__cta{ display: flex; flex-direction: column; gap: .85rem; align-items: flex-start; }
-
-/* painel de embarque: os dados duros do evento */
-.board{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  background: linear-gradient(180deg, var(--panel), var(--ink));
-  overflow: hidden;
-}
-.board__cell{
-  padding: 1.05rem 1.2rem;
-  border-right: 1px solid var(--line-soft);
-  display: flex;
-  flex-direction: column;
-  gap: .3rem;
-  min-width: 0;
-}
-.board__cell:last-child{ border-right: 0; }
-.board__k{
-  font-family: var(--f-mono);
-  font-size: .68rem;
-  font-weight: 500;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.board__v{
-  font-family: var(--f-mono);
-  font-size: var(--step-1);
-  font-weight: 600;
-  color: var(--cream);
-  font-variant-numeric: tabular-nums;
-  line-height: 1.2;
-  overflow-wrap: break-word;
-}
-.board__v small{
-  display: block;
-  font-size: .7rem;
-  letter-spacing: .1em;
-  color: var(--text-2);
-  font-weight: 400;
-  text-transform: uppercase;
-  margin-top: .15rem;
-}
-
-/* contagem regressiva */
-.clock{ display: flex; gap: .5rem; flex-wrap: wrap; align-items: flex-end; }
-.clock__unit{
-  min-width: 64px;
-  padding: .6rem .5rem .5rem;
-  background: var(--panel-2);
-  border: 1px solid var(--line);
-  border-radius: 2px;
+/* ---------- faixa vermelha de topo ---------- */
+.topbar{
+  background: var(--red);
+  color: var(--white);
   text-align: center;
-}
-.clock__n{
-  display: block;
-  font-family: var(--f-mono);
-  font-size: var(--step-2);
+  padding: 14px 18px;
+  font-size: clamp(.78rem, .72rem + .3vw, 1rem);
   font-weight: 600;
-  color: var(--cream);
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-}
-.clock__l{
-  display: block;
-  margin-top: .3rem;
-  font-family: var(--f-mono);
-  font-size: .62rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.clock__off{
-  font-family: var(--f-mono);
-  font-size: var(--step--1);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  border: 1px dashed var(--line);
-  padding: .7rem .9rem;
-  border-radius: 2px;
-}
-
-/* ============================================================
-   2 · PERGUNTA DE TRANSIÇÃO
-   ============================================================ */
-.pivot{ background: var(--ink-2); }
-.pivot h2{ font-size: var(--step-3); max-width: 30ch; }
-.pivot h2 span{ color: var(--muted); }
-
-/* ============================================================
-   3 · PASSIVA vs ATIVA
-   ============================================================ */
-.vs{ display: grid; gap: 1rem; grid-template-columns: 1fr; margin-top: 2.2rem; }
-@media (min-width: 830px){ .vs{ grid-template-columns: 1fr 1fr; gap: 1.35rem; } }
-
-.col{
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  padding: clamp(1.3rem, .8rem + 1.6vw, 2.1rem);
-  border-radius: var(--r);
-  border: 1px solid var(--line-soft);
-  background: var(--panel);
-}
-.col--bad{ background: linear-gradient(180deg, var(--rust-soft), transparent 55%), var(--ink-2); border-color: rgba(193,97,74,.3); }
-.col--good{ background: linear-gradient(180deg, rgba(184,177,163,.09), transparent 55%), var(--panel); border-color: var(--taupe-lo); }
-
-.col__head{ display: flex; flex-direction: column; gap: .35rem; }
-.col__kicker{
-  font-family: var(--f-mono);
-  font-size: .68rem;
-  font-weight: 600;
-  letter-spacing: .18em;
+  letter-spacing: .01em;
   text-transform: uppercase;
 }
-.col--bad .col__kicker{ color: var(--rust); }
-.col--good .col__kicker{ color: var(--sage); }
-.col__title{ font-size: var(--step-2); }
-.col--bad .col__title{ color: var(--text-2); }
 
-.marks{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .85rem; }
-.marks li{ display: grid; grid-template-columns: 1.35rem 1fr; gap: .8rem; align-items: start; color: var(--text-2); line-height: 1.5; }
-.marks li::before{
-  content: "";
-  width: 1.35rem; height: 1.35rem;
-  border-radius: 50%;
-  margin-top: .18rem;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: .68rem;
-}
-.col--bad .marks li::before{
-  background-color: var(--rust-soft);
-  box-shadow: inset 0 0 0 1px rgba(193,97,74,.42);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 2l8 8M10 2l-8 8' stroke='%23C1614A' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
-}
-.col--good .marks li::before{
-  background-color: var(--sage-soft);
-  box-shadow: inset 0 0 0 1px rgba(125,148,113,.45);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.4l2.6 2.6L10 3.2' stroke='%237D9471' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
-}
+/* ---------- hero ---------- */
+.hero{ padding-block: clamp(2rem, 1rem + 3vw, 3.5rem) clamp(2.5rem, 1.5rem + 3vw, 4rem); }
+.hero__grid{ display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 1rem + 3vw, 3rem); align-items: center; }
+@media (min-width: 940px){ .hero__grid{ grid-template-columns: 1.05fr .95fr; } }
 
-/* ============================================================
-   4 · NICHOS — tabela real
-   ============================================================ */
-.table-scroll{ overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); margin-top: 1.8rem; }
-table{ border-collapse: collapse; width: 100%; min-width: 800px; font-size: var(--step--1); }
-thead th{
-  text-align: left;
-  padding: .95rem 1rem;
-  background: var(--panel-2);
-  border-bottom: 1px solid var(--line);
-  font-family: var(--f-mono);
-  font-size: .68rem;
-  font-weight: 600;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  color: var(--taupe);
-  white-space: nowrap;
-}
-tbody td{
-  padding: .9rem 1rem;
-  border-bottom: 1px solid var(--line-soft);
-  color: var(--text-2);
-  vertical-align: top;
-  line-height: 1.45;
-}
-tbody th{
-  padding: .9rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--line-soft);
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: var(--step-0);
-  color: var(--text);
-  white-space: nowrap;
-  vertical-align: top;
-}
-tbody tr:last-child td, tbody tr:last-child th{ border-bottom: 0; }
-tbody tr:nth-child(even){ background: rgba(232,226,213,.02); }
-.cell-mono{ font-family: var(--f-mono); font-variant-numeric: tabular-nums; color: var(--text); }
+.hero__col{ display: flex; flex-direction: column; gap: 1.4rem; align-items: flex-start; }
 
-/* ============================================================
-   5 · O QUE VOCÊ IMPLEMENTA
-   ============================================================ */
-.deliver{ display: grid; gap: 1rem; grid-template-columns: 1fr; margin-top: 2.2rem; }
-@media (min-width: 700px){ .deliver{ grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1000px){ .deliver{ grid-template-columns: repeat(3, 1fr); } }
+.brand{ display: inline-flex; align-items: center; gap: .7rem; }
+.brand__mark{ width: 44px; height: auto; aspect-ratio: 118 / 116; flex: none; display: block; }
+.brand__word{ font-size: 1.6rem; font-weight: 800; letter-spacing: -.03em; color: #E8E2D5; line-height: 1; }
 
-.dcard{
-  display: flex;
-  flex-direction: column;
-  gap: .55rem;
-  padding: 1.4rem 1.5rem;
-  background: var(--panel);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--r);
-}
-.dcard__n{
-  font-family: var(--f-mono);
-  font-size: .7rem;
-  font-weight: 600;
-  letter-spacing: .16em;
-  color: var(--taupe);
-}
-.dcard h3{ font-size: var(--step-1); font-weight: 700; }
-.dcard p{ color: var(--text-2); font-size: var(--step--1); line-height: 1.55; }
-
-/* ============================================================
-   6 · FUNIL
-   ============================================================ */
-.funnel{ display: flex; flex-direction: column; gap: .55rem; margin-top: 2rem; }
-.fstep{ display: flex; flex-direction: column; gap: .3rem; align-items: flex-start; }
-.fstep__bar{
-  display: flex;
+.pill{
+  display: inline-flex;
   align-items: center;
-  gap: .8rem;
-  padding: .7rem 1rem;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--taupe), rgba(184,177,163,.3));
-  min-width: 230px;
+  gap: .5rem;
+  padding: .6rem 1.05rem;
+  border: 1px solid #3A3A3A;
+  border-radius: 999px;
+  font-size: .82rem;
+  color: var(--white);
 }
-.fstep__n{
-  font-family: var(--f-mono);
-  font-size: var(--step-1);
-  font-weight: 600;
-  color: var(--ink-2);
-  font-variant-numeric: tabular-nums;
-}
-.fstep__lbl{ font-size: var(--step--1); font-weight: 600; color: var(--ink-2); }
-.fstep__rate{
-  font-family: var(--f-mono);
-  font-size: var(--step--1);
-  color: var(--muted);
-  letter-spacing: .08em;
-  padding-left: .15rem;
-}
+.pill svg{ width: 15px; height: 15px; flex: none; color: var(--white); }
 
-/* ============================================================
-   7 · ANCORAGEM DE VALOR
-   ============================================================ */
-.anchor-box{
-  margin-top: 2rem;
-  padding: clamp(1.4rem, .9rem + 1.8vw, 2.3rem);
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--taupe);
-  border-radius: var(--r);
-  background: var(--panel);
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  align-items: flex-start;
-}
-.anchor-box p{ color: var(--text-2); max-width: 68ch; }
-.anchor-box .kick{
-  font-family: var(--f-display);
-  font-size: var(--step-1);
-  font-weight: 700;
-  color: var(--cream);
-  letter-spacing: -.015em;
-}
+.hero h1{ font-size: clamp(1.85rem, 1.25rem + 2.6vw, 3.2rem); max-width: 24ch; }
+.hero__slogan{ font-size: clamp(1.05rem, .95rem + .5vw, 1.3rem); color: var(--grey); }
+.hero__slogan b{ color: var(--white); }
 
-/* ============================================================
-   PROVA SOCIAL — galeria das turmas anteriores
-   ============================================================ */
-.gallery{
-  display: grid;
-  gap: .7rem;
-  grid-template-columns: repeat(2, 1fr);
-  margin-top: 2.2rem;
-}
-@media (min-width: 720px){ .gallery{ grid-template-columns: repeat(3, 1fr); gap: .85rem; } }
+.limited{ display: inline-flex; align-items: center; gap: .55rem; font-size: .9rem; font-weight: 500; }
+.limited::before{ content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--red); flex: none; }
 
-.shot{
-  position: relative;
-  margin: 0;
-  border-radius: var(--r);
-  overflow: hidden;
-  background: var(--panel-2);
-  border: 1px solid var(--line);
-  aspect-ratio: 4 / 3;
+/* barra de vagas */
+.vagas{ width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: .45rem; }
+.vagas__track{ height: 7px; border-radius: 999px; background: #262626; overflow: hidden; }
+.vagas__fill{ height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--red), var(--orange)); }
+.vagas__lbl{ font-size: .78rem; color: var(--grey-2); }
+
+/* contador */
+.clock{ display: flex; gap: .45rem; flex-wrap: wrap; }
+.clock__u{
+  min-width: 62px; padding: .55rem .4rem .45rem;
+  background: var(--panel); border: 1px solid #232323; border-radius: 8px; text-align: center;
 }
-.shot img{
-  position: absolute;
-  inset: 0;
+.clock__n{ display: block; font-size: 1.5rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.clock__l{ display: block; margin-top: .22rem; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-2); }
+.clock__off{ font-size: .8rem; color: var(--grey-2); border: 1px dashed #2E2E2E; border-radius: 8px; padding: .65rem .85rem; }
+
+/* moldura de mídia (vídeo/foto do hero) */
+.media{
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  border: 2px solid var(--line);
+  background: linear-gradient(180deg, var(--panel) 0%, var(--black) 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem; text-align: center;
+  position: relative; overflow: hidden;
 }
-/* rótulo atrás da foto: aparece enquanto o arquivo não estiver no lugar */
-.shot__ph{
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.2rem;
-  text-align: center;
-  font-family: var(--f-mono);
-  font-size: .64rem;
+.media img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.media__ph{ font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-2); }
+
+/* ---------- títulos de seção ---------- */
+.sec-h{ font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.2rem); max-width: 30ch; margin-inline: auto; }
+.sec-h--l{ margin-inline: 0; }
+.kicker{
+  font-size: clamp(1.15rem, 1rem + .9vw, 1.6rem);
   font-weight: 500;
-  letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--muted);
-  background: repeating-linear-gradient(135deg, var(--panel) 0 10px, var(--panel-2) 10px 20px);
+  color: var(--orange);
+  margin-top: .9rem;
+}
+.kicker b{ color: var(--red); font-weight: 700; }
+.lede{ color: var(--grey); max-width: 62ch; margin-inline: auto; margin-top: 1rem; font-size: 1.02rem; }
+.lede--l{ margin-inline: 0; }
+
+/* ---------- slots a preencher ---------- */
+.todo{
+  border: 1px dashed var(--red);
+  background: rgba(255,43,31,.08);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  display: flex; flex-direction: column; gap: .35rem;
+  text-align: left;
+}
+.todo__tag{ font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+.todo__txt{ font-size: .82rem; color: var(--grey); line-height: 1.5; }
+.todo--light{ border-color: #C8342A; background: rgba(255,43,31,.07); }
+.todo--light .todo__txt{ color: #6B6B6B; }
+
+/* ---------- comparação: card branco vs. card quente, escalonados ---------- */
+.cmp{ display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-top: 2.4rem; }
+@media (min-width: 900px){
+  .cmp{ grid-template-columns: 1fr 1fr; gap: 2.2rem; align-items: start; }
+  .cmp__hot{ margin-top: 3.2rem; }
+}
+
+.card{ border-radius: 20px; padding: 33px 30px 30px; display: flex; flex-direction: column; gap: 1.1rem; text-align: left; }
+.card--white{ background: var(--white); color: var(--ink); }
+.card--hot{
+  background: linear-gradient(150deg, var(--orange) 0%, var(--red-deep) 55%, #2A0703 100%);
+  color: var(--white);
+}
+.card h3{ font-size: 1.35rem; font-weight: 400; }
+.card--white h3{ color: var(--ink); }
+.card h3 u{ font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+/* lista com chevron vermelho */
+.chev{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .9rem; }
+.chev li{
+  position: relative;
+  padding-left: 1.7rem;
+  font-size: .96rem;
+  line-height: 1.5;
+}
+.chev li::before{
+  content: "›";
+  position: absolute;
+  left: .35rem;
+  top: -.1rem;
+  color: var(--red);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.card--hot .chev li::before{ color: #2A0703; }
+
+/* ---------- galeria de turmas ---------- */
+.gallery{ display: grid; grid-template-columns: repeat(2, 1fr); gap: .7rem; margin-top: 2.2rem; }
+@media (min-width: 760px){ .gallery{ grid-template-columns: repeat(4, 1fr); gap: .85rem; } }
+.shot{ position: relative; margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid #1E1E1E; background: var(--panel); aspect-ratio: 4 / 3; }
+.shot img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.shot__ph{
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem; text-align: center;
+  font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-2);
+  background: repeating-linear-gradient(135deg, #131313 0 10px, #191919 10px 20px);
 }
 .shot figcaption{
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 1.6rem .8rem .6rem;
-  background: linear-gradient(180deg, transparent, rgba(10,9,8,.88));
-  font-family: var(--f-mono);
-  font-size: .64rem;
-  font-weight: 500;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  color: var(--cream);
+  position: absolute; inset: auto 0 0 0;
+  padding: 1.5rem .75rem .55rem;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,.9));
+  font-size: .66rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--white);
 }
 
-/* ============================================================
-   8 · OS DOIS BILHETES (oferta)
-   Presencial = cartão em papel · Online = cartão digital.
-   O material codifica a modalidade.
-   ============================================================ */
-.offer{ background: var(--ink-2); }
-/* stretch (e não start): os dois bilhetes ficam da mesma altura e as
-   linhas de preço alinham — é uma comparação, precisa bater. */
-.tickets{ display: grid; gap: 1.2rem; grid-template-columns: 1fr; margin-top: 2.4rem; align-items: stretch; }
-@media (min-width: 940px){ .tickets{ grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+/* ---------- grade de entregáveis ---------- */
+.grid3{ display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2.2rem; }
+@media (min-width: 700px){ .grid3{ grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px){ .grid3{ grid-template-columns: repeat(3, 1fr); } }
+.tile{
+  border-radius: 16px;
+  border: 1px solid #1F1F1F;
+  background: linear-gradient(180deg, var(--panel) 0%, var(--black) 100%);
+  padding: 1.5rem 1.5rem 1.6rem;
+  display: flex; flex-direction: column; gap: .55rem;
+}
+.tile__n{ font-size: .78rem; font-weight: 700; letter-spacing: .1em; color: var(--red); }
+.tile h4{ font-size: 1.15rem; font-weight: 600; }
+.tile p{ font-size: .9rem; color: var(--grey); line-height: 1.55; }
 
-.tkt{
-  display: flex;
-  flex-direction: column;
-  border-radius: 6px;
-  overflow: hidden;
+/* ---------- tabela de nichos ---------- */
+.tbl-wrap{ overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; margin-top: 2rem; }
+table{ border-collapse: collapse; width: 100%; min-width: 820px; font-size: .88rem; }
+thead th{
+  text-align: left; padding: .95rem 1rem;
+  background: #121212; border-bottom: 1px solid var(--line);
+  font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red);
+  white-space: nowrap;
 }
-.tkt--paper{
-  background: var(--paper);
-  color: var(--paper-ink);
-  box-shadow: 0 30px 70px -34px rgba(0,0,0,.8);
+tbody th{
+  text-align: left; padding: .9rem 1rem; border-bottom: 1px solid #1A1A1A;
+  font-weight: 600; font-size: .95rem; color: var(--white); white-space: nowrap; vertical-align: top;
 }
-.tkt--screen{
-  background: var(--panel);
-  color: var(--text);
-  border: 1px solid var(--taupe-lo);
-}
+tbody td{ padding: .9rem 1rem; border-bottom: 1px solid #1A1A1A; color: var(--grey); vertical-align: top; line-height: 1.45; }
+tbody tr:last-child th, tbody tr:last-child td{ border-bottom: 0; }
+tbody tr:nth-child(even){ background: #0A0A0A; }
+.num{ font-variant-numeric: tabular-nums; color: var(--white); }
 
-.tkt__top{ padding: clamp(1.4rem, 1rem + 1.6vw, 2.1rem); display: flex; flex-direction: column; gap: 1.2rem; }
+/* ---------- funil ---------- */
+.funnel{ display: flex; flex-direction: column; gap: .5rem; margin-top: 2rem; }
+.fstep{ display: flex; flex-direction: column; gap: .25rem; align-items: flex-start; }
+.fbar{
+  display: flex; align-items: center; gap: .8rem;
+  padding: .7rem 1.05rem; border-radius: 8px; min-width: 230px;
+  background: linear-gradient(90deg, var(--orange), var(--red-deep));
+  color: var(--white);
+}
+.fbar b{ font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.fbar span{ font-size: .88rem; font-weight: 600; }
+.frate{ font-size: .78rem; color: var(--grey-2); padding-left: .1rem; }
 
-.tkt__brand{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding-bottom: .95rem;
+/* ---------- container escuro da oferta ---------- */
+.shell{
+  margin-top: 2.4rem;
+  border: 2px solid var(--line);
+  border-radius: 26px;
+  background: linear-gradient(180deg, var(--panel) 0%, var(--black) 100%);
+  padding: clamp(1.5rem, 1rem + 2.4vw, 2.5rem) clamp(1.1rem, .7rem + 2vw, 2.5rem) clamp(1.5rem, 1rem + 2vw, 2.5rem);
 }
-.tkt--paper .tkt__brand{ border-bottom: 1px solid var(--paper-2); }
-.tkt--screen .tkt__brand{ border-bottom: 1px solid var(--line); }
-.tkt__brand .brand__word{ font-size: var(--step-1); }
-.tkt--paper .tkt__brand .brand__word{ color: var(--paper-ink); }
+.shell__copy{ display: flex; flex-direction: column; gap: 1rem; max-width: 60ch; margin-inline: auto; text-align: center; }
+.shell__copy p{ color: var(--grey); }
+.shell__copy p b{ color: var(--white); }
 
-.tkt__head{ display: flex; flex-direction: column; gap: .5rem; }
-.tkt__mode{
-  font-family: var(--f-mono);
-  font-size: .68rem;
-  font-weight: 600;
-  letter-spacing: .19em;
-  text-transform: uppercase;
-}
-.tkt--paper .tkt__mode{ color: var(--paper-mut); }
-.tkt--screen .tkt__mode{ color: var(--taupe); }
-.tkt__title{ font-size: var(--step-2); font-weight: 800; letter-spacing: -.025em; }
-.tkt--paper .tkt__title{ color: var(--paper-ink); }
-.tkt__for{ font-size: var(--step--1); line-height: 1.5; }
-.tkt--paper .tkt__for{ color: var(--paper-mut); }
-.tkt--screen .tkt__for{ color: var(--text-2); }
-/* lado a lado, os dois bilhetes precisam ter as mesmas linhas na mesma altura */
-@media (min-width: 940px){
-  .tkt__title{ min-height: calc(var(--step-2) * 1.06); }
-  .tkt__for{ min-height: calc(1.5em * 3); }
-}
+.offers{ display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-top: 2.2rem; align-items: stretch; }
+@media (min-width: 900px){ .offers{ grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
 
-/* faixa de rota com os dados duros da modalidade */
-.tkt__meta{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
-  border-radius: 3px;
-  overflow: hidden;
-}
-.tkt__mcell{ padding: .7rem .8rem; display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
-.tkt--paper .tkt__mcell{ background: var(--paper-2); border-right: 1px solid rgba(23,21,15,.12); }
-.tkt--screen .tkt__mcell{ background: var(--panel-2); border-right: 1px solid var(--line); }
-.tkt__mcell:last-child{ border-right: 0 !important; }
-.tkt__mk{
-  font-family: var(--f-mono);
-  font-size: .6rem;
-  font-weight: 500;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-}
-.tkt--paper .tkt__mk{ color: var(--paper-mut); }
-.tkt--screen .tkt__mk{ color: var(--muted); }
-.tkt__mv{
-  font-family: var(--f-mono);
-  font-size: var(--step-0);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  line-height: 1.2;
-  overflow-wrap: break-word;
-}
-.tkt--paper .tkt__mv{ color: var(--paper-ink); }
-.tkt--screen .tkt__mv{ color: var(--cream); }
+.offer{ border-radius: 16px; padding: 1.7rem 1.5rem 1.8rem; display: flex; flex-direction: column; gap: 1.2rem; }
+.offer--hot{ background: linear-gradient(180deg, #3E1006 0%, #140302 70%, #0A0202 100%); border: 1px solid #7A2A12; }
+.offer--cold{ background: linear-gradient(180deg, #171717 0%, #0A0A0A 100%); border: 1px solid var(--line); }
 
-.tkt__list{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .65rem; }
-.tkt__list li{
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: .7rem;
-  align-items: baseline;
-  font-size: var(--step--1);
-  line-height: 1.5;
-  padding-bottom: .65rem;
+.offer__tag{ font-size: .7rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--red); }
+.offer--cold .offer__tag{ color: var(--grey); }
+.offer__title{ font-size: 1.5rem; font-weight: 600; }
+.offer__for{ font-size: .88rem; color: var(--grey); line-height: 1.5; }
+.offer__meta{ display: flex; flex-wrap: wrap; gap: .4rem; }
+.chip{
+  font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  padding: .35rem .6rem; border-radius: 6px; background: rgba(255,255,255,.07); color: var(--white);
 }
-.tkt__list li:last-child{ padding-bottom: 0; border-bottom: 0 !important; }
-.tkt__list li::before{ content: "✦"; font-size: .72rem; }
-.tkt--paper .tkt__list li{ color: var(--paper-ink); border-bottom: 1px dotted var(--paper-2); }
-.tkt--paper .tkt__list li::before{ color: var(--taupe-lo); }
-.tkt--screen .tkt__list li{ color: var(--text-2); border-bottom: 1px solid var(--line-soft); }
-.tkt--screen .tkt__list li::before{ color: var(--taupe); }
+.offer__rule{ height: 1px; background: rgba(255,255,255,.14); }
 
-/* stub picotado com o preço */
-.tkt__stub{
-  position: relative;
-  padding: clamp(1.4rem, 1rem + 1.6vw, 2.1rem);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: auto;
-}
-.tkt--paper .tkt__stub{ background: var(--paper-2); }
-.tkt--screen .tkt__stub{ background: var(--panel-2); }
-.tkt__stub::before{
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 0;
-}
-.tkt--paper .tkt__stub::before{ border-top: 2px dashed rgba(23,21,15,.28); }
-.tkt--screen .tkt__stub::before{ border-top: 2px dashed var(--taupe-lo); }
+/* preço, no formato da referência */
+.price__k{ font-size: .78rem; color: var(--grey); }
+.price__v{ font-size: clamp(2.4rem, 1.8rem + 2.4vw, 3.4rem); font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; margin-top: .3rem; }
+.price__v sup{ font-size: .34em; font-weight: 600; top: -.9em; margin-right: .1em; }
+.price__v .tbd{ font-size: .3em; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.price__sub{ font-size: .8rem; color: var(--grey-2); margin-top: .5rem; line-height: 1.5; }
+.offer__foot{ margin-top: auto; padding-top: 1.1rem; display: flex; flex-direction: column; gap: .8rem; }
+.scarce{ font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--red); text-align: center; }
+.offer--cold .scarce{ color: var(--grey); }
 
-.price-k{
-  font-family: var(--f-mono);
-  font-size: .66rem;
-  font-weight: 600;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-}
-.tkt--paper .price-k{ color: var(--paper-mut); }
-.tkt--screen .price-k{ color: var(--muted); }
-.price-v{
-  font-family: var(--f-display);
-  font-size: clamp(2.4rem, 1.7rem + 2.6vw, 3.4rem);
-  font-weight: 900;
-  letter-spacing: -.04em;
-  line-height: .98;
-  font-variant-numeric: tabular-nums;
-  margin-top: .3rem;
-}
-.tkt--paper .price-v{ color: var(--paper-ink); }
-.tkt--screen .price-v{ color: var(--cream); }
-.price-v sup{ font-size: .34em; font-weight: 700; top: -.9em; letter-spacing: 0; margin-right: .1em; }
-.price-v .tbd{ font-size: .34em; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-.price-sub{ font-size: var(--step--1); line-height: 1.5; margin-top: .5rem; }
-.tkt--paper .price-sub{ color: var(--paper-mut); }
-.tkt--screen .price-sub{ color: var(--text-2); }
+/* ---------- cronograma ---------- */
+.hours{ display: grid; grid-template-columns: repeat(auto-fit, minmax(124px, 1fr)); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; margin-top: 2rem; background: var(--panel-2); }
+.hcell{ padding: 1rem 1.15rem; border-right: 1px solid #1C1C1C; display: flex; flex-direction: column; gap: .2rem; }
+.hcell:last-child{ border-right: 0; }
+.hcell b{ font-size: 1.3rem; font-weight: 700; color: var(--white); font-variant-numeric: tabular-nums; }
+.hcell span{ font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-2); }
 
-.tkt--paper .btn{ background: var(--paper-ink); color: var(--paper); }
-.tkt--paper .btn:hover{ background: #2A261C; box-shadow: 0 12px 26px -14px rgba(23,21,15,.55); }
-
-.scarce{
-  font-family: var(--f-mono);
-  font-size: .68rem;
-  font-weight: 600;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  text-align: center;
-}
-.tkt--paper .scarce{ color: #A2402A; }
-.tkt--screen .scarce{ color: var(--taupe); }
-
-.todo--paper{ border-color: rgba(23,21,15,.4); background: rgba(23,21,15,.05); }
-.todo--paper .todo__tag{ color: var(--paper-ink); }
-.todo--paper .todo__txt{ color: var(--paper-mut); }
-
-/* ============================================================
-   9 · ITINERÁRIO
-   ============================================================ */
-.hours{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  overflow: hidden;
-  margin-top: 2.2rem;
-  background: var(--panel);
-}
-.hours__cell{ padding: 1rem 1.1rem; border-right: 1px solid var(--line-soft); display: flex; flex-direction: column; gap: .25rem; }
-.hours__cell:last-child{ border-right: 0; }
-.hours__t{
-  font-family: var(--f-mono);
-  font-size: var(--step-1);
-  font-weight: 600;
-  color: var(--cream);
-  font-variant-numeric: tabular-nums;
-}
-.hours__l{
-  font-family: var(--f-mono);
-  font-size: .66rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.legs{ display: flex; flex-direction: column; gap: clamp(2.2rem, 1.4rem + 2.5vw, 3.4rem); margin-top: 2.6rem; }
-.leg{ display: flex; flex-direction: column; gap: 1.2rem; }
-.leg__head{ display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; padding-bottom: .9rem; border-bottom: 1px solid var(--line); }
-.leg__day{
-  font-family: var(--f-mono);
-  font-size: var(--step-2);
-  font-weight: 600;
-  color: var(--taupe);
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-}
-.leg__title{ font-size: var(--step-1); font-weight: 700; }
-
-.mods{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.mods > li{
-  display: grid;
-  grid-template-columns: 2.7rem 1fr;
-  gap: 1rem;
-  padding: 1.15rem 0;
-  border-bottom: 1px solid var(--line-soft);
-}
+/* ---------- itinerário ---------- */
+.legs{ display: flex; flex-direction: column; gap: clamp(2rem, 1.4rem + 2vw, 3rem); margin-top: 2.4rem; }
+.leg__h{ display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; padding-bottom: .85rem; border-bottom: 1px solid var(--line); }
+.leg__d{ font-size: 1.5rem; font-weight: 700; color: var(--red); line-height: 1; }
+.leg__t{ font-size: 1.15rem; font-weight: 500; }
+.mods{ list-style: none; margin: 0; padding: 0; }
+.mods > li{ display: grid; grid-template-columns: 2.6rem 1fr; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid #171717; }
 .mods > li:last-child{ border-bottom: 0; }
-.mods__n{
-  font-family: var(--f-mono);
-  font-size: var(--step--1);
-  font-weight: 600;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-  padding-top: .2rem;
-}
-.mods__body{ display: flex; flex-direction: column; gap: .45rem; min-width: 0; }
-.mods__body h4{ font-size: var(--step-1); font-weight: 700; }
-.mods__body p{ color: var(--text-2); font-size: var(--step--1); line-height: 1.6; }
+.mods__n{ font-size: .82rem; font-weight: 700; color: var(--grey-2); font-variant-numeric: tabular-nums; padding-top: .2rem; }
+.mods__b{ display: flex; flex-direction: column; gap: .4rem; min-width: 0; }
+.mods__b h4{ font-size: 1.1rem; font-weight: 600; }
+.mods__b p{ font-size: .9rem; color: var(--grey); line-height: 1.6; }
 
-/* ============================================================
-   10 · POR QUE 30 CADEIRAS
-   ============================================================ */
-.letter{ background: var(--ink-2); }
-.letter__body{ display: flex; flex-direction: column; gap: 1.05rem; margin-top: 1.8rem; max-width: 68ch; align-items: flex-start; }
-.letter__body p{ color: var(--text-2); }
-.letter__body p.pop{
-  font-family: var(--f-display);
-  font-size: var(--step-1);
-  font-weight: 800;
-  color: var(--cream);
-  letter-spacing: -.015em;
-}
-
-/* ============================================================
-   11 · GARANTIA
-   ============================================================ */
-.guar{
-  margin-top: 2rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  background: var(--paper);
-  color: var(--paper-ink);
-  border-radius: 6px;
-  overflow: hidden;
-}
-@media (min-width: 800px){ .guar{ grid-template-columns: auto 1fr; } }
-.guar__seal{
-  padding: clamp(1.4rem, 1rem + 1.6vw, 2.2rem);
-  background: var(--paper-2);
-  display: flex;
-  flex-direction: column;
-  gap: .2rem;
-  justify-content: center;
-  align-items: center;
+/* ---------- faixa vermelho → preto (quebra de objeção) ---------- */
+.band{
+  background: linear-gradient(180deg, var(--red-2) 0%, #6E1206 42%, var(--black) 78%);
+  padding-block: clamp(3rem, 2rem + 4vw, 5rem) clamp(3.5rem, 2rem + 5vw, 6rem);
   text-align: center;
-  min-width: 190px;
 }
-.guar__num{
-  font-family: var(--f-display);
-  font-size: clamp(3rem, 2rem + 3vw, 4.2rem);
-  font-weight: 900;
-  line-height: .9;
-  letter-spacing: -.045em;
-  color: var(--paper-ink);
-  font-variant-numeric: tabular-nums;
-}
-.guar__unit{
-  font-family: var(--f-mono);
-  font-size: .7rem;
-  font-weight: 600;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--paper-mut);
-}
-.guar__body{ padding: clamp(1.4rem, 1rem + 1.6vw, 2.2rem); display: flex; flex-direction: column; gap: .9rem; }
-.guar__body h3{ font-size: var(--step-2); color: var(--paper-ink); }
-.guar__body p{ color: var(--paper-mut); font-size: var(--step-0); line-height: 1.55; max-width: 60ch; }
-.guar__body strong{ color: var(--paper-ink); }
+.band h2{ font-size: clamp(1.6rem, 1.2rem + 1.9vw, 2.5rem); max-width: 26ch; margin-inline: auto; }
+.band__body{ display: flex; flex-direction: column; gap: 1.4rem; max-width: 56ch; margin: 1.8rem auto 0; }
+.band__body p{ font-weight: 700; font-size: 1rem; line-height: 1.5; }
+.band__body p.soft{ font-weight: 400; color: rgba(255,255,255,.82); }
 
-/* ============================================================
-   12 · FAQ
-   ============================================================ */
+/* ---------- garantia ---------- */
+.guar{ display: grid; grid-template-columns: 1fr; background: var(--white); color: var(--ink); border-radius: 20px; overflow: hidden; margin-top: 2rem; }
+@media (min-width: 800px){ .guar{ grid-template-columns: auto 1fr; } }
+.guar__seal{ background: #F1F1F1; padding: clamp(1.4rem, 1rem + 1.5vw, 2.2rem); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .1rem; min-width: 190px; }
+.guar__n{ font-size: clamp(3rem, 2rem + 3vw, 4rem); font-weight: 800; line-height: .9; color: var(--red); font-variant-numeric: tabular-nums; }
+.guar__u{ font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--ink); }
+.guar__b{ padding: clamp(1.4rem, 1rem + 1.5vw, 2.2rem); display: flex; flex-direction: column; gap: .9rem; }
+.guar__b h3{ font-size: 1.45rem; font-weight: 600; color: var(--ink); }
+.guar__b p{ font-size: .95rem; color: #5A5A5A; line-height: 1.55; max-width: 62ch; }
+.guar__b strong{ color: var(--ink); }
+
+/* ---------- FAQ ---------- */
 .faq{ margin-top: 2rem; border-top: 1px solid var(--line); }
-details{ border-bottom: 1px solid var(--line-soft); }
+details{ border-bottom: 1px solid #1A1A1A; }
 summary{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.25rem .2rem;
-  cursor: pointer;
-  font-family: var(--f-display);
-  font-size: var(--step-1);
-  font-weight: 700;
-  letter-spacing: -.015em;
-  color: var(--text);
-  list-style: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.2rem .2rem; cursor: pointer; list-style: none;
+  font-size: 1.08rem; font-weight: 600; color: var(--white);
 }
 summary::-webkit-details-marker{ display: none; }
 summary::after{
-  content: "";
-  flex: none;
-  width: .78rem; height: .78rem;
-  border-right: 2px solid var(--taupe);
-  border-bottom: 2px solid var(--taupe);
-  transform: rotate(45deg) translateY(-2px);
-  transition: transform .2s ease;
+  content: ""; flex: none; width: .72rem; height: .72rem;
+  border-right: 2px solid var(--red); border-bottom: 2px solid var(--red);
+  transform: rotate(45deg) translateY(-2px); transition: transform .2s ease;
 }
 details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
-.ans{ padding: 0 .2rem 1.4rem; color: var(--text-2); max-width: 72ch; line-height: 1.62; }
+.ans{ padding: 0 .2rem 1.35rem; color: var(--grey); max-width: 72ch; line-height: 1.6; font-size: .95rem; }
 
-/* ============================================================
-   13 · AUTORIDADE
-   ============================================================ */
-.who{ background: var(--ink-2); }
-.who__grid{ display: grid; gap: clamp(1.4rem, 1rem + 2vw, 2.6rem); grid-template-columns: 1fr; margin-top: 2rem; align-items: start; }
-@media (min-width: 860px){ .who__grid{ grid-template-columns: 300px 1fr; } }
+/* ---------- quem conduz ---------- */
+.who{ display: grid; grid-template-columns: 1fr; gap: clamp(1.4rem, 1rem + 2vw, 2.6rem); margin-top: 2rem; align-items: start; }
+@media (min-width: 860px){ .who{ grid-template-columns: 300px 1fr; } }
 .who__photo{
-  border: 1px dashed var(--rust);
-  border-radius: var(--r);
-  background: var(--rust-soft);
-  aspect-ratio: 4 / 5;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  text-align: center;
+  border: 1px dashed var(--red); background: rgba(255,43,31,.07); border-radius: 16px;
+  aspect-ratio: 4 / 5; display: flex; flex-direction: column; gap: .5rem;
+  align-items: center; justify-content: center; padding: 1.5rem; text-align: center;
+  position: relative; overflow: hidden;
 }
+.who__photo img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .who__card{ display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
-.who__name{ font-size: var(--step-3); }
-.who__role{
-  font-family: var(--f-mono);
-  font-size: var(--step--1);
-  font-weight: 500;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--taupe);
-}
+.who__name{ font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.2rem); font-weight: 600; }
+.who__role{ font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+.who__card p{ color: var(--grey); max-width: 62ch; }
 
-.logos{ display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .8rem; margin-top: 1.8rem; }
+.logos{ display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .8rem; margin-top: 1.6rem; }
 .logo-slot{
-  border: 1px dashed var(--line);
-  border-radius: var(--r);
-  min-height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--f-mono);
-  font-size: .66rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  background: var(--panel);
-  text-align: center;
-  padding: .5rem;
+  border: 1px dashed #2A2A2A; border-radius: 12px; min-height: 76px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-2);
+  background: var(--panel-2); text-align: center; padding: .5rem;
 }
 
-/* ============================================================
-   14 · SUPORTE
-   ============================================================ */
-.help{ display: grid; gap: 1rem; grid-template-columns: 1fr; margin-top: 2rem; }
-@media (min-width: 800px){ .help{ grid-template-columns: 1fr 1fr; gap: 1.35rem; } }
-.help__card{
+/* ---------- suporte ---------- */
+.help{ display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-top: 2rem; }
+@media (min-width: 800px){ .help{ grid-template-columns: 1fr 1fr; } }
+.help__c{
+  border: 1px solid #1F1F1F; border-radius: 16px;
+  background: linear-gradient(180deg, var(--panel) 0%, var(--black) 100%);
   padding: clamp(1.3rem, .9rem + 1.4vw, 2rem);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--r);
-  background: var(--panel);
-  display: flex;
-  flex-direction: column;
-  gap: .9rem;
-  align-items: flex-start;
+  display: flex; flex-direction: column; gap: .9rem; align-items: flex-start;
 }
-.help__card h3{ font-size: var(--step-1); font-weight: 700; }
-.help__card p{ color: var(--text-2); font-size: var(--step--1); line-height: 1.55; }
+.help__c h3{ font-size: 1.15rem; font-weight: 600; }
+.help__c p{ font-size: .9rem; color: var(--grey); line-height: 1.55; }
 
-/* ============================================================
-   15 · RODAPÉ
-   ============================================================ */
-.foot{ border-top: 1px solid var(--line-soft); padding-block: 2.6rem; background: var(--ink-2); }
+/* ---------- rodapé ---------- */
+.foot{ border-top: 1px solid #1A1A1A; padding-block: 2.4rem; }
 .foot__row{ display: flex; flex-wrap: wrap; gap: 1.2rem 2rem; justify-content: space-between; align-items: center; }
-.foot small{
-  font-family: var(--f-mono);
-  font-size: .7rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
+.foot small{ font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--grey-2); }
 
-/* ============================================================
-   BARRA FIXA
-   ============================================================ */
-.dock{
-  position: fixed;
-  inset: auto 0 0 0;
-  z-index: 40;
-  background: rgba(10,9,8,.94);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid var(--taupe-lo);
-}
-.dock__in{ display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .8rem; flex-wrap: wrap; }
-.dock__info{ display: flex; flex-direction: column; gap: .1rem; min-width: 0; }
-.dock__t{
-  font-family: var(--f-mono);
-  font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  color: var(--text);
-  font-variant-numeric: tabular-nums;
-}
-.dock__s{
-  font-family: var(--f-mono);
-  font-size: .66rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--taupe);
-}
-.dock .btn{ padding: .85rem 1.4rem; font-size: var(--step--1); }
+/* ---------- barra fixa ---------- */
+.dock{ position: fixed; inset: auto 0 0 0; z-index: 40; background: rgba(0,0,0,.94); backdrop-filter: blur(10px); border-top: 1px solid #232323; }
+.dock__in{ display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .75rem; flex-wrap: wrap; }
+.dock__i{ display: flex; flex-direction: column; gap: .05rem; min-width: 0; }
+.dock__t{ font-size: .84rem; font-weight: 600; color: var(--white); }
+.dock__s{ font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--red); }
+.dock .btn{ padding: .85rem 1.4rem; }
 @media (max-width: 560px){
   .dock__in{ justify-content: center; }
-  .dock__info{ align-items: center; text-align: center; }
+  .dock__i{ align-items: center; text-align: center; }
   .dock .btn{ width: 100%; }
 }
 
-@media (prefers-reduced-motion: reduce){
-  *{ animation-duration: .001ms !important; transition-duration: .001ms !important; }
-}
+@media (prefers-reduced-motion: reduce){ *{ transition-duration: .001ms !important; animation-duration: .001ms !important; } }
 </style>
 
-<!-- símbolo Fly Scale, reconstruído em vetor (trocar pelo arquivo oficial antes de publicar) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="fs-mark" viewBox="0 0 118 116">
-      <rect x="30" y="0" width="88" height="88" rx="25" fill="currentColor"/>
-      <path d="M56 62 92 26" fill="none" stroke="var(--sym-bg, #100F0C)" stroke-width="9.5" stroke-linecap="round"/>
-      <path d="M71 26h21v21" fill="none" stroke="var(--sym-bg, #100F0C)" stroke-width="9.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <rect x="0" y="52" width="64" height="64" rx="19" fill="var(--sym-bg, #100F0C)"/>
-      <rect x="4.75" y="56.75" width="54.5" height="54.5" rx="14.5" fill="none" stroke="currentColor" stroke-width="9.5"/>
-    </symbol>
-  </defs>
-</svg>
+<!-- símbolo Fly Scale reconstruído em vetor — trocar pelo arquivo oficial -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="fs-mark" viewBox="0 0 118 116">
+    <rect x="30" y="0" width="88" height="88" rx="25" fill="currentColor"/>
+    <path d="M56 62 92 26" fill="none" stroke="var(--sym-bg,#000)" stroke-width="9.5" stroke-linecap="round"/>
+    <path d="M71 26h21v21" fill="none" stroke="var(--sym-bg,#000)" stroke-width="9.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="0" y="52" width="64" height="64" rx="19" fill="var(--sym-bg,#000)"/>
+    <rect x="4.75" y="56.75" width="54.5" height="54.5" rx="14.5" fill="none" stroke="currentColor" stroke-width="9.5"/>
+  </symbol>
+</defs></svg>
 
-<!-- ============================================================
-     1 · HERO
-     ============================================================ -->
+<!-- ================= 1 · FAIXA DE TOPO ================= -->
+<div class="topbar">Exclusivo para donos de agência de viagens</div>
+
+<!-- ================= 2 · HERO ================= -->
 <header class="hero">
   <div class="wrap hero__grid">
+    <div class="hero__col">
 
-    <span class="brand">
-      <svg class="brand__mark" style="--sym-bg:#0A0908; color:var(--taupe)" aria-hidden="true"><use href="#fs-mark"/></svg>
-      <span class="brand__word">Fly Scale</span>
-    </span>
+      <span class="brand">
+        <svg class="brand__mark" style="--sym-bg:#000; color:#B8B1A3" aria-hidden="true"><use href="#fs-mark"/></svg>
+        <span class="brand__word">Fly Scale</span>
+      </span>
 
-    <div class="tag-row">
-      <span class="tag tag--hot">Exclusivo para donos de agência de viagens</span>
-      <span class="tag">Etapa final da implementação AHO</span>
-      <span class="tag">Entregável Fly Growth</span>
-    </div>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/>
+        </svg>
+        <span id="pill-date">Data a definir · Presencial ou Online</span>
+      </span>
 
-    <h1>Dois dias para você sair com a sua agência <em>rodando</em>.</h1>
+      <h1>Dois dias construindo a operação da sua agência, para você sair com ela <span class="mk">rodando</span>.</h1>
 
-    <p class="hero__sub">
-      Fly Scale é a implementação do Grupo Fly: mais de 20 horas de execução prática, lado a lado
-      com quem opera, até a sua agência ter posicionamento, fornecedores, processo comercial e
-      plano de ação definidos. Agora em duas modalidades — presencial na nossa sede ou online, ao vivo.
-    </p>
+      <p class="hero__slogan"><b>“Aqui a gente não fala de teoria.”</b> Mais de 20 horas de execução prática, presencial na nossa sede ou online, ao vivo.</p>
 
-    <p class="hero__slogan">“Aqui a gente não fala de teoria.”</p>
+      <a class="btn" href="#oferta">Garantir minha vaga</a>
 
-    <div class="board">
-      <div class="board__cell">
-        <span class="board__k">Data</span>
-        <span class="board__v" id="board-date">A definir<small>Dois dias de imersão</small></span>
+      <span class="limited">Vagas limitadas</span>
+
+      <div class="vagas">
+        <div class="vagas__track"><div class="vagas__fill" style="width:72%"></div></div>
+        <span class="vagas__lbl">Turma presencial limitada a 30 cadeiras</span>
       </div>
-      <div class="board__cell">
-        <span class="board__k">Presencial</span>
-        <span class="board__v">ARU<small>Sede Grupo Fly · 30 cadeiras</small></span>
-      </div>
-      <div class="board__cell">
-        <span class="board__k">Online</span>
-        <span class="board__v">AO VIVO<small>Novidade desta edição</small></span>
-      </div>
-      <div class="board__cell">
-        <span class="board__k">Carga</span>
-        <span class="board__v">+20h<small>Nas duas modalidades</small></span>
-      </div>
-    </div>
 
-    <div class="hero__cta">
-      <a class="btn" href="#cadeira">Garantir minha cadeira</a>
       <div id="clock" class="clock">
-        <span class="clock__off">Contagem regressiva ativa quando a data da turma for definida</span>
+        <span class="clock__off">O contador liga quando a data da turma for definida</span>
       </div>
+
     </div>
 
+    <div class="media">
+      <span class="media__ph">A preencher · vídeo de convite<br>ou foto de abertura</span>
+      <img src="img/hero.jpg" alt="" onerror="this.hidden=true">
+    </div>
   </div>
 </header>
 
-<!-- ============================================================
-     2 · PERGUNTA DE TRANSIÇÃO
-     ============================================================ -->
-<section class="band band--flush pivot">
-  <div class="wrap head-block">
-    <p class="eyebrow">A virada</p>
-    <h2>Como você sai da teoria e coloca a sua agência rodando <span>em um único fim de semana?</span></h2>
-  </div>
-</section>
+<!-- ================= 3 · PERGUNTA + COMPARAÇÃO ================= -->
+<section class="sec">
+  <div class="wrap center">
+    <h2 class="sec-h">Como você vai resolver seu problema de <b>agência sem processo</b> em apenas um fim de semana?</h2>
+    <p class="kicker">O seu <b>posicionamento</b></p>
 
-<!-- ============================================================
-     3 · PASSIVA vs ATIVA
-     ============================================================ -->
-<section class="band">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">O seu posicionamento</p>
-      <h2 class="h-sec" style="max-width:26ch">Agência passiva ou agência ativa?</h2>
-      <p class="lede">
-        Essa é a primeira decisão dos dois dias — e ela muda todas as outras: quem você atende,
-        de quem você compra, quanto você cobra e como você vende.
-      </p>
-    </div>
-
-    <div class="vs">
-      <div class="col col--bad">
-        <div class="col__head">
-          <span class="col__kicker">Modo passivo</span>
-          <h3 class="col__title">Agência passiva</h3>
-        </div>
-        <ul class="marks">
-          <li>Sofre com a demanda do cliente: o foco cai no que ele pede, não no que você poderia ofertar.</li>
-          <li>Cota o que aparece, sem margem definida e sem esteira de produtos própria.</li>
-          <li>Aceita qualquer solicitação porque não tem previsibilidade de faturamento no mês seguinte.</li>
-          <li>Depende de indicação e de sorte no lugar de um processo comercial.</li>
+    <div class="cmp">
+      <div class="card card--white">
+        <h3><u>Agência passiva</u></h3>
+        <ul class="chev">
+          <li>Sofre com a demanda do cliente: o foco cai no que ele pede, não no que você poderia ofertar</li>
+          <li>Define preço no feeling e descobre a margem só no fim do mês</li>
+          <li>Aceita qualquer solicitação porque não tem previsibilidade de faturamento</li>
+          <li>Vive de indicação e <b>conta com a sorte</b></li>
         </ul>
       </div>
 
-      <div class="col col--good">
-        <div class="col__head">
-          <span class="col__kicker">Modo ativo</span>
-          <h3 class="col__title">Agência ativa</h3>
-        </div>
-        <ul class="marks">
-          <li>Vende produto empacotado e passagem promocional que você mesmo escolheu ofertar.</li>
-          <li>Trabalha com margem definida por produto, sabendo o que cada venda deixa.</li>
-          <li>Tem processo comercial otimizado, dos cinco passos da abordagem ao pós-venda.</li>
-          <li>Prospecta de forma ativa e mede o funil: sabe quantos leads viram venda.</li>
+      <div class="card card--hot cmp__hot">
+        <h3><u>Agência ativa</u></h3>
+        <ul class="chev">
+          <li>Vende produto empacotado e passagem promocional que ela mesma escolheu ofertar</li>
+          <li>Trabalha com margem definida por produto e sabe o que cada venda deixa</li>
+          <li>Tem processo comercial otimizado, da abordagem ao pós-venda</li>
+          <li>Prospecta de forma ativa e mede o funil: sabe quantos leads viram venda</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     3.5 · PROVA SOCIAL — turmas anteriores
-     ============================================================ -->
-<section class="band">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">Turmas anteriores</p>
-      <h2 class="h-sec" style="max-width:28ch">O Fly Scale não é lançamento. Já rodou, turma após turma.</h2>
-      <p class="lede">
-        Estas são as pessoas que já passaram pela implementação na nossa sede, em Araçatuba.
-        A modalidade online abre agora para quem não conseguia viajar — com a mesma grade.
-      </p>
-    </div>
+<!-- ================= 4 · PROVA SOCIAL ================= -->
+<section class="sec">
+  <div class="wrap center">
+    <h2 class="sec-h">Aprenda dentro da operação de quem <b>faz todo dia</b>.</h2>
+    <p class="lede">O Fly Scale não é lançamento. Já rodou turma após turma na nossa sede, em Araçatuba. A modalidade online abre agora para quem não conseguia viajar — com a mesma grade.</p>
 
     <div class="gallery">
-      <figure class="shot">
-        <span class="shot__ph">Turma na sede · Araçatuba/SP</span>
-        <img src="img/turma-01.jpg" alt="Turma do Fly Scale reunida no hall da sede do Grupo Fly, em Araçatuba." loading="lazy" onerror="this.hidden=true">
-        <figcaption>Turma na sede · Araçatuba/SP</figcaption>
-      </figure>
-      <figure class="shot">
-        <span class="shot__ph">Implementação presencial</span>
-        <img src="img/turma-02.jpg" alt="Participantes do Fly Scale posando na escada do hall da sede." loading="lazy" onerror="this.hidden=true">
-        <figcaption>Implementação presencial</figcaption>
-      </figure>
-      <figure class="shot">
-        <span class="shot__ph">Credenciais Fly Scale</span>
-        <img src="img/turma-03.jpg" alt="Turma do Fly Scale com as credenciais do evento, no hall da sede." loading="lazy" onerror="this.hidden=true">
-        <figcaption>Credenciais Fly Scale</figcaption>
-      </figure>
-      <figure class="shot">
-        <span class="shot__ph">Dois dias de imersão</span>
-        <img src="img/turma-04.jpg" alt="Turma do Fly Scale reunida sob a claraboia do hall da sede." loading="lazy" onerror="this.hidden=true">
-        <figcaption>Dois dias de imersão</figcaption>
-      </figure>
-      <figure class="shot">
-        <span class="shot__ph">Turma intimista</span>
-        <img src="img/turma-05.jpg" alt="Grupo de participantes do Fly Scale no hall da sede do Grupo Fly." loading="lazy" onerror="this.hidden=true">
-        <figcaption>Turma intimista</figcaption>
-      </figure>
-      <figure class="shot">
-        <span class="shot__ph">Fachada da sede · VoeFly</span>
-        <img src="img/turma-06.jpg" alt="Turma do Fly Scale em frente à fachada da sede, VoeFly Viagens." loading="lazy" onerror="this.hidden=true">
-        <figcaption>Fachada da sede · VoeFly</figcaption>
-      </figure>
+      <figure class="shot"><span class="shot__ph">Turma na sede · Araçatuba/SP</span><img src="img/turma-01.jpg" alt="Turma do Fly Scale reunida na escada do hall da sede do Grupo Fly." loading="lazy" onerror="this.hidden=true"><figcaption>Turma na sede</figcaption></figure>
+      <figure class="shot"><span class="shot__ph">Implementação presencial</span><img src="img/turma-02.jpg" alt="Participantes do Fly Scale posando no hall da sede." loading="lazy" onerror="this.hidden=true"><figcaption>Implementação presencial</figcaption></figure>
+      <figure class="shot"><span class="shot__ph">Credenciais Fly Scale</span><img src="img/turma-03.jpg" alt="Turma do Fly Scale com as credenciais do evento." loading="lazy" onerror="this.hidden=true"><figcaption>Credenciais Fly Scale</figcaption></figure>
+      <figure class="shot"><span class="shot__ph">Dois dias de imersão</span><img src="img/turma-04.jpg" alt="Turma do Fly Scale sob a claraboia do hall da sede." loading="lazy" onerror="this.hidden=true"><figcaption>Dois dias de imersão</figcaption></figure>
+      <figure class="shot"><span class="shot__ph">Turma intimista</span><img src="img/turma-05.jpg" alt="Turma do Fly Scale reunida no hall da sede." loading="lazy" onerror="this.hidden=true"><figcaption>Turma intimista</figcaption></figure>
+      <figure class="shot"><span class="shot__ph">Sede do Grupo Fly</span><img src="img/turma-06.jpg" alt="Turma do Fly Scale na área de estar da sede." loading="lazy" onerror="this.hidden=true"><figcaption>Sede do Grupo Fly</figcaption></figure>
+      <figure class="shot"><span class="shot__ph">Turma após turma</span><img src="img/turma-07.jpg" alt="Turma do Fly Scale posando na escada do hall." loading="lazy" onerror="this.hidden=true"><figcaption>Turma após turma</figcaption></figure>
+      <figure class="shot"><span class="shot__ph">Fachada · VoeFly Viagens</span><img src="img/turma-08.jpg" alt="Turma do Fly Scale em frente à fachada da sede, VoeFly Viagens." loading="lazy" onerror="this.hidden=true"><figcaption>Fachada · VoeFly</figcaption></figure>
     </div>
 
     <div class="todo" style="margin-top:1.2rem">
       <span class="todo__tag">A preencher</span>
-      <span class="todo__txt">
-        Salvar as fotos das turmas em <code>img/turma-01.jpg</code> … <code>img/turma-06.jpg</code>
-        (recorte 4:3) e ajustar as legendas com a edição e o mês de cada turma.
-        Confirmar autorização de uso de imagem dos participantes antes de publicar.
-      </span>
+      <span class="todo__txt">Salvar as fotos em <code>img/turma-01.jpg</code> … <code>img/turma-08.jpg</code> (recorte 4:3) e ajustar as legendas com a edição e o mês de cada turma. Confirmar autorização de uso de imagem dos participantes antes de publicar.</span>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     4 · NICHOS
-     ============================================================ -->
-<section class="band">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">Escolha de nicho</p>
-      <h2 class="h-sec" style="max-width:28ch">Seis perfis de agência. Você sai com o seu escolhido.</h2>
-      <p class="lede">
-        Cada nicho tem um público, um jeito de prospectar, um ticket e um caminho de emissão diferentes.
-        Nos dois dias a gente cruza o seu momento com essa matriz e trava a decisão.
-      </p>
-    </div>
+<!-- ================= 5 · O QUE VOCÊ IMPLEMENTA ================= -->
+<section class="sec">
+  <div class="wrap center">
+    <h2 class="sec-h">O que você vai implementar <b>em dois dias</b></h2>
+    <p class="lede">Você não sai do Fly Scale com ideias soltas nem com uma lista de “coisas para fazer depois”. Sai com as decisões tomadas e o plano escrito.</p>
 
-    <div class="table-scroll">
+    <div class="grid3" style="text-align:left">
+      <article class="tile"><span class="tile__n">01</span><h4>Posicionamento e nicho</h4><p>Passiva ou ativa, nicho escolhido na matriz, público definido e esteira de produtos desenhada.</p></article>
+      <article class="tile"><span class="tile__n">02</span><h4>Estrutura interna</h4><p>As cinco frentes montadas: atendimento e vendas, marketing, financeiro, cotação e emissão, backoffice e pós-venda.</p></article>
+      <article class="tile"><span class="tile__n">03</span><h4>Rede de fornecedores</h4><p>Quando usar consolidadora e quando usar operadora — e quais credenciar primeiro para o seu nicho.</p></article>
+      <article class="tile"><span class="tile__n">04</span><h4>Marca e geração de demanda</h4><p>Registro no INPI na Classe 39, WhatsApp profissional, padrão visual, fixados, tráfego e calendário de ofertas.</p></article>
+      <article class="tile"><span class="tile__n">05</span><h4>Processo comercial e operação</h4><p>Os cinco passos da venda e o fluxo do lead até o pós-venda, com resposta em até cinco minutos.</p></article>
+      <article class="tile"><span class="tile__n">06</span><h4>Finanças e plano de ação</h4><p>DRE e fluxo de caixa separados, margem média por produto e o seu plano de 30, 60 e 90 dias escrito.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 · NICHOS ================= -->
+<section class="sec">
+  <div class="wrap center">
+    <h2 class="sec-h">Seis perfis de agência. Você sai com <b>o seu escolhido</b>.</h2>
+    <p class="lede">Cada nicho tem um público, um jeito de prospectar, um ticket e um caminho de emissão diferentes. Nos dois dias a gente cruza o seu momento com essa matriz e trava a decisão.</p>
+
+    <div class="tbl-wrap" style="text-align:left">
       <table>
-        <thead>
-          <tr>
-            <th scope="col">Nicho</th>
-            <th scope="col">Público-alvo</th>
-            <th scope="col">Prospecção</th>
-            <th scope="col">Volume</th>
-            <th scope="col">Ticket</th>
-            <th scope="col">Emissão principal</th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th scope="col">Nicho</th><th scope="col">Público-alvo</th><th scope="col">Prospecção</th>
+          <th scope="col">Volume</th><th scope="col">Ticket</th><th scope="col">Emissão principal</th>
+        </tr></thead>
         <tbody>
-          <tr>
-            <th scope="row">Lazer (pacoteira)</th>
-            <td>Classes A, B e C — estilo CVC</td>
-            <td class="cell-mono">Ativa</td>
-            <td class="cell-mono">Menor</td>
-            <td class="cell-mono">Maior</td>
-            <td>Consolidadoras e operadoras</td>
-          </tr>
-          <tr>
-            <th scope="row">Lazer emissiva</th>
-            <td>Classe C para baixo</td>
-            <td class="cell-mono">Ativa</td>
-            <td class="cell-mono">Maior</td>
-            <td class="cell-mono">Menor</td>
-            <td>Milhas e vouchers</td>
-          </tr>
-          <tr>
-            <th scope="row">Corporativo (B2B)</th>
-            <td>Classe A e empresas</td>
-            <td class="cell-mono">Passiva</td>
-            <td class="cell-mono">Menor</td>
-            <td class="cell-mono">Maior</td>
-            <td>Consolidadoras e operadoras — exige fluxo de caixa</td>
-          </tr>
-          <tr>
-            <th scope="row">Gestão de milhas</th>
-            <td>Classes A, B e C — CPF e empresas</td>
-            <td class="cell-mono">Ativa</td>
-            <td class="cell-mono">Menor</td>
-            <td class="cell-mono">Maior</td>
-            <td>Consolidadoras e operadoras</td>
-          </tr>
-          <tr>
-            <th scope="row">Expedição e grupos</th>
-            <td>Classe A</td>
-            <td class="cell-mono">Ativa</td>
-            <td class="cell-mono">Menor</td>
-            <td class="cell-mono">Maior</td>
-            <td>Direto com prestadores</td>
-          </tr>
-          <tr>
-            <th scope="row">Especialização</th>
-            <td>Classes A e B — vistos e Disney</td>
-            <td class="cell-mono">Passiva</td>
-            <td class="cell-mono">Menor</td>
-            <td class="cell-mono">Maior</td>
-            <td>Operadoras e serviços de vistos</td>
-          </tr>
+          <tr><th scope="row">Lazer (pacoteira)</th><td>Classes A, B e C — estilo CVC</td><td class="num">Ativa</td><td class="num">Menor</td><td class="num">Maior</td><td>Consolidadoras e operadoras</td></tr>
+          <tr><th scope="row">Lazer emissiva</th><td>Classe C para baixo</td><td class="num">Ativa</td><td class="num">Maior</td><td class="num">Menor</td><td>Milhas e vouchers</td></tr>
+          <tr><th scope="row">Corporativo (B2B)</th><td>Classe A e empresas</td><td class="num">Passiva</td><td class="num">Menor</td><td class="num">Maior</td><td>Consolidadoras e operadoras — exige fluxo de caixa</td></tr>
+          <tr><th scope="row">Gestão de milhas</th><td>Classes A, B e C — CPF e empresas</td><td class="num">Ativa</td><td class="num">Menor</td><td class="num">Maior</td><td>Consolidadoras e operadoras</td></tr>
+          <tr><th scope="row">Expedição e grupos</th><td>Classe A</td><td class="num">Ativa</td><td class="num">Menor</td><td class="num">Maior</td><td>Direto com prestadores</td></tr>
+          <tr><th scope="row">Especialização</th><td>Classes A e B — vistos e Disney</td><td class="num">Passiva</td><td class="num">Menor</td><td class="num">Maior</td><td>Operadoras e serviços de vistos</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     5 · O QUE VOCÊ IMPLEMENTA
-     ============================================================ -->
-<section class="band">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">O que você implementa em dois dias</p>
-      <h2 class="h-sec" style="max-width:30ch">Você não sai com anotações. Sai com as decisões tomadas.</h2>
-      <p class="lede">
-        Nenhuma dessas etapas é “para fazer depois”. Cada uma é fechada dentro da sede, com a nossa
-        equipe do lado, usando a apostila e os materiais práticos da turma.
-      </p>
-    </div>
+<!-- ================= 7 · FUNIL ================= -->
+<section class="sec">
+  <div class="wrap center">
+    <h2 class="sec-h">Você sai sabendo o que <b>cada cem leads</b> devem virar.</h2>
+    <p class="lede">É esta a régua que a gente instala na sua operação. Sem ela, você não sabe se o problema está no tráfego, no atendimento ou no fechamento.</p>
 
-    <div class="deliver">
-      <article class="dcard">
-        <span class="dcard__n">01</span>
-        <h3>Posicionamento e nicho</h3>
-        <p>Passiva ou ativa, nicho escolhido na matriz, público definido e esteira de produtos desenhada.</p>
-      </article>
-      <article class="dcard">
-        <span class="dcard__n">02</span>
-        <h3>Estrutura interna</h3>
-        <p>As cinco frentes montadas: atendimento e vendas, marketing, financeiro, cotação e emissão, backoffice e pós-venda.</p>
-      </article>
-      <article class="dcard">
-        <span class="dcard__n">03</span>
-        <h3>Rede de fornecedores</h3>
-        <p>Quando usar consolidadora e quando usar operadora — e quais credenciar primeiro para o seu nicho.</p>
-      </article>
-      <article class="dcard">
-        <span class="dcard__n">04</span>
-        <h3>Marca e geração de demanda</h3>
-        <p>Registro no INPI na Classe 39, WhatsApp profissional, padrão visual, fixados, tráfego e calendário de ofertas.</p>
-      </article>
-      <article class="dcard">
-        <span class="dcard__n">05</span>
-        <h3>Processo comercial e operação</h3>
-        <p>Os cinco passos da venda e o fluxo do lead até o pós-venda, com resposta em até cinco minutos.</p>
-      </article>
-      <article class="dcard">
-        <span class="dcard__n">06</span>
-        <h3>Finanças e plano de ação</h3>
-        <p>DRE e fluxo de caixa separados, margem média por produto e o seu plano de 30, 60 e 90 dias escrito.</p>
-      </article>
+    <div class="funnel" style="text-align:left" role="img" aria-label="Funil de referência: de 100 leads, 35 conexões, 20 orçamentos, 10 reuniões e 3 fechamentos.">
+      <div class="fstep"><div class="fbar" style="width:100%"><b>100</b><span>Leads</span></div></div>
+      <div class="fstep"><div class="fbar" style="width:min(100%, max(230px, 45%))"><b>35</b><span>Conexão</span></div><span class="frate">35% dos leads</span></div>
+      <div class="fstep"><div class="fbar" style="width:min(100%, max(230px, 34%))"><b>20</b><span>Orçamento</span></div><span class="frate">57% das conexões</span></div>
+      <div class="fstep"><div class="fbar" style="width:min(100%, max(230px, 27%))"><b>10</b><span>Reunião</span></div><span class="frate">50% dos orçamentos</span></div>
+      <div class="fstep"><div class="fbar" style="width:min(100%, max(230px, 22%))"><b>3</b><span>Fechamento</span></div><span class="frate">30% das reuniões</span></div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     6 · FUNIL
-     ============================================================ -->
-<section class="band">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">Métricas do funil</p>
-      <h2 class="h-sec" style="max-width:28ch">Você sai sabendo o que cada cem leads devem virar.</h2>
-      <p class="lede">
-        É esta a régua que a gente instala na sua operação. Sem ela, você não sabe se o problema
-        está no tráfego, no atendimento ou no fechamento.
-      </p>
-    </div>
+<!-- ================= 8 · OFERTA ================= -->
+<section class="sec" id="oferta">
+  <div class="wrap center">
+    <h2 class="sec-h" style="max-width:34ch">Quanto vale transformar sua agência em uma <span class="mk">operação previsível?</span></h2>
 
-    <div class="funnel" role="img" aria-label="Funil de referência: de 100 leads, 35 conexões, 20 orçamentos, 10 reuniões e 3 fechamentos.">
-      <div class="fstep">
-        <div class="fstep__bar" style="width:100%">
-          <span class="fstep__n">100</span><span class="fstep__lbl">Leads</span>
-        </div>
+    <div class="shell">
+      <div class="shell__copy">
+        <p><b>Pense no que você já gastou tentando descobrir isso sozinho.</b> Meses cotando no feeling. Fornecedor credenciado no nicho errado. Tráfego rodando sem processo comercial atrás para receber o lead.</p>
+        <p>Agora imagina comprimir tudo isso em dois dias, dentro de uma operação que já roda, com acesso direto ao Luiz Gregatti e a toda a equipe.</p>
+        <p><b>Essa é a proposta do Fly Scale.</b></p>
       </div>
-      <div class="fstep">
-        <div class="fstep__bar" style="width:min(100%, max(230px, 45%))">
-          <span class="fstep__n">35</span><span class="fstep__lbl">Conexão</span>
-        </div>
-        <span class="fstep__rate">35% dos leads</span>
-      </div>
-      <div class="fstep">
-        <div class="fstep__bar" style="width:min(100%, max(230px, 34%))">
-          <span class="fstep__n">20</span><span class="fstep__lbl">Orçamento</span>
-        </div>
-        <span class="fstep__rate">57% das conexões</span>
-      </div>
-      <div class="fstep">
-        <div class="fstep__bar" style="width:min(100%, max(230px, 27%))">
-          <span class="fstep__n">10</span><span class="fstep__lbl">Reunião</span>
-        </div>
-        <span class="fstep__rate">50% dos orçamentos</span>
-      </div>
-      <div class="fstep">
-        <div class="fstep__bar" style="width:min(100%, max(230px, 22%))">
-          <span class="fstep__n">3</span><span class="fstep__lbl">Fechamento</span>
-        </div>
-        <span class="fstep__rate">30% das reuniões</span>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ============================================================
-     7 · ANCORAGEM DE VALOR
-     ============================================================ -->
-<section class="band">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">Ancoragem</p>
-      <h2 class="h-sec" style="max-width:30ch">Quanto vale parar de adivinhar e passar a ter processo?</h2>
-    </div>
+      <div class="offers" style="text-align:left">
 
-    <div class="anchor-box">
-      <p class="kick">Pense no que você já gastou tentando descobrir isso sozinho.</p>
-      <p>
-        Meses cotando no feeling e descobrindo a margem só no fim do mês. Fornecedor credenciado
-        no nicho errado. Tráfego pago rodando sem um processo comercial atrás para receber o lead.
-        Cada um desses erros tem um preço — e nenhum deles vem com alguém do lado para corrigir na hora.
-      </p>
-      <p>
-        Fly Scale existe para comprimir isso em dois dias, dentro de uma operação que já roda,
-        com acesso direto e presencial ao Luiz Gregatti e a toda a equipe.
-      </p>
-      <a class="btn" href="#cadeira">Ver as condições da turma</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     8 · OS DOIS BILHETES (oferta)
-     ============================================================ -->
-<section class="band offer" id="cadeira">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">Escolha a sua modalidade</p>
-      <h2 class="h-sec" style="max-width:26ch">Mesma grade. Dois jeitos de estar dentro.</h2>
-      <p class="lede">
-        A implementação é a mesma nas duas modalidades: os mesmos dois dias, a mesma carga,
-        o mesmo plano de ação saindo com você. O que muda é onde você senta.
-      </p>
-    </div>
-
-    <div class="tickets">
-
-      <!-- PRESENCIAL — cartão em papel -->
-      <article class="tkt tkt--paper">
-        <div class="tkt__top">
-          <div class="tkt__brand">
-            <span class="brand">
-              <svg class="brand__mark" style="--sym-bg:#E8E2D5; color:#8B8578; width:32px" aria-hidden="true"><use href="#fs-mark"/></svg>
-              <span class="brand__word">Fly Scale</span>
-            </span>
-            <span class="tkt__mode">Bilhete 01</span>
+        <article class="offer offer--hot">
+          <span class="offer__tag">Modalidade presencial</span>
+          <h3 class="offer__title">Na nossa sede</h3>
+          <p class="offer__for">Para quem quer a implementação com a equipe passando na sua mesa e acesso direto e presencial ao Luiz Gregatti.</p>
+          <div class="offer__meta">
+            <span class="chip">Araçatuba/SP</span><span class="chip">+20h</span><span class="chip">30 cadeiras</span><span class="chip">2 dias</span>
           </div>
-
-          <div class="tkt__head">
-            <span class="tkt__mode">Modalidade presencial</span>
-            <h3 class="tkt__title">Na nossa sede</h3>
-            <p class="tkt__for">
-              Para quem quer a implementação com a equipe passando na sua mesa e acesso direto
-              e presencial ao Luiz Gregatti.
-            </p>
-          </div>
-
-          <div class="tkt__meta">
-            <div class="tkt__mcell"><span class="tkt__mk">Local</span><span class="tkt__mv">ARU</span></div>
-            <div class="tkt__mcell"><span class="tkt__mk">Carga</span><span class="tkt__mv">+20h</span></div>
-            <div class="tkt__mcell"><span class="tkt__mk">Turma</span><span class="tkt__mv">30</span></div>
-            <div class="tkt__mcell"><span class="tkt__mk">Dias</span><span class="tkt__mv">02</span></div>
-          </div>
-
-          <ul class="tkt__list">
-            <li>Dois dias imersos na sede do Grupo Fly, em Araçatuba/SP</li>
+          <div class="offer__rule"></div>
+          <ul class="chev">
+            <li>Dois dias imersos na sede do Grupo Fly</li>
             <li>Mais de 20 horas de treinamento prático</li>
             <li>Turma intimista de até 30 pessoas</li>
             <li>Materiais práticos e apostila impressa</li>
-            <li>Plano de ação prático e personalizado, revisado na hora</li>
-            <li>Acesso direto e presencial ao Luiz Gregatti e a toda a equipe</li>
+            <li>Plano de ação personalizado, revisado na hora</li>
+            <li>Acesso direto e presencial ao Luiz Gregatti e à equipe</li>
           </ul>
-        </div>
-
-        <div class="tkt__stub">
-          <div>
-            <p class="price-k">Investimento por cadeira</p>
-            <p class="price-v"><sup>R$</sup>5.000</p>
-            <p class="price-sub">Já incluída para quem está na AHO Presencial e no combo Fly Growth.</p>
+          <div class="offer__foot">
+            <div>
+              <p class="price__k">Investimento por cadeira</p>
+              <p class="price__v"><sup>R$</sup>5.000</p>
+              <p class="price__sub">Já incluída para quem está na AHO Presencial e no combo Fly Growth.</p>
+            </div>
+            <div class="todo">
+              <span class="todo__tag">A definir com a liderança</span>
+              <span class="todo__txt">Parcelamento, política de lotes e link de checkout.</span>
+            </div>
+            <a class="btn btn--wide" href="#suporte">Garantir minha cadeira</a>
+            <p class="scarce">Apenas 30 cadeiras por turma</p>
           </div>
-          <div class="todo todo--paper">
-            <span class="todo__tag">A definir com a liderança</span>
-            <span class="todo__txt">Parcelamento, política de lotes e link de checkout.</span>
-          </div>
-          <a class="btn btn--wide" href="#suporte">Garantir minha cadeira</a>
-          <p class="scarce">Apenas 30 cadeiras por turma</p>
-        </div>
-      </article>
+        </article>
 
-      <!-- ONLINE — cartão digital -->
-      <article class="tkt tkt--screen">
-        <div class="tkt__top">
-          <div class="tkt__brand">
-            <span class="brand">
-              <svg class="brand__mark" style="--sym-bg:#1A1814; color:var(--taupe); width:32px" aria-hidden="true"><use href="#fs-mark"/></svg>
-              <span class="brand__word">Fly Scale</span>
-            </span>
-            <span class="tkt__mode">Bilhete 02 · Novo</span>
+        <article class="offer offer--cold">
+          <span class="offer__tag">Modalidade online · ao vivo · novo</span>
+          <h3 class="offer__title">De onde você estiver</h3>
+          <p class="offer__for">Para quem não consegue viajar até Araçatuba e quer a mesma implementação, ao vivo, com a equipe respondendo em tempo real.</p>
+          <div class="offer__meta">
+            <span class="chip">Ao vivo</span><span class="chip">+20h</span><span class="chip">2 dias</span>
           </div>
-
-          <div class="tkt__head">
-            <span class="tkt__mode">Modalidade online · ao vivo</span>
-            <h3 class="tkt__title">De onde você estiver</h3>
-            <p class="tkt__for">
-              Para quem não consegue viajar até Araçatuba e quer a mesma implementação,
-              ao vivo, com a equipe respondendo em tempo real.
-            </p>
-          </div>
-
-          <div class="tkt__meta">
-            <div class="tkt__mcell"><span class="tkt__mk">Onde</span><span class="tkt__mv">AO VIVO</span></div>
-            <div class="tkt__mcell"><span class="tkt__mk">Carga</span><span class="tkt__mv">+20h</span></div>
-            <div class="tkt__mcell"><span class="tkt__mk">Turma</span><span class="tkt__mv">—</span></div>
-            <div class="tkt__mcell"><span class="tkt__mk">Dias</span><span class="tkt__mv">02</span></div>
-          </div>
-
-          <ul class="tkt__list">
+          <div class="offer__rule"></div>
+          <ul class="chev">
             <li>Dois dias de imersão ao vivo, transmitidos da sede</li>
-            <li>Mais de 20 horas de treinamento prático — a mesma grade do presencial</li>
+            <li>Mais de 20 horas de treinamento prático — a mesma grade</li>
             <li>Materiais práticos e apostila em versão digital</li>
-            <li>Plano de ação prático e personalizado, construído junto</li>
+            <li>Plano de ação personalizado, construído junto</li>
             <li>Canal de dúvidas com a equipe durante os dois dias</li>
           </ul>
-
-          <div class="todo">
-            <span class="todo__tag">A definir antes de publicar</span>
-            <span class="todo__txt">
-              Plataforma da transmissão, limite de vagas da turma online, se há gravação
-              e por quanto tempo, e o que exatamente muda em relação ao presencial.
-              Ajustar a lista acima ao que a liderança aprovar.
-            </span>
+          <div class="offer__foot">
+            <div>
+              <p class="price__k">Investimento por vaga</p>
+              <p class="price__v"><span class="tbd">a definir</span></p>
+              <p class="price__sub">Valor da modalidade online a divulgar conforme direcionamento da liderança.</p>
+            </div>
+            <div class="todo">
+              <span class="todo__tag">A definir antes de publicar</span>
+              <span class="todo__txt">Preço, lotes e checkout. Plataforma da transmissão, limite de vagas, se há gravação e o que muda em relação ao presencial.</span>
+            </div>
+            <a class="btn btn--ghost btn--wide" href="#suporte">Quero a vaga online</a>
+            <p class="scarce">Vagas limitadas por turma</p>
           </div>
-        </div>
+        </article>
 
-        <div class="tkt__stub">
-          <div>
-            <p class="price-k">Investimento por vaga</p>
-            <p class="price-v"><span class="tbd">a definir</span></p>
-            <p class="price-sub">Valor da modalidade online a ser divulgado conforme direcionamento da liderança.</p>
-          </div>
-          <div class="todo">
-            <span class="todo__tag">A definir com a liderança</span>
-            <span class="todo__txt">Preço, lotes, parcelamento e link de checkout do online.</span>
-          </div>
-          <a class="btn btn--wide btn--ghost" href="#suporte">Quero a vaga online</a>
-          <p class="scarce">Vagas limitadas por turma</p>
-        </div>
-      </article>
-
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     9 · ITINERÁRIO
-     ============================================================ -->
-<section class="band">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">Itinerário dos dois dias</p>
-      <h2 class="h-sec" style="max-width:24ch">A grade completa, na ordem em que acontece</h2>
-      <p class="lede">Idêntica no presencial e no online. Quem assiste de casa vê e executa o mesmo conteúdo, no mesmo horário.</p>
+<!-- ================= 9 · CRONOGRAMA + ITINERÁRIO ================= -->
+<section class="sec">
+  <div class="wrap center">
+    <h2 class="sec-h">Cronograma e <b>grade completa</b></h2>
+    <p class="lede">Idêntica no presencial e no online. Quem assiste de casa executa o mesmo conteúdo, no mesmo horário.</p>
+
+    <div class="hours" style="text-align:left">
+      <div class="hcell"><b>09h30</b><span>Início</span></div>
+      <div class="hcell"><b>12h00</b><span>Almoço</span></div>
+      <div class="hcell"><b>13h30</b><span>Retorno</span></div>
+      <div class="hcell"><b>17h30</b><span>Encerramento</span></div>
     </div>
 
-    <div class="hours">
-      <div class="hours__cell"><span class="hours__t">09h30</span><span class="hours__l">Início</span></div>
-      <div class="hours__cell"><span class="hours__t">12h00</span><span class="hours__l">Almoço</span></div>
-      <div class="hours__cell"><span class="hours__t">13h30</span><span class="hours__l">Retorno</span></div>
-      <div class="hours__cell"><span class="hours__t">17h30</span><span class="hours__l">Encerramento</span></div>
-    </div>
-    <p class="cta-note" style="margin-top:.8rem">Cronograma de referência · confirmar horários finais da turma</p>
-
-    <div class="legs">
-
-      <div class="leg">
-        <div class="leg__head">
-          <span class="leg__day">Dia 01</span>
-          <h3 class="leg__title">Estrutura de negócio, fornecedores, marketing e operações</h3>
-        </div>
+    <div class="legs" style="text-align:left">
+      <div>
+        <div class="leg__h"><span class="leg__d">Dia 01</span><h3 class="leg__t">Estrutura de negócio, fornecedores, marketing e operações</h3></div>
         <ol class="mods">
-          <li>
-            <span class="mods__n">1.1</span>
-            <div class="mods__body">
-              <h4>Posicionamento: passiva vs. ativa</h4>
-              <p>Por que a agência passiva perde o controle da oferta, e como a ativa vende produto empacotado e passagem promocional com margem definida e processo comercial otimizado.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mods__n">1.2</span>
-            <div class="mods__body">
-              <h4>Nichos e perfis de agência</h4>
-              <p>Os seis perfis lado a lado — público, prospecção, volume, ticket e emissão principal — para você travar o seu.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mods__n">1.3</span>
-            <div class="mods__body">
-              <h4>Estrutura organizacional interna</h4>
-              <p>Atendimento e vendas; marketing e social media; financeiro e administrativo; cotação e emissão; backoffice e pós-venda. Quem faz o quê, mesmo em operação enxuta.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mods__n">1.4</span>
-            <div class="mods__body">
-              <h4>Fornecedores: consolidadoras vs. operadoras</h4>
-              <p>Consolidadoras para serviço avulso — passagem, seguro, locação — com política própria por item, multitrecho, codeshare, montagem de grupo de 10 a 100 pax e mesclagem de classes: Pátria, Flytour, Ancoradouro, RexturAdvance, Sakura, Confiança, Skyteam.</p>
-              <p>Operadoras para pacote completo com pagamento único e parcelamento estendido, em múltiplos cartões, boleto tradicional ou pré-pago, até 15x sem juros: CVC e Visual no nacional, Orinter em internacional e vistos, Cativa em bloqueios, Azul Viagens, FRT em luxo e destination wedding, Diversa em neve, TBIsmo em Disney.</p>
-              <p>E os específicos: R11 Travel em cruzeiros, RateHawk e Expedia TAAP em hotéis, iFriend, ETS e Civitatis em passeios, Lusa Nova e Abreu em circuitos europeus, TT Operadora em trens na Europa.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mods__n">1.5</span>
-            <div class="mods__body">
-              <h4>Marca, marketing e geração de demanda</h4>
-              <p>Registro de marca no INPI na Classe 39, fixados no Instagram, WhatsApp profissional, selo verificado, padrão visual, influenciadores, Meta e Google Ads — e a sazonalidade do calendário de ofertas ao longo do ano.</p>
-            </div>
-          </li>
+          <li><span class="mods__n">1.1</span><div class="mods__b"><h4>Posicionamento: passiva vs. ativa</h4><p>Por que a agência passiva perde o controle da oferta, e como a ativa vende produto empacotado e passagem promocional com margem definida e processo comercial otimizado.</p></div></li>
+          <li><span class="mods__n">1.2</span><div class="mods__b"><h4>Nichos e perfis de agência</h4><p>Os seis perfis lado a lado — público, prospecção, volume, ticket e emissão principal — para você travar o seu.</p></div></li>
+          <li><span class="mods__n">1.3</span><div class="mods__b"><h4>Estrutura organizacional interna</h4><p>Atendimento e vendas; marketing e social media; financeiro e administrativo; cotação e emissão; backoffice e pós-venda. Quem faz o quê, mesmo em operação enxuta.</p></div></li>
+          <li><span class="mods__n">1.4</span><div class="mods__b"><h4>Fornecedores: consolidadoras vs. operadoras</h4>
+            <p>Consolidadoras para serviço avulso — passagem, seguro, locação — com política própria por item, multitrecho, codeshare, montagem de grupo de 10 a 100 pax e mesclagem de classes: Pátria, Flytour, Ancoradouro, RexturAdvance, Sakura, Confiança, Skyteam.</p>
+            <p>Operadoras para pacote completo com pagamento único e parcelamento estendido, em múltiplos cartões, boleto tradicional ou pré-pago, até 15x sem juros: CVC e Visual no nacional, Orinter em internacional e vistos, Cativa em bloqueios, Azul Viagens, FRT em luxo e destination wedding, Diversa em neve, TBIsmo em Disney.</p>
+            <p>E os específicos: R11 Travel em cruzeiros, RateHawk e Expedia TAAP em hotéis, iFriend, ETS e Civitatis em passeios, Lusa Nova e Abreu em circuitos europeus, TT Operadora em trens na Europa.</p></div></li>
+          <li><span class="mods__n">1.5</span><div class="mods__b"><h4>Marca, marketing e geração de demanda</h4><p>Registro de marca no INPI na Classe 39, fixados no Instagram, WhatsApp profissional, selo verificado, padrão visual, influenciadores, Meta e Google Ads — e a sazonalidade do calendário de ofertas ao longo do ano.</p></div></li>
         </ol>
       </div>
 
-      <div class="leg">
-        <div class="leg__head">
-          <span class="leg__day">Dia 02</span>
-          <h3 class="leg__title">Vendas, operação, finanças e planejamento</h3>
-        </div>
+      <div>
+        <div class="leg__h"><span class="leg__d">Dia 02</span><h3 class="leg__t">Vendas, operação, finanças e planejamento</h3></div>
         <ol class="mods">
-          <li>
-            <span class="mods__n">2.1</span>
-            <div class="mods__body">
-              <h4>Processo comercial em cinco passos</h4>
-              <p>Abordagem, rapport, sondagem, demonstração e fechamento — com social selling entrando como camada de aquecimento.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mods__n">2.2</span>
-            <div class="mods__body">
-              <h4>Fluxo operacional do lead à emissão</h4>
-              <p>Chegada do lead, sondagem e cotação, fechamento e pagamento, emissão e pós-venda. Resposta em até cinco minutos, cuidados com PIX e cartão por causa de chargeback, e os dados exigidos para emissão nacional e internacional.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mods__n">2.3</span>
-            <div class="mods__body">
-              <h4>Métricas do funil</h4>
-              <p>De 100 leads a 35% de conexão, 57% de orçamento, 50% de reunião e 30% de fechamento — e o que fazer quando um desses degraus cai.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mods__n">2.4</span>
-            <div class="mods__body">
-              <h4>Cotação internacional e emissão em milhas</h4>
-              <p>O caminho Google Flights, Flight Connections, alianças aéreas e tarifas Award — com rotas e programas recomendados por região para Europa e Estados Unidos.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mods__n">2.5</span>
-            <div class="mods__body">
-              <h4>Gestão financeira</h4>
-              <p>DRE em regime de competência para medir lucratividade, fluxo de caixa para medir liquidez real — e por que confundir os dois quebra agência que está vendendo bem.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mods__n">2.6</span>
-            <div class="mods__body">
-              <h4>Plano de ação de 30, 60 e 90 dias</h4>
-              <p>Planejamento de caixa, esteira de produtos, margem média, rotina de prospecção e orçamento de marketing. É este documento que você leva embora.</p>
-            </div>
-          </li>
+          <li><span class="mods__n">2.1</span><div class="mods__b"><h4>Processo comercial em cinco passos</h4><p>Abordagem, rapport, sondagem, demonstração e fechamento — com social selling entrando como camada de aquecimento.</p></div></li>
+          <li><span class="mods__n">2.2</span><div class="mods__b"><h4>Fluxo operacional do lead à emissão</h4><p>Chegada do lead, sondagem e cotação, fechamento e pagamento, emissão e pós-venda. Resposta em até cinco minutos, cuidados com PIX e cartão por causa de chargeback, e os dados exigidos para emissão nacional e internacional.</p></div></li>
+          <li><span class="mods__n">2.3</span><div class="mods__b"><h4>Métricas do funil</h4><p>De 100 leads a 35% de conexão, 57% de orçamento, 50% de reunião e 30% de fechamento — e o que fazer quando um desses degraus cai.</p></div></li>
+          <li><span class="mods__n">2.4</span><div class="mods__b"><h4>Cotação internacional e emissão em milhas</h4><p>O caminho Google Flights, Flight Connections, alianças aéreas e tarifas Award — com rotas e programas recomendados por região para Europa e Estados Unidos.</p></div></li>
+          <li><span class="mods__n">2.5</span><div class="mods__b"><h4>Gestão financeira</h4><p>DRE em regime de competência para medir lucratividade, fluxo de caixa para medir liquidez real — e por que confundir os dois quebra agência que está vendendo bem.</p></div></li>
+          <li><span class="mods__n">2.6</span><div class="mods__b"><h4>Plano de ação de 30, 60 e 90 dias</h4><p>Planejamento de caixa, esteira de produtos, margem média, rotina de prospecção e orçamento de marketing. É este documento que você leva embora.</p></div></li>
         </ol>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     10 · POR QUE 30 CADEIRAS
-     ============================================================ -->
-<section class="band letter">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">A objeção</p>
-      <h2 class="h-sec" style="max-width:30ch">Por que só 30 cadeiras — e por que agora tem online?</h2>
-    </div>
-
-    <div class="letter__body">
-      <p class="pop">Porque implementação não é palestra.</p>
-      <p>
-        Se o objetivo fosse entregar conteúdo, cabia auditório cheio e a gente vendia mil ingressos.
-        Só que o entregável do Fly Scale não é a aula — é a sua agência com as decisões tomadas
-        no fim do segundo dia. Isso exige alguém olhando o seu caso: o seu nicho, os seus fornecedores,
-        o seu caixa, o seu plano.
-      </p>
-      <p>
-        Com 30 pessoas na sala, a equipe consegue passar em cada mesa. Com 300, não. É por isso que
-        a turma presencial é intimista e é por isso que a cadeira tem o valor que tem — você não está
-        comprando acesso a um conteúdo, está comprando duas jornadas de trabalho da nossa
-        operação aplicadas ao seu negócio.
-      </p>
-      <p class="pop">E o online existe por um motivo simples: gente boa ficava de fora.</p>
-      <p>
-        Turma após turma, a gente ouviu a mesma coisa de quem não conseguia vir: a agenda não fecha,
-        a passagem não cabe, a agência não pode parar dois dias fora da cidade. Em vez de diluir o
-        presencial para caber mais gente, a gente abriu uma segunda porta — mesma grade, mesmos dois
-        dias, ao vivo, de onde você estiver.
-      </p>
-      <p>
-        Quem já está na AHO chega aqui para fechar a jornada de implementação. Quem está no
-        Fly Growth chega para acelerar o que já performa. Nos dois casos, e nas duas modalidades,
-        a vaga é limitada e ela acaba.
-      </p>
-      <a class="btn" href="#cadeira" style="margin-top:.5rem">Garantir minha cadeira</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     11 · GARANTIA
-     ============================================================ -->
+<!-- ================= 10 · FAIXA: POR QUE SÓ 30? ================= -->
 <section class="band">
   <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">Segurança na decisão</p>
-      <h2 class="h-sec" style="max-width:26ch">Sua inscrição tem prazo para repensar</h2>
+    <h2>Por que só 30 cadeiras — e por que agora tem online?</h2>
+    <div class="band__body">
+      <p>Porque implementação não é palestra. Se o objetivo fosse entregar conteúdo, cabia auditório cheio e a gente vendia mil ingressos.</p>
+      <p class="soft">Só que o entregável do Fly Scale não é a aula — é a sua agência com as decisões tomadas no fim do segundo dia. Isso exige alguém olhando o seu caso: o seu nicho, os seus fornecedores, o seu caixa, o seu plano.</p>
+      <p>Com 30 pessoas na sala, a equipe consegue passar em cada mesa. Com 300, não.</p>
+      <p class="soft">E o online existe por um motivo simples: gente boa ficava de fora. Turma após turma ouvimos o mesmo de quem não conseguia vir — a agenda não fecha, a passagem não cabe, a agência não pode parar dois dias fora da cidade. Em vez de diluir o presencial para caber mais gente, abrimos uma segunda porta.</p>
+      <p>Nas duas modalidades a vaga é limitada e ela acaba.</p>
+      <a class="btn" href="#oferta" style="align-self:center; margin-top:.6rem">Garantir minha vaga</a>
     </div>
+  </div>
+</section>
 
-    <div class="guar">
-      <div class="guar__seal">
-        <span class="guar__num">7</span>
-        <span class="guar__unit">dias</span>
-      </div>
-      <div class="guar__body">
-        <h3>Sete dias para se decidir</h3>
-        <p>
-          A inscrição no Fly Scale tem garantia de 7 dias a contar da compra: dentro desse prazo,
-          você pede o cancelamento e devolvemos 100% do valor.
-        </p>
-        <p>
-          <strong>Atenção:</strong> depois que a implementação presencial acontece, não é possível
-          solicitar cancelamento. É uma experiência prática, ao vivo, com acesso completo à equipe
-          e aos materiais da turma — uma vez entregue, o valor não é mais reembolsável.
-        </p>
-        <div class="todo todo--paper">
+<!-- ================= 11 · GARANTIA ================= -->
+<section class="sec">
+  <div class="wrap center">
+    <h2 class="sec-h"><b>7 dias</b> para se decidir</h2>
+
+    <div class="guar" style="text-align:left">
+      <div class="guar__seal"><span class="guar__n">7</span><span class="guar__u">dias</span></div>
+      <div class="guar__b">
+        <h3>Garantia de 7 dias</h3>
+        <p>A sua inscrição no Fly Scale tem garantia de 7 dias a contar da compra. Se por qualquer motivo você se arrepender nesse prazo, devolvemos 100% do valor.</p>
+        <p><strong>Mas atenção:</strong> depois que a implementação acontece, não é possível solicitar cancelamento. É uma experiência prática, ao vivo, com acesso completo à equipe e aos materiais da turma — uma vez entregue, o valor não é mais reembolsável.</p>
+        <div class="todo todo--light">
           <span class="todo__tag">A validar antes de publicar</span>
-          <span class="todo__txt">Confirmar com a liderança e com o jurídico o prazo, a redação e a política de remarcação de cadeira. Este texto é um rascunho estrutural.</span>
+          <span class="todo__txt">Confirmar com a liderança e com o jurídico o prazo, a redação e a política de remarcação de vaga. Este texto é um rascunho estrutural.</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     12 · FAQ
-     ============================================================ -->
-<section class="band">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">Dúvidas frequentes</p>
-      <h2 class="h-sec" style="max-width:20ch">Antes de garantir a cadeira</h2>
-    </div>
+<!-- ================= 12 · FAQ ================= -->
+<section class="sec">
+  <div class="wrap center">
+    <h2 class="sec-h">Dúvidas <b>frequentes</b></h2>
 
-    <div class="faq">
+    <div class="faq" style="text-align:left">
       <details open>
         <summary>Qual a diferença entre o presencial e o online?</summary>
-        <p class="ans">A grade é a mesma: os mesmos dois dias, as mesmas mais de 20 horas, o mesmo plano
-        de ação saindo com você. No presencial você senta na nossa sede, em Araçatuba, numa turma de até
-        30 pessoas, e tem a equipe passando na sua mesa e acesso direto ao Luiz Gregatti. No online você
-        acompanha ao vivo de onde estiver, com canal de dúvidas com a equipe durante os dois dias.</p>
+        <p class="ans">A grade é a mesma: os mesmos dois dias, as mesmas mais de 20 horas, o mesmo plano de ação saindo com você. No presencial você senta na nossa sede, em Araçatuba, numa turma de até 30 pessoas, com a equipe passando na sua mesa e acesso direto ao Luiz Gregatti. No online você acompanha ao vivo de onde estiver, com canal de dúvidas com a equipe durante os dois dias.</p>
       </details>
       <details>
         <summary>O online é ao vivo ou gravado?</summary>
         <div class="ans">
           <p>Ao vivo. O Fly Scale depende de você executando junto — não é curso gravado para assistir depois.</p>
-          <div class="todo" style="margin-top:.9rem">
-            <span class="todo__tag">A preencher</span>
-            <span class="todo__txt">Definir se a turma online tem acesso à gravação depois, por quanto tempo, e se isso vale também para o presencial.</span>
-          </div>
+          <div class="todo" style="margin-top:.9rem"><span class="todo__tag">A preencher</span><span class="todo__txt">Definir se a turma online tem acesso à gravação depois e por quanto tempo.</span></div>
         </div>
       </details>
       <details>
         <summary>Preciso já ter agência aberta?</summary>
-        <p class="ans">Não precisa estar faturando, mas o aproveitamento é maior quando você já passou pelo
-        conteúdo da AHO — o Fly Scale é a etapa que fecha aquela jornada de implementação. Se você está
-        começando agora, ainda funciona: você sai com as decisões estruturais tomadas em vez de descobrir
-        por tentativa e erro.</p>
+        <p class="ans">Não precisa estar faturando, mas o aproveitamento é maior quando você já passou pelo conteúdo da AHO — o Fly Scale é a etapa que fecha aquela jornada de implementação. Se está começando agora, funciona: você sai com as decisões estruturais tomadas em vez de descobrir por tentativa e erro.</p>
       </details>
       <details>
-        <summary>Já estou na AHO ou no Fly Growth. Preciso comprar a cadeira?</summary>
-        <p class="ans">A implementação presencial é um dos entregáveis do combo Fly Growth, e a modalidade
-        AHO Presencial já inclui os dois dias na sede. A cadeira avulsa de R$ 5.000 é para quem quer
-        participar sem estar em um dos programas. Se você não tem certeza do que o seu plano já cobre,
-        fale com o suporte antes de comprar.</p>
+        <summary>Já estou na AHO ou no Fly Growth. Preciso comprar?</summary>
+        <p class="ans">A implementação presencial é um dos entregáveis do combo Fly Growth, e a modalidade AHO Presencial já inclui os dois dias na sede. A cadeira avulsa de R$ 5.000 é para quem quer participar sem estar em um dos programas. Se não tem certeza do que o seu plano cobre, fale com o suporte antes de comprar.</p>
       </details>
       <details>
         <summary>É teoria ou prática?</summary>
-        <p class="ans">Prática. É literalmente o nosso bordão: aqui a gente não fala de teoria. São mais de
-        20 horas construindo posicionamento, estrutura, fornecedores, processo comercial e plano de ação
-        aplicados ao seu caso.</p>
+        <p class="ans">Prática. É literalmente o nosso bordão: aqui a gente não fala de teoria. São mais de 20 horas construindo posicionamento, estrutura, fornecedores, processo comercial e plano de ação aplicados ao seu caso.</p>
       </details>
       <details>
         <summary>E se eu não puder ficar nos dois dias?</summary>
-        <p class="ans">A grade é sequencial: o dia 2 monta vendas, operação e finanças sobre a estrutura
-        decidida no dia 1. Quem participa de um só dia leva metade do plano. Se a sua agenda não permite
-        separar dois dias para estruturar o próprio negócio, esse é justamente o sintoma que o Fly Scale
-        vem resolver.</p>
+        <p class="ans">A grade é sequencial: o dia 2 monta vendas, operação e finanças sobre a estrutura decidida no dia 1. Quem participa de um só dia leva metade do plano. Se a sua agenda não permite separar dois dias para estruturar o próprio negócio, é exatamente por isso que você precisa estar aqui.</p>
       </details>
       <details>
         <summary>Onde acontece o presencial e como eu chego?</summary>
-        <p class="ans">Na sede do Grupo Fly, em Araçatuba, interior de São Paulo. Depois da inscrição você
-        recebe por e-mail e WhatsApp o endereço completo, os horários e as orientações de chegada.</p>
+        <p class="ans">Na sede do Grupo Fly, em Araçatuba, interior de São Paulo. Depois da inscrição você recebe por e-mail e WhatsApp o endereço completo, os horários e as orientações de chegada.</p>
       </details>
       <details>
         <summary>No presencial, passagem, hospedagem e alimentação estão incluídas?</summary>
-        <div class="ans">
-          <div class="todo">
-            <span class="todo__tag">A preencher</span>
-            <span class="todo__txt">Definir o que a cadeira cobre (coffee break, almoço, indicação de hotel parceiro) e o que fica por conta do participante.</span>
-          </div>
-        </div>
+        <div class="ans"><div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Definir o que a cadeira cobre (coffee break, almoço, hotel parceiro) e o que fica por conta do participante.</span></div></div>
       </details>
       <details>
         <summary>Posso parcelar?</summary>
-        <div class="ans">
-          <div class="todo">
-            <span class="todo__tag">A preencher</span>
-            <span class="todo__txt">Inserir as condições de parcelamento e formas de pagamento das duas modalidades, exatamente como direcionado pela liderança.</span>
-          </div>
-        </div>
+        <div class="ans"><div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Inserir as condições de parcelamento e formas de pagamento das duas modalidades, exatamente como direcionado pela liderança.</span></div></div>
       </details>
       <details>
         <summary>Comprei o online e mudei de ideia. Consigo migrar para o presencial?</summary>
-        <div class="ans">
-          <div class="todo">
-            <span class="todo__tag">A preencher</span>
-            <span class="todo__txt">Definir a política de upgrade entre modalidades (se existe, se paga a diferença, até quando pode pedir).</span>
-          </div>
-        </div>
+        <div class="ans"><div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Definir a política de upgrade entre modalidades: se existe, se paga a diferença, até quando pode pedir.</span></div></div>
       </details>
       <details>
-        <summary>Ainda tenho dúvida. Com quem eu falo?</summary>
-        <p class="ans">Com o suporte oficial do Grupo Fly, pelo botão no fim desta página. É o canal certo
-        para dúvidas de vaga, pagamento e acesso.</p>
+        <summary>Ainda com dúvidas?</summary>
+        <p class="ans">Clique no botão no fim desta página e converse com o suporte oficial do Grupo Fly. É o canal certo para dúvidas de vaga, pagamento e acesso.</p>
       </details>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     13 · AUTORIDADE
-     ============================================================ -->
-<section class="band who">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">Quem conduz</p>
-      <h2 class="h-sec" style="max-width:26ch">Você aprende dentro da operação de quem faz</h2>
-    </div>
+<!-- ================= 13 · QUEM CONDUZ ================= -->
+<section class="sec">
+  <div class="wrap center">
+    <h2 class="sec-h">Quem conduz a <b>implementação</b>?</h2>
 
-    <div class="who__grid">
+    <div class="who" style="text-align:left">
       <div class="who__photo">
         <span class="todo__tag">A preencher</span>
         <span class="todo__txt">Foto oficial do Luiz Gregatti (vertical, 4:5)</span>
+        <img src="img/luiz.jpg" alt="" onerror="this.hidden=true">
       </div>
       <div class="who__card">
         <h3 class="who__name">Luiz Gregatti</h3>
-        <p class="who__role">Grupo Fly · Conduz a implementação presencial</p>
-        <p class="body-copy">
-          Nos dois dias, o acesso é direto e presencial ao Luiz e a toda a equipe do Grupo Fly —
-          as mesmas pessoas que operam o Viajaflux, a AHO e o Fly Growth no dia a dia.
-        </p>
-        <div class="todo">
-          <span class="todo__tag">A preencher</span>
-          <span class="todo__txt">Bio oficial do Luiz Gregatti aprovada pela liderança: trajetória, tempo de mercado e papel no Grupo Fly. Não publicar números de faturamento ou resultado sem validação.</span>
-        </div>
-        <div class="todo">
-          <span class="todo__tag">A preencher</span>
-          <span class="todo__txt">Bloco de depoimentos reais de participantes de turmas anteriores, com nome, cidade e foto autorizados. Não usar depoimento fictício.</span>
-        </div>
+        <p class="who__role">Grupo Fly · Conduz a implementação</p>
+        <p>Nos dois dias, o acesso é direto ao Luiz e a toda a equipe do Grupo Fly — as mesmas pessoas que operam o Viajaflux, a AHO e o Fly Growth no dia a dia.</p>
+        <div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Bio oficial do Luiz Gregatti aprovada pela liderança: trajetória, tempo de mercado e papel no Grupo Fly. Não publicar número de faturamento ou resultado sem validação.</span></div>
+        <div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Bloco de depoimentos reais de participantes de turmas anteriores, com nome, cidade e foto autorizados. Não usar depoimento fictício.</span></div>
       </div>
     </div>
 
-    <p class="eyebrow eyebrow--mut" style="margin-top:3rem">Ecossistema Grupo Fly</p>
     <div class="logos">
       <div class="logo-slot">Logo Grupo Fly</div>
       <div class="logo-slot">Logo Viajaflux</div>
@@ -1886,119 +862,93 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
       <div class="logo-slot">Logo Fly Growth</div>
       <div class="logo-slot">Slot livre</div>
     </div>
-    <p class="cta-note" style="margin-top:.8rem">Substituir pelos arquivos oficiais de marca</p>
   </div>
 </section>
 
-<!-- ============================================================
-     14 · SUPORTE E CANAIS OFICIAIS
-     ============================================================ -->
-<section class="band" id="suporte">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">Suporte</p>
-      <h2 class="h-sec" style="max-width:24ch">Fale com o time oficial</h2>
-    </div>
+<!-- ================= 14 · SUPORTE ================= -->
+<section class="sec" id="suporte">
+  <div class="wrap center">
+    <h2 class="sec-h">Precisa de ajuda com sua <b>inscrição</b>?</h2>
 
-    <div class="help">
-      <div class="help__card">
+    <div class="help" style="text-align:left">
+      <div class="help__c">
         <h3>Dúvida sobre vaga, pagamento ou acesso</h3>
-        <p>Qualquer dúvida sobre a sua inscrição no Fly Scale é resolvida diretamente com o suporte
-        oficial do Grupo Fly.</p>
+        <p>Qualquer dúvida sobre a sua inscrição no Fly Scale é resolvida diretamente com o suporte oficial do Grupo Fly.</p>
         <a class="btn" href="#suporte">Falar com o suporte</a>
-        <div class="todo">
-          <span class="todo__tag">A preencher</span>
-          <span class="todo__txt">Link do WhatsApp oficial do suporte.</span>
-        </div>
+        <div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Link do WhatsApp oficial do suporte.</span></div>
       </div>
-      <div class="help__card">
+      <div class="help__c">
         <h3>Não tem certeza se o contato é oficial?</h3>
-        <p>Se você recebeu mensagem de algum número falando em vaga, cobrança ou pagamento, confirme
-        antes de responder. O Grupo Fly só usa os canais oficiais divulgados nesta página.</p>
+        <p>Recebeu mensagem de algum número falando em vaga, cobrança ou pagamento? Antes de responder, confirme. O Grupo Fly só usa os canais oficiais divulgados nesta página.</p>
         <a class="btn btn--ghost" href="#suporte">Ver canais oficiais</a>
-        <div class="todo">
-          <span class="todo__tag">A preencher</span>
-          <span class="todo__txt">Listar números e e-mails oficiais, ou plugar o verificador de número.</span>
-        </div>
+        <div class="todo"><span class="todo__tag">A preencher</span><span class="todo__txt">Listar números e e-mails oficiais, ou plugar o verificador de número.</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     15 · RODAPÉ
-     ============================================================ -->
+<!-- ================= 15 · RODAPÉ ================= -->
 <footer class="foot">
   <div class="wrap foot__row">
     <span class="brand">
-      <svg class="brand__mark" style="--sym-bg:#0A0908; color:var(--taupe); width:34px" aria-hidden="true"><use href="#fs-mark"/></svg>
-      <span class="brand__word" style="font-size:var(--step-1)">Fly Scale</span>
+      <svg class="brand__mark" style="--sym-bg:#000; color:#B8B1A3; width:34px" aria-hidden="true"><use href="#fs-mark"/></svg>
+      <span class="brand__word" style="font-size:1.2rem">Fly Scale</span>
     </span>
     <small>Grupo Fly · Araçatuba/SP · Todos os direitos reservados</small>
   </div>
 </footer>
 
-<!-- ============================================================
-     BARRA FIXA
-     ============================================================ -->
+<!-- ================= BARRA FIXA ================= -->
 <div class="dock">
   <div class="wrap dock__in">
-    <div class="dock__info">
+    <div class="dock__i">
       <span class="dock__t" id="dock-when">Presencial em Araçatuba/SP ou online, ao vivo</span>
-      <span class="dock__s">+20h · dois dias · vagas limitadas</span>
+      <span class="dock__s">Vagas limitadas · +20h · 2 dias</span>
     </div>
-    <a class="btn" href="#cadeira">Garantir minha cadeira</a>
+    <a class="btn" href="#oferta">Garantir minha vaga</a>
   </div>
 </div>
 
 <script>
 /* ------------------------------------------------------------------
-   Data da turma e contagem regressiva.
-   Preencha as DUAS constantes quando a data for fechada.
+   Data da turma e contador.
+   Preencha as duas constantes quando a data for fechada.
    TURMA_INICIO: ISO com fuso de Brasília, ex. "2026-11-14T09:30:00-03:00"
    TURMA_ROTULO: como aparece na página, ex. "14 e 15 de Novembro"
-   Deixe null para a página exibir "a definir" em vez de uma data falsa.
+   Em null, a página mostra "a definir" em vez de uma data falsa.
    ------------------------------------------------------------------ */
 var TURMA_INICIO = null;
 var TURMA_ROTULO = null;
 
 (function () {
-  var clock   = document.getElementById('clock');
-  var boardEl = document.getElementById('board-date');
-  var dockEl  = document.getElementById('dock-when');
+  var clock = document.getElementById('clock');
+  var pill  = document.getElementById('pill-date');
+  var dock  = document.getElementById('dock-when');
 
   if (TURMA_ROTULO) {
-    boardEl.innerHTML = TURMA_ROTULO + '<small>Dois dias de imersão</small>';
-    dockEl.textContent = TURMA_ROTULO + ' · presencial ou online';
+    pill.textContent = TURMA_ROTULO + ' · Presencial ou Online';
+    dock.textContent = TURMA_ROTULO + ' · presencial ou online';
   }
-
   if (!TURMA_INICIO) return;
 
   var alvo = new Date(TURMA_INICIO).getTime();
   if (isNaN(alvo)) return;
 
-  var unidades = [['dias', 86400000], ['horas', 3600000], ['min', 60000], ['seg', 1000]];
-
-  clock.innerHTML = unidades.map(function (u) {
-    return '<span class="clock__unit"><span class="clock__n" data-u="' + u[0] +
-           '">--</span><span class="clock__l">' + u[0] + '</span></span>';
+  var U = [['dias', 86400000], ['horas', 3600000], ['min', 60000], ['seg', 1000]];
+  clock.innerHTML = U.map(function (u) {
+    return '<span class="clock__u"><span class="clock__n" data-u="' + u[0] + '">--</span>' +
+           '<span class="clock__l">' + u[0] + '</span></span>';
   }).join('');
 
-  var campos = {};
-  unidades.forEach(function (u) {
-    campos[u[0]] = clock.querySelector('[data-u="' + u[0] + '"]');
-  });
+  var f = {};
+  U.forEach(function (u) { f[u[0]] = clock.querySelector('[data-u="' + u[0] + '"]'); });
 
   (function tick() {
-    var resta = alvo - Date.now();
-    if (resta <= 0) {
-      clock.innerHTML = '<span class="clock__off">A turma já começou</span>';
-      return;
-    }
-    unidades.forEach(function (u) {
-      var v = Math.floor(resta / u[1]);
-      resta -= v * u[1];
-      campos[u[0]].textContent = v < 10 ? '0' + v : String(v);
+    var r = alvo - Date.now();
+    if (r <= 0) { clock.innerHTML = '<span class="clock__off">A turma já começou</span>'; return; }
+    U.forEach(function (u) {
+      var v = Math.floor(r / u[1]); r -= v * u[1];
+      f[u[0]].textContent = v < 10 ? '0' + v : String(v);
     });
     setTimeout(tick, 1000);
   })();
