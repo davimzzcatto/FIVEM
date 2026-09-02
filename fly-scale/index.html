@@ -33,6 +33,7 @@
   --f: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
   --wrap: 1140px;
+  --hero-w: 700px;   /* medida da coluna do hero */
   --pad: clamp(1.1rem, .5rem + 2.4vw, 2.5rem);
   --sec-y: clamp(3.4rem, 2rem + 5.5vw, 6.5rem);
 }
@@ -108,9 +109,8 @@ b, strong{ font-weight: 700; }
 
 /* ---------- hero ---------- */
 .hero{ padding-block: clamp(2rem, 1rem + 3vw, 3.5rem) clamp(2.5rem, 1.5rem + 3vw, 4rem); }
-.hero__grid{ display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 1rem + 3vw, 3rem); align-items: center; }
-@media (min-width: 940px){ .hero__grid{ grid-template-columns: 1.05fr .95fr; } }
-
+.hero__grid{ display: block; }
+.hero__col > *{ max-width: var(--hero-w); }
 .hero__col{ display: flex; flex-direction: column; gap: 1.4rem; align-items: flex-start; }
 
 .brand{ display: inline-flex; align-items: center; gap: .7rem; }
@@ -129,7 +129,7 @@ b, strong{ font-weight: 700; }
 }
 .pill svg{ width: 15px; height: 15px; flex: none; color: var(--white); }
 
-.hero h1{ font-size: clamp(1.85rem, 1.25rem + 2.6vw, 3.2rem); max-width: 24ch; }
+.hero h1{ font-size: clamp(1.85rem, 1.25rem + 2.6vw, 3.2rem); }
 .hero__slogan{ font-size: clamp(1.05rem, .95rem + .5vw, 1.3rem); color: var(--grey); }
 .hero__slogan b{ color: var(--white); }
 
@@ -154,16 +154,14 @@ b, strong{ font-weight: 700; }
 
 /* moldura de mídia (vídeo/foto do hero) */
 .media{
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 18px;
   border: 2px solid var(--line);
-  background: linear-gradient(180deg, var(--panel) 0%, var(--black) 100%);
-  display: flex; align-items: center; justify-content: center;
-  padding: 1.5rem; text-align: center;
-  position: relative; overflow: hidden;
+  background: var(--black);
+  overflow: hidden;
 }
-.media{ padding: 0; }
 .media video{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
 
 /* ---------- títulos de seção ---------- */
@@ -293,7 +291,6 @@ b, strong{ font-weight: 700; }
 .price__k{ font-size: .78rem; color: var(--grey); }
 .price__v{ font-size: clamp(2.4rem, 1.8rem + 2.4vw, 3.4rem); font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; margin-top: .3rem; }
 .price__v sup{ font-size: .34em; font-weight: 600; top: -.9em; margin-right: .1em; }
-.price__v .tbd{ font-size: .3em; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .price__sub{ font-size: .8rem; color: var(--grey-2); margin-top: .5rem; line-height: 1.5; }
 .offer__foot{ margin-top: auto; padding-top: 1.1rem; display: flex; flex-direction: column; gap: .8rem; }
 .scarce{ font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--red); text-align: center; }
@@ -374,14 +371,6 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
 .who__role{ font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
 .who__card p{ color: var(--grey); max-width: 62ch; }
 
-.logos{ display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .8rem; margin-top: 1.6rem; }
-.logo-slot{
-  border: 1px dashed #2A2A2A; border-radius: 12px; min-height: 76px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-2);
-  background: var(--panel-2); text-align: center; padding: .5rem;
-}
-
 /* ---------- depoimentos ---------- */
 .quotes{ display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2.2rem; text-align: left; }
 @media (min-width: 860px){ .quotes{ grid-template-columns: repeat(3, 1fr); } }
@@ -460,6 +449,14 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
         <span id="pill-date">26 e 27 de Setembro · Presencial ou Online</span>
       </span>
 
+      <div class="media">
+        <video controls playsinline preload="metadata"
+               poster="media/convite-poster.jpg"
+               aria-label="Vídeo de convite do Fly Scale">
+          <source src="media/convite.mp4" type="video/mp4">
+        </video>
+      </div>
+
       <h1>Dois dias construindo a operação da sua agência, para você sair com ela <span class="mk">rodando</span>.</h1>
 
       <p class="hero__slogan"><b>“Aqui a gente não fala de teoria.”</b> Mais de 20 horas de execução prática, presencial na nossa sede ou online, ao vivo.</p>
@@ -477,14 +474,6 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
         <span class="clock__off">Carregando…</span>
       </div>
 
-    </div>
-
-    <div class="media">
-      <video controls playsinline preload="metadata"
-             poster="media/convite-poster.jpg"
-             aria-label="Vídeo de convite do Fly Scale">
-        <source src="media/convite.mp4" type="video/mp4">
-      </video>
     </div>
   </div>
 </header>
@@ -639,8 +628,8 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
           <div class="offer__foot">
             <div>
               <p class="price__k">Investimento por vaga</p>
-              <p class="price__v"><span class="tbd">a definir</span></p>
-              <p class="price__sub">Valor da modalidade online a divulgar conforme direcionamento da liderança.</p>
+              <p class="price__v"><sup>R$</sup>1.997</p>
+              <p class="price__sub">Mesma grade e os mesmos dois dias do presencial, ao vivo, de onde você estiver.</p>
             </div>
             <a class="btn btn--ghost btn--wide" href="#suporte">Quero a vaga online</a>
             <p class="scarce">Vagas limitadas por turma</p>
@@ -748,7 +737,7 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
       </details>
       <details>
         <summary>Já estou na AHO ou no Fly Growth. Preciso comprar?</summary>
-        <p class="ans">A implementação presencial é um dos entregáveis do combo Fly Growth, e a modalidade AHO Presencial já inclui os dois dias na sede. A cadeira avulsa de R$ 5.000 é para quem quer participar sem estar em um dos programas. Se não tem certeza do que o seu plano cobre, fale com o suporte antes de comprar.</p>
+        <p class="ans">A implementação presencial é um dos entregáveis do combo Fly Growth, e a modalidade AHO Presencial já inclui os dois dias na sede. A cadeira avulsa custa R$ 5.000 no presencial e R$ 1.997 no online — é para quem quer participar sem estar em um dos programas. Se não tem certeza do que o seu plano cobre, fale com o suporte antes de comprar.</p>
       </details>
       <details>
         <summary>É teoria ou prática?</summary>
@@ -788,14 +777,6 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
         <p class="who__role">Grupo Fly · Conduz a implementação</p>
         <p>Nos dois dias, o acesso é direto ao Luiz e a toda a equipe do Grupo Fly — as mesmas pessoas que operam o Viajaflux, a AHO e o Fly Growth no dia a dia.</p>
       </div>
-    </div>
-
-    <div class="logos">
-      <div class="logo-slot">Logo Grupo Fly</div>
-      <div class="logo-slot">Logo Viajaflux</div>
-      <div class="logo-slot">Logo AHO</div>
-      <div class="logo-slot">Logo Fly Growth</div>
-      <div class="logo-slot">Slot livre</div>
     </div>
   </div>
 </section>

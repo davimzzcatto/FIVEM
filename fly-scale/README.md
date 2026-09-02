@@ -5,6 +5,7 @@ evento da Sand Academy e adaptada para vender **duas modalidades**: presencial n
 em Araçatuba/SP, e online ao vivo.
 
 **Próxima turma: 26 e 27 de Setembro.** O contador regressivo está ligado.
+**Preços:** R$ 5.000 no presencial (30 cadeiras) e R$ 1.997 no online.
 
 ```
 index.html            fonte — referencia media/ e img/ por caminho relativo. É este que vai pro domínio.
@@ -24,7 +25,7 @@ A única requisição externa da página é a fonte no Google Fonts.
 | # | Função na PV de referência | Fly Scale |
 |---|---|---|
 | 1 | Faixa vermelha de topo com o público | “Exclusivo para donos de agência de viagens” |
-| 2 | Hero: marca, data, headline com destaque, CTA, escassez, contador | Idem + **vídeo de convite** à direita |
+| 2 | Hero: marca, data, headline com destaque, CTA, escassez, contador | Coluna única de 700px: **vídeo de convite acima do headline** |
 | 3 | Pergunta de transição + comparação Sem/Com | **Agência passiva** (card branco) vs. **agência ativa** (card vermelho→laranja), escalonados |
 | 4 | Prova social | **Galeria das turmas anteriores** (aparece quando as fotos estiverem em `img/`) |
 | 5 | O que você vai implementar em dois dias | 6 cards de entregável |
@@ -153,8 +154,6 @@ As duas alimentam a pill do hero, a barra fixa e o contador. Em `null`, a págin
 ## Pendências antes de subir campanha
 
 **Liderança**
-- **Preço da modalidade online** — o card mostra “a definir” até ser informado
-  (o presencial está em R$ 5.000, conforme direcionado)
 - Parcelamento e formas de pagamento das duas modalidades
 - Links de checkout (hoje os CTAs apontam para a seção de suporte)
 - Redação e prazo da garantia + política de remarcação (validar com o jurídico)
