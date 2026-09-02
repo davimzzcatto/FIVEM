@@ -98,6 +98,10 @@ O `+faststart` põe o índice no começo do arquivo, então o vídeo começa a t
 baixar inteiro. Para produção, considere servir por CDN ou plataforma de vídeo em vez do
 MP4 direto.
 
+**Player estilo VSL**: o `<video>` não tem o atributo `controls`, então não expõe duração
+nem barra de progresso. Um botão de play sobre o poster dá o comando, e clicar no vídeo
+alterna play/pause. O botão reaparece no hover enquanto toca, para dar como pausar.
+
 ### Imagens que faltam
 
 Salvar em `img/` com estes nomes exatos — a página referencia eles diretamente:
@@ -109,9 +113,10 @@ Salvar em `img/` com estes nomes exatos — a página referencia eles diretament
 | `depo-01.jpg` … `depo-03.jpg` | fotos dos depoimentos | quadrado |
 
 **A galeria e o retrato se escondem sozinhos** enquanto os arquivos não existirem (o
-script no fim do `index.html` verifica se as imagens carregaram). Nada de buraco no
-layout, e eles aparecem automaticamente quando os arquivos entrarem — não precisa mexer
-no código.
+script no fim do `index.html` verifica se as imagens carregaram). Cada tile some
+individualmente, e a galeria inteira só desaparece quando nenhuma foto carrega — então
+qualquer quantidade (3, 5, 8) fecha o grid sem deixar quadro vazio. Não precisa mexer no
+código: é só colocar os arquivos e rodar o build.
 
 Confirmar autorização de uso de imagem dos participantes antes de publicar.
 

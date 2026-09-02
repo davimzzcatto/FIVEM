@@ -162,7 +162,29 @@ b, strong{ font-weight: 700; }
   background: var(--black);
   overflow: hidden;
 }
-.media video{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
+.media video{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: #000; cursor: pointer; }
+.media video::-webkit-media-controls{ display: none !important; }
+
+/* play estilo VSL: sem barra de progresso, sem duração, sem chrome do player */
+.media__play{
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 84px; height: 84px;
+  display: flex; align-items: center; justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 0 0 2px rgba(255,255,255,.85) inset;
+  color: var(--white);
+  cursor: pointer;
+  transition: transform .18s ease, background .18s ease, opacity .25s ease;
+}
+.media__play svg{ width: 40px; height: 40px; margin-left: 4px; }
+.media__play:hover{ transform: scale(1.06); background: rgba(0,0,0,.7); }
+.media.is-playing .media__play{ opacity: 0; pointer-events: none; }
+.media.is-playing:hover .media__play{ opacity: 1; pointer-events: auto; }
 
 /* ---------- títulos de seção ---------- */
 .sec-h{ font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.2rem); max-width: 30ch; margin-inline: auto; }
@@ -449,12 +471,16 @@ details[open] summary::after{ transform: rotate(225deg) translateY(-2px); }
         <span id="pill-date">26 e 27 de Setembro · Presencial ou Online</span>
       </span>
 
-      <div class="media">
-        <video controls playsinline preload="metadata"
+      <div class="media" id="vsl">
+        <video id="vsl-video" playsinline preload="metadata"
                poster="media/convite-poster.jpg"
+               disablepictureinpicture
                aria-label="Vídeo de convite do Fly Scale">
           <source src="media/convite.mp4" type="video/mp4">
         </video>
+        <button class="media__play" id="vsl-play" type="button" aria-label="Assistir ao vídeo de convite">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+        </button>
       </div>
 
       <h1>Dois dias construindo a operação da sua agência, para você sair com ela <span class="mk">rodando</span>.</h1>
@@ -884,13 +910,44 @@ var TURMA_ROTULO = "26 e 27 de Setembro";
       }
     });
   }
+  /* cada tile some sozinho se a foto dele não existir; a galeria toda
+     só desaparece quando nenhuma carregou. Assim qualquer quantidade
+     de fotos (3, 5, 8) fecha o grid sem deixar quadro vazio. */
   var g = document.querySelector('.gallery');
-  if (g) settle([].slice.call(g.querySelectorAll('img')), function (ok) { if (!ok) g.hidden = true; });
+  if (g) {
+    [].slice.call(g.querySelectorAll('.shot')).forEach(function (fig) {
+      settle([].slice.call(fig.querySelectorAll('img')), function (ok) {
+        if (!ok) fig.hidden = true;
+      });
+    });
+    settle([].slice.call(g.querySelectorAll('img')), function (ok) {
+      if (!ok) g.hidden = true;
+    });
+  }
 
   var wp = document.getElementById('who-photo'), who = document.getElementById('who');
   if (wp) settle([].slice.call(wp.querySelectorAll('img')), function (ok) {
     if (!ok) { wp.hidden = true; if (who) who.classList.add('who--nophoto'); }
   });
+})();
+
+/* Player VSL: clique no vídeo ou no botão dá play/pause.
+   Sem controles nativos, então não expõe duração nem barra de progresso. */
+(function () {
+  var box = document.getElementById('vsl');
+  var vid = document.getElementById('vsl-video');
+  var btn = document.getElementById('vsl-play');
+  if (!box || !vid || !btn) return;
+
+  function toggle() {
+    if (vid.paused) { vid.play().catch(function () {}); }
+    else { vid.pause(); }
+  }
+  btn.addEventListener('click', toggle);
+  vid.addEventListener('click', toggle);
+  vid.addEventListener('play',  function () { box.classList.add('is-playing'); });
+  vid.addEventListener('pause', function () { box.classList.remove('is-playing'); });
+  vid.addEventListener('ended', function () { box.classList.remove('is-playing'); vid.currentTime = 0; });
 })();
 
 (function () {
