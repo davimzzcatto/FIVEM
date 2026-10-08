@@ -1,0 +1,11 @@
+{
+  "name": "FlyPost",
+  "short_name": "FlyPost",
+  "description": "Agendamento e publicação automática de posts nas redes sociais.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0c10",
+  "theme_color": "#ff5a1f",
+  "lang": "pt-BR",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

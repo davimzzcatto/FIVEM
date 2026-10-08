@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlyPost</title>
+  <meta name="description" content="Agende e publique Reels, imagens, carrosséis e stories no Instagram, Facebook e TikTok.">
+  <meta name="theme-color" content="#0b0c10">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <script>
+    // Aplica o tema antes do primeiro desenho, para não piscar.
+    try { var t = localStorage.getItem('fp-theme'); if (t && t !== 'auto') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="/css/app.css">
+  <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+  <div id="app"><div class="loading" style="min-height:100vh"><span class="spinner"></span></div></div>
+  <noscript><p style="padding:40px;font-family:system-ui">O FlyPost precisa de JavaScript ativado.</p></noscript>
+</body>
+</html>
