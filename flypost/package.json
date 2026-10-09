@@ -1,0 +1,16 @@
+{
+  "name": "flypost",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agendamento e publicação automática de posts no Instagram, Facebook e TikTok.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch server/index.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js",
+    "plan": "node --disable-warning=ExperimentalWarning scripts/plan.js"
+  }
+}
