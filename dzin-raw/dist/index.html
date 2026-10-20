@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="dzin.raw — design, motion e edição. Seu negócio merece um criativo à altura.">
+<meta name="theme-color" content="#04070F">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="dzin.raw">
+<meta property="og:title" content="dzin.raw">
+<meta property="og:description" content="dzin.raw — design, motion e edição. Seu negócio merece um criativo à altura.">
+<meta property="og:image" content="img/retrato.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="dzin.raw">
+<meta name="twitter:description" content="dzin.raw — design, motion e edição. Seu negócio merece um criativo à altura.">
+<meta name="twitter:image" content="img/retrato.webp">
+<link rel="icon" href="img/retrato.webp">
+<style>*{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>dzin.raw</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap">
+
+<style>
+/* ============================================================
+   dzin.raw — primeira dobra
+   Modelada no hero da referência (jorgewebpro.com): foto ocupando
+   a tela inteira, coluna de texto à esquerda, assinatura embaixo
+   à direita, nav fino no topo. Tela escura única, sem tema claro.
+   ============================================================ */
+:root{
+  --ink:        #FFFBF8;                 /* texto principal */
+  --ink-soft:   rgba(255,247,241,.84);   /* texto de apoio */
+  --night:      #04070F;                 /* fundo atrás da foto */
+  --blue:       #2F9BE8;                 /* azul do contraluz da foto */
+  --blue-lit:   #BFE4FF;                 /* palavra que gira */
+  --f: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+
+  color-scheme: dark;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+body{
+  margin: 0;
+  background: var(--night);
+  color: var(--ink);
+  font-family: var(--f);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.sr-only{
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+:where(a):focus-visible{ outline: 2px solid var(--blue-lit); outline-offset: 4px; border-radius: 999px; }
+
+/* ---------- palco ---------- */
+.hero{
+  position: relative;
+  isolation: isolate;
+  height: 100vh;
+  height: 100svh;
+  min-height: 670px;
+  background-color: var(--night);
+  border-radius: 0 0 22px 22px;
+  overflow: hidden;
+}
+
+.hero__photo{
+  position: absolute; inset: 0; z-index: 1;
+  background-image: url("img/retrato.webp");
+  background-size: cover;
+  background-position: 55% 48%;
+  background-repeat: no-repeat;
+}
+
+/* escurecimento: desce do topo, fecha embaixo e abre espaço à esquerda */
+.hero::before{
+  content: "";
+  position: absolute; inset: 0; z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0,2,10,.52) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0) 40%, rgba(0,0,0,.52) 66%, rgba(0,0,0,.88) 86%, rgba(0,0,0,.97) 100%),
+    linear-gradient(90deg, rgba(1,4,15,.84) 0%, rgba(1,4,15,.44) 34%, rgba(0,0,0,0) 60%);
+}
+
+/* ---------- nav ---------- */
+.nav{
+  position: absolute; top: 18px; left: 0; z-index: 8;
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%;
+  padding-inline: max(16px, 3.3%, env(safe-area-inset-left, 0px)) max(16px, 3.3%, env(safe-area-inset-right, 0px));
+  font-size: 13px;
+}
+.nav__mark{
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: .02em;
+  font-weight: 400;
+  opacity: .9;
+  transition: opacity .25s ease;
+}
+.nav__mark:hover{ opacity: 1; }
+.nav__ig{
+  display: inline-grid; place-items: center;
+  width: 40px; height: 40px;
+  color: var(--ink);
+  border: 1px solid rgba(255,255,255,.34);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background .3s ease, border-color .3s ease, transform .3s ease;
+}
+.nav__ig:hover{ background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.8); transform: translateY(-1px); }
+
+/* ---------- coluna de texto ---------- */
+.lead{
+  position: absolute; z-index: 4;
+  bottom: 9%;
+  left: max(16px, 3.3%, env(safe-area-inset-left, 0px));
+  width: min(40%, 580px);
+}
+
+.lead h1{
+  margin: 0;
+  font-weight: 300;
+  font-size: clamp(26px, min(2.8vw, 5.6vh), 50px);
+  line-height: .98;
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+
+/* a palavra que muda: negócio / evento / casamento / business */
+.rot{ display: inline-block; }
+.rot__word{
+  display: inline-block;
+  color: var(--blue-lit);
+  font-weight: 400;
+  text-shadow: 0 0 30px rgba(47,155,232,.45);
+}
+.rot__word.is-leaving{ animation: word-out .32s cubic-bezier(.4,0,1,1) forwards; }
+.rot__word.is-entering{ animation: word-in .52s cubic-bezier(.16,1,.3,1); }
+@keyframes word-out{
+  to{ opacity: 0; transform: translateY(-.34em); filter: blur(5px); }
+}
+@keyframes word-in{
+  from{ opacity: 0; transform: translateY(.38em); filter: blur(6px); }
+  to{ opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.lead p{
+  max-width: 330px;
+  margin: 20px 0 22px;
+  color: var(--ink-soft);
+  font-weight: 300;
+  font-size: clamp(12px, min(1vw, 2vh), 15px);
+  line-height: 1.42;
+  text-wrap: balance;
+}
+
+/* ---------- botões ---------- */
+.cta-row{ display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.cta{
+  display: inline-flex; align-items: center; gap: 12px;
+  height: 48px;
+  border-radius: 999px;
+  font-size: 13px; font-weight: 500; letter-spacing: .01em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cta--primary{
+  position: relative; overflow: hidden;
+  padding: 0 5px 0 22px;
+  background: #fff;
+  color: #0B1E3F;
+}
+/* o azul sobe por dentro do botão no hover */
+.cta__fill{
+  position: absolute; inset: 0; z-index: 0;
+  background: var(--blue);
+  transform: translateY(103%);
+  transition: transform .55s cubic-bezier(.3,.6,.3,1);
+  pointer-events: none;
+}
+.cta--primary:hover .cta__fill, .cta--primary:focus-visible .cta__fill{ transform: translateY(0); }
+.cta__label{ position: relative; z-index: 1; white-space: nowrap; transition: color .35s ease; }
+.cta--primary:hover .cta__label, .cta--primary:focus-visible .cta__label{ color: #fff; }
+.cta__chip{
+  position: relative; z-index: 1;
+  flex: none;
+  display: grid; place-items: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  transition: background .35s ease, color .35s ease;
+}
+.cta--primary:hover .cta__chip, .cta--primary:focus-visible .cta__chip{ background: #fff; color: #0B1E3F; }
+.cta__chip svg{ transition: transform .45s cubic-bezier(.22,.61,.36,1); }
+.cta--primary:hover .cta__chip svg, .cta--primary:focus-visible .cta__chip svg{ transform: translate(2px,-2px); }
+
+.cta--ghost{
+  padding: 0 22px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.38);
+  transition: background .35s ease, border-color .35s ease;
+}
+.cta--ghost:hover{ background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.78); }
+.cta--ghost svg{ flex: none; }
+
+/* ---------- assinatura ---------- */
+.signature{
+  position: absolute; z-index: 4;
+  right: max(16px, 3.3%, env(safe-area-inset-right, 0px));
+  bottom: 9%;
+  text-align: right;
+  font-weight: 200;
+  font-size: clamp(36px, min(5vw, 9.5vh), 76px);
+  line-height: .84;
+  letter-spacing: -.02em;
+  color: rgba(255,251,248,.94);
+}
+
+/* ---------- telas estreitas ---------- */
+@media (max-width: 860px){
+  .hero{ height: 92vh; height: 92svh; min-height: 580px; border-radius: 0 0 18px 18px; }
+  .hero__photo{ background-position: 50% 50%; }
+  .hero::before{
+    background:
+      linear-gradient(180deg, rgba(0,2,10,.5) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,.2) 44%, rgba(0,0,0,.82) 72%, rgba(0,0,0,.97) 100%);
+  }
+  .nav{ top: 12px; }
+
+  .lead{
+    top: auto; bottom: 6%;
+    left: max(16px, 5%, env(safe-area-inset-left, 0px));
+    right: max(16px, 5%, env(safe-area-inset-right, 0px));
+    width: auto;
+    text-align: center;
+  }
+  .lead h1{ font-size: clamp(25px, 6.6vw, 38px); line-height: 1.04; }
+  .lead p{ max-width: 100%; margin: 15px auto 20px; font-size: 12.5px; line-height: 1.5; }
+
+  .cta-row{ flex-direction: column; align-items: stretch; gap: 10px; }
+  .cta--primary{ justify-content: space-between; padding-left: 20px; }
+  .cta--ghost{ justify-content: center; }
+
+  .signature{ display: none; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero" id="topo">
+  <div class="hero__photo" role="img" aria-label="Retrato em contraluz azul"></div>
+
+  <header class="nav">
+    <a class="nav__mark" href="#topo">dzin.raw</a>
+    <a class="nav__ig" href="https://www.instagram.com/dzin.raw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @dzin.raw">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+        <circle cx="12" cy="12" r="4.2"></circle>
+        <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </a>
+  </header>
+
+  <section class="lead" aria-labelledby="headline">
+    <h1 id="headline">
+      <span class="sr-only">Seu negócio merece um criativo à altura.</span>
+      <span aria-hidden="true">
+        <span class="rot"><span class="rot__art">Seu</span> <span class="rot__word">negócio</span></span><br>
+        merece um criativo<br>
+        à altura.
+      </span>
+    </h1>
+
+    <p>Design, motion, edição. Mais do que falar sobre o que posso fazer, é mostrar na prática.</p>
+
+    <div class="cta-row">
+      <a class="cta cta--primary" href="https://wa.me/5518997695327?text=Oi%21%20Vi%20seu%20site%20e%20quero%20tirar%20uma%20ideia%20do%20papel" target="_blank" rel="noopener noreferrer">
+        <span class="cta__fill" aria-hidden="true"></span>
+        <span class="cta__label">Vamos tirar sua ideia do papel</span>
+        <span class="cta__chip" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 7h10v10"></path><path d="M7 17 17 7"></path>
+          </svg>
+        </span>
+      </a>
+
+      <a class="cta cta--ghost" href="https://www.instagram.com/dzin.raw/" target="_blank" rel="noopener noreferrer">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+          <circle cx="12" cy="12" r="4.2"></circle>
+          <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"></circle>
+        </svg>
+        @dzin.raw
+      </a>
+    </div>
+  </section>
+
+  <div class="signature" aria-hidden="true">dzin.<br>raw</div>
+</div>
+
+<script>
+(function(){
+  /* As variações do headline. O artigo vem junto para caber palavra
+     feminina sem quebrar a concordância: {art:"Sua", palavra:"marca"}. */
+  var VARIACOES = [
+    { art: "Seu", palavra: "negócio"   },
+    { art: "Seu", palavra: "evento"    },
+    { art: "Seu", palavra: "casamento" },
+    { art: "Seu", palavra: "business"  }
+  ];
+  var INTERVALO = 2600;   // ms que cada palavra fica na tela
+
+  var art  = document.querySelector(".rot__art");
+  var word = document.querySelector(".rot__word");
+  if(!art || !word || VARIACOES.length < 2) return;
+
+  var calmo = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var i = 0;
+
+  function aplica(v){ art.textContent = v.art; word.textContent = v.palavra; }
+
+  function gira(){
+    var proxima = VARIACOES[(i + 1) % VARIACOES.length];
+    i = (i + 1) % VARIACOES.length;
+
+    if(calmo){ aplica(proxima); return; }
+
+    word.classList.add("is-leaving");
+    setTimeout(function(){
+      aplica(proxima);
+      word.classList.remove("is-leaving");
+      word.classList.add("is-entering");
+      setTimeout(function(){ word.classList.remove("is-entering"); }, 520);
+    }, 320);
+  }
+
+  aplica(VARIACOES[0]);
+  setInterval(gira, calmo ? INTERVALO + 1200 : INTERVALO);
+})();
+</script>
+</body>
+</html>

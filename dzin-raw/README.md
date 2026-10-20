@@ -5,8 +5,10 @@ do dzin.raw. Uma tela só: foto ocupando o fundo inteiro, coluna de texto à esq
 assinatura embaixo à direita e nav fino no topo — a mesma composição da referência.
 
 ```
-index.html          a página inteira (HTML + CSS + JS, sem build)
+index.html          a fonte — HTML + CSS + JS numa peça só
 img/retrato.webp    a foto do hero (1671×941)
+build.py            embrulha o index.html num documento completo e escreve dist/
+dist/               o que vai para o ar (gerado; versionado para a Vercel servir direto)
 ```
 
 A única requisição externa é a fonte no Google Fonts.
@@ -81,25 +83,23 @@ e o layout invertendo para texto centralizado embaixo no celular.
 
 ---
 
-## Publicar em domínio próprio
+## Publicar
 
-O `index.html` foi escrito no formato de Artifact — começa em `<title>`, sem
-`<!DOCTYPE>`/`<html>`/`<head>`/`<body>`. Para subir em domínio, prefixe:
+`dist/` é a pasta que vai para o ar — documento completo, com as metas de busca e de
+compartilhamento, e a `img/` ao lado. Ela está versionada, então qualquer host estático
+serve ela sem build.
 
-```html
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="dzin.raw — design, motion e edição. Seu negócio merece um criativo à altura.">
-<style>*{box-sizing:border-box}body{margin:0}img{max-width:100%}</style>
-</head>
-<body>
+```
+python3 build.py                      # regerar depois de mexer no index.html
+python3 build.py https://seudominio   # com canonical e og:image absolutos
 ```
 
-e feche com `</body></html>`, com a pasta `img/` ao lado. Antes de subir campanha:
-og:image, favicon e os pixels de Meta/Google Ads.
+**Vercel**: projeto apontando para este repositório, *Root Directory* = `dzin-raw/dist`,
+sem build command e sem output directory — é HTML estático. Cada push na branch publica
+sozinho.
+
+Depois de mexer no `index.html`, rodar o `build.py` antes do commit, senão o `dist/`
+continua com a versão velha.
 
 ---
 

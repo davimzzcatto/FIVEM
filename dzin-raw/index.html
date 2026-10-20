@@ -66,8 +66,8 @@ body{
   position: absolute; inset: 0; z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(0,2,10,.52) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0) 54%, rgba(0,0,0,.72) 80%, rgba(0,0,0,.96) 100%),
-    linear-gradient(90deg, rgba(1,4,15,.86) 0%, rgba(1,4,15,.46) 32%, rgba(0,0,0,0) 58%);
+    linear-gradient(180deg, rgba(0,2,10,.52) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0) 40%, rgba(0,0,0,.52) 66%, rgba(0,0,0,.88) 86%, rgba(0,0,0,.97) 100%),
+    linear-gradient(90deg, rgba(1,4,15,.84) 0%, rgba(1,4,15,.44) 34%, rgba(0,0,0,0) 60%);
 }
 
 /* ---------- nav ---------- */
@@ -101,7 +101,7 @@ body{
 /* ---------- coluna de texto ---------- */
 .lead{
   position: absolute; z-index: 4;
-  top: 16%;
+  bottom: 9%;
   left: max(16px, 3.3%, env(safe-area-inset-left, 0px));
   width: min(40%, 580px);
 }
@@ -200,7 +200,7 @@ body{
 .signature{
   position: absolute; z-index: 4;
   right: max(16px, 3.3%, env(safe-area-inset-right, 0px));
-  bottom: 7.5%;
+  bottom: 9%;
   text-align: right;
   font-weight: 200;
   font-size: clamp(36px, min(5vw, 9.5vh), 76px);
