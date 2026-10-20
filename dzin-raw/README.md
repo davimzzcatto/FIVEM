@@ -50,9 +50,18 @@ quantas quiser; com uma só, o giro desliga sozinho.
 também na nav). O número está no formato `wa.me/5518997695327` — 55 do Brasil, 18 do
 DDD. A mensagem pronta vai no `?text=`.
 
-**A foto**: trocar `img/retrato.webp` mantendo o nome. No desktop ela é cortada em
-`background-position: 55% 48%` para o rosto ficar à direita do texto; no celular o
-corte é central. Se a foto nova tiver o rosto em outro lugar, é esse valor que ajusta.
+**A foto**: trocar `img/retrato.webp` mantendo o nome. O enquadramento é controlado
+em dois lugares do CSS, porque desktop e celular cortam a mesma imagem de jeitos
+diferentes:
+
+| Onde | Regra | O que faz |
+|---|---|---|
+| `.hero__photo` | `background-position: 50% 78%` | no desktop a foto preenche a largura e sobra altura; o `78%` escolhe que faixa vertical aparece |
+| `.hero__photo` dentro de `@media (max-width: 860px)` | `background-size: auto 132%` e `background-position: 50% calc(100% - 90px)` | no celular a foto é ampliada e subida, senão o rosto fica pequeno e o texto cai em cima dele |
+
+Para o rosto ficar **mais longe** no celular, baixe o `132%`; para ficar mais perto,
+suba. O `- 90px` é quanto a imagem sobe — quanto maior, mais espaço entre o queixo e
+o headline.
 
 **Quem tem motivo para mudar junto**: o escurecimento (`.hero::before`) existe para o
 texto branco ler em cima da foto. Foto mais clara pede gradiente mais forte.
