@@ -1,0 +1,164 @@
+[
+ {
+  "slug": "secret",
+  "titulo": "Secret",
+  "categoria": "Design & motion",
+  "cliente": "Festa Secret",
+  "formato": "retrato",
+  "capa": "img/trabalhos/secret.webp",
+  "galeria": [
+   "img/trabalhos/secret-01.webp",
+   "img/trabalhos/secret-02.webp",
+   "img/trabalhos/secret-03.webp",
+   "img/trabalhos/secret-04.webp"
+  ],
+  "loop": "media/trabalhos/secret-loop.mp4",
+  "video": "media/trabalhos/secret.mp4"
+ },
+ {
+  "slug": "viajaflux-summit",
+  "titulo": "Viajaflux Summit",
+  "categoria": "Design & fotografia",
+  "cliente": "Viajaflux",
+  "formato": "retrato",
+  "capa": "img/trabalhos/viajaflux-summit.webp",
+  "galeria": [
+   "img/trabalhos/viajaflux-summit-01.webp",
+   "img/trabalhos/viajaflux-summit-02.webp",
+   "img/trabalhos/viajaflux-summit-03.webp",
+   "img/trabalhos/viajaflux-summit-04.webp",
+   "img/trabalhos/viajaflux-summit-05.webp",
+   "img/trabalhos/viajaflux-summit-06.webp",
+   "img/trabalhos/viajaflux-summit-07.webp"
+  ],
+  "loop": "media/trabalhos/viajaflux-summit-loop.mp4",
+  "video": "media/trabalhos/viajaflux-summit.mp4"
+ },
+ {
+  "slug": "amanda-e-joao-vitor",
+  "titulo": "Amanda & João Vitor",
+  "categoria": "Edição de vídeo",
+  "cliente": "Casamento",
+  "formato": "retrato",
+  "capa": "img/trabalhos/amanda-e-joao-vitor.webp",
+  "loop": "media/trabalhos/amanda-e-joao-vitor-loop.mp4",
+  "video": "media/trabalhos/amanda-e-joao-vitor.mp4"
+ },
+ {
+  "slug": "fly-scale",
+  "titulo": "Fly Scale",
+  "categoria": "Fotografia & vídeo",
+  "cliente": "Grupo Fly",
+  "formato": "retrato",
+  "capa": "img/trabalhos/fly-scale.webp",
+  "galeria": [
+   "img/trabalhos/fly-scale-01.webp",
+   "img/trabalhos/fly-scale-02.webp",
+   "img/trabalhos/fly-scale-03.webp",
+   "img/trabalhos/fly-scale-04.webp",
+   "img/trabalhos/fly-scale-05.webp",
+   "img/trabalhos/fly-scale-06.webp"
+  ],
+  "loop": "media/trabalhos/fly-scale-loop.mp4",
+  "video": "media/trabalhos/fly-scale.mp4"
+ },
+ {
+  "slug": "folder-grupo-fly",
+  "titulo": "Folder Grupo Fly",
+  "categoria": "Design editorial & motion",
+  "cliente": "Grupo Fly",
+  "formato": "paisagem",
+  "capa": "img/trabalhos/folder-grupo-fly.webp",
+  "galeria": [
+   "img/trabalhos/folder-grupo-fly-01.webp",
+   "img/trabalhos/folder-grupo-fly-02.webp"
+  ],
+  "loop": "media/trabalhos/folder-grupo-fly-loop.mp4",
+  "video": "media/trabalhos/folder-grupo-fly.mp4"
+ },
+ {
+  "slug": "vitoria-e-marcus",
+  "titulo": "Vitória & Marcus",
+  "categoria": "Edição de vídeo",
+  "cliente": "Casamento",
+  "formato": "retrato",
+  "capa": "img/trabalhos/vitoria-e-marcus.webp",
+  "loop": "media/trabalhos/vitoria-e-marcus-loop.mp4",
+  "video": "media/trabalhos/vitoria-e-marcus.mp4"
+ },
+ {
+  "slug": "luiz-gregatti",
+  "titulo": "Depoimentos Luiz Gregatti",
+  "categoria": "Edição de vídeo",
+  "cliente": "@luiz.gregatti",
+  "formato": "retrato",
+  "capa": "img/trabalhos/luiz-gregatti.webp",
+  "loop": "media/trabalhos/luiz-gregatti-loop.mp4",
+  "video": "media/trabalhos/luiz-gregatti.mp4"
+ },
+ {
+  "slug": "freedom-mastermind",
+  "titulo": "Freedom Mastermind",
+  "categoria": "Fotografia",
+  "cliente": "Freedom Mastermind",
+  "formato": "retrato",
+  "capa": "img/trabalhos/freedom-mastermind.webp",
+  "galeria": [
+   "img/trabalhos/freedom-mastermind-01.webp",
+   "img/trabalhos/freedom-mastermind-02.webp",
+   "img/trabalhos/freedom-mastermind-03.webp",
+   "img/trabalhos/freedom-mastermind-04.webp",
+   "img/trabalhos/freedom-mastermind-05.webp",
+   "img/trabalhos/freedom-mastermind-06.webp"
+  ]
+ },
+ {
+  "slug": "nany-kids",
+  "titulo": "Nany Kids",
+  "categoria": "Design & fotografia",
+  "cliente": "Nany Kids",
+  "formato": "retrato",
+  "capa": "img/trabalhos/nany-kids.webp",
+  "galeria": [
+   "img/trabalhos/nany-kids-01.webp",
+   "img/trabalhos/nany-kids-02.webp",
+   "img/trabalhos/nany-kids-03.webp",
+   "img/trabalhos/nany-kids-04.webp",
+   "img/trabalhos/nany-kids-05.webp"
+  ]
+ },
+ {
+  "slug": "igreja-amor-e-cuidado",
+  "titulo": "Virada 2026",
+  "categoria": "Motion design",
+  "cliente": "Igreja Amor e Cuidado",
+  "formato": "paisagem",
+  "capa": "img/trabalhos/igreja-amor-e-cuidado.webp",
+  "loop": "media/trabalhos/igreja-amor-e-cuidado-loop.mp4",
+  "video": "media/trabalhos/igreja-amor-e-cuidado.mp4"
+ },
+ {
+  "slug": "di-bari",
+  "titulo": "Rótulos Di Bari",
+  "categoria": "Design",
+  "cliente": "Di Bari Alimentos",
+  "formato": "retrato",
+  "capa": "img/trabalhos/di-bari.webp",
+  "galeria": [
+   "img/trabalhos/di-bari-01.webp",
+   "img/trabalhos/di-bari-02.webp",
+   "img/trabalhos/di-bari-03.webp",
+   "img/trabalhos/di-bari-04.webp"
+  ]
+ },
+ {
+  "slug": "estudo-cafe",
+  "titulo": "Estudo — Café",
+  "categoria": "Vídeo & fotografia",
+  "cliente": "Estudo pessoal",
+  "formato": "paisagem",
+  "capa": "img/trabalhos/estudo-cafe.webp",
+  "loop": "media/trabalhos/estudo-cafe-loop.mp4",
+  "video": "media/trabalhos/estudo-cafe.mp4"
+ }
+]

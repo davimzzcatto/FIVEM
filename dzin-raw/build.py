@@ -16,7 +16,7 @@ AQUI = Path(__file__).parent
 DIST = AQUI / "dist"
 
 TITULO = "dzin.raw"
-DESCRICAO = ("dzin.raw — design, motion e edição. "
+DESCRICAO = ("Davi Mazzucatto — design, motion design, edição de vídeo e fotografia. "
              "Seu negócio merece um criativo à altura.")
 OG_IMAGE = "img/retrato.webp"
 
@@ -58,6 +58,8 @@ def main() -> None:
     DIST.mkdir()
     (DIST / "index.html").write_text(pagina, encoding="utf-8")
     shutil.copytree(AQUI / "img", DIST / "img")
+    if (AQUI / "media").exists():
+        shutil.copytree(AQUI / "media", DIST / "media")
 
     total = sum(f.stat().st_size for f in DIST.rglob("*") if f.is_file())
     print(f"dist/ pronto — {total/1024:.0f} KB"
