@@ -1,27 +1,66 @@
 [
  {
-  "slug": "secret",
-  "titulo": "Secret",
-  "categoria": "Design & motion",
+  "slug": "secret-stories",
+  "titulo": "Secret — Stories",
+  "categoria": "Design",
   "cliente": "Festa Secret",
   "formato": "retrato",
-  "capa": "img/trabalhos/secret.webp",
   "galeria": [
-   "img/trabalhos/secret-01.webp",
-   "img/trabalhos/secret-02.webp",
-   "img/trabalhos/secret-03.webp",
-   "img/trabalhos/secret-04.webp"
+   "img/trabalhos/secret-stories-01.webp",
+   "img/trabalhos/secret-stories-02.webp",
+   "img/trabalhos/secret-stories-03.webp",
+   "img/trabalhos/secret-stories-04.webp",
+   "img/trabalhos/secret-stories-05.webp",
+   "img/trabalhos/secret-stories-06.webp",
+   "img/trabalhos/secret-stories-07.webp",
+   "img/trabalhos/secret-stories-08.webp",
+   "img/trabalhos/secret-stories-09.webp",
+   "img/trabalhos/secret-stories-10.webp",
+   "img/trabalhos/secret-stories-11.webp",
+   "img/trabalhos/secret-stories-12.webp",
+   "img/trabalhos/secret-stories-13.webp",
+   "img/trabalhos/secret-stories-14.webp",
+   "img/trabalhos/secret-stories-15.webp",
+   "img/trabalhos/secret-stories-16.webp"
   ],
-  "loop": "media/trabalhos/secret-loop.mp4",
-  "video": "media/trabalhos/secret.mp4"
+  "capa": "img/trabalhos/secret-stories-01.webp"
+ },
+ {
+  "slug": "secret-essa-sexta",
+  "titulo": "Secret — Essa sexta",
+  "categoria": "Motion design",
+  "cliente": "Festa Secret",
+  "formato": "retrato",
+  "capa": "img/trabalhos/secret-essa-sexta.webp",
+  "loop": "media/trabalhos/secret-essa-sexta-loop.mp4",
+  "video": "media/trabalhos/secret-essa-sexta.mp4"
+ },
+ {
+  "slug": "secret-rio-beach-club",
+  "titulo": "Secret — Rio Beach Club",
+  "categoria": "Motion design",
+  "cliente": "Festa Secret",
+  "formato": "retrato",
+  "capa": "img/trabalhos/secret-rio-beach-club.webp",
+  "loop": "media/trabalhos/secret-rio-beach-club-loop.mp4",
+  "video": "media/trabalhos/secret-rio-beach-club.mp4"
+ },
+ {
+  "slug": "secret-vendas-abertas",
+  "titulo": "Secret — Vendas abertas",
+  "categoria": "Motion design",
+  "cliente": "Festa Secret",
+  "formato": "retrato",
+  "capa": "img/trabalhos/secret-vendas-abertas.webp",
+  "loop": "media/trabalhos/secret-vendas-abertas-loop.mp4",
+  "video": "media/trabalhos/secret-vendas-abertas.mp4"
  },
  {
   "slug": "viajaflux-summit",
   "titulo": "Viajaflux Summit",
-  "categoria": "Design & fotografia",
+  "categoria": "Fotografia",
   "cliente": "Viajaflux",
   "formato": "retrato",
-  "capa": "img/trabalhos/viajaflux-summit.webp",
   "galeria": [
    "img/trabalhos/viajaflux-summit-01.webp",
    "img/trabalhos/viajaflux-summit-02.webp",
@@ -29,10 +68,58 @@
    "img/trabalhos/viajaflux-summit-04.webp",
    "img/trabalhos/viajaflux-summit-05.webp",
    "img/trabalhos/viajaflux-summit-06.webp",
-   "img/trabalhos/viajaflux-summit-07.webp"
+   "img/trabalhos/viajaflux-summit-07.webp",
+   "img/trabalhos/viajaflux-summit-08.webp",
+   "img/trabalhos/viajaflux-summit-09.webp",
+   "img/trabalhos/viajaflux-summit-10.webp",
+   "img/trabalhos/viajaflux-summit-11.webp",
+   "img/trabalhos/viajaflux-summit-12.webp",
+   "img/trabalhos/viajaflux-summit-13.webp",
+   "img/trabalhos/viajaflux-summit-14.webp",
+   "img/trabalhos/viajaflux-summit-15.webp",
+   "img/trabalhos/viajaflux-summit-16.webp",
+   "img/trabalhos/viajaflux-summit-17.webp"
   ],
-  "loop": "media/trabalhos/viajaflux-summit-loop.mp4",
-  "video": "media/trabalhos/viajaflux-summit.mp4"
+  "capa": "img/trabalhos/viajaflux-summit-01.webp"
+ },
+ {
+  "slug": "placas-premiacao",
+  "titulo": "Placas de premiação",
+  "categoria": "Design",
+  "cliente": "Viajaflux",
+  "formato": "retrato",
+  "galeria": [
+   "img/trabalhos/placas-premiacao-01.webp",
+   "img/trabalhos/placas-premiacao-02.webp",
+   "img/trabalhos/placas-premiacao-03.webp",
+   "img/trabalhos/placas-premiacao-04.webp",
+   "img/trabalhos/placas-premiacao-05.webp",
+   "img/trabalhos/placas-premiacao-06.webp",
+   "img/trabalhos/placas-premiacao-07.webp",
+   "img/trabalhos/placas-premiacao-08.webp",
+   "img/trabalhos/placas-premiacao-09.webp",
+   "img/trabalhos/placas-premiacao-10.webp",
+   "img/trabalhos/placas-premiacao-11.webp",
+   "img/trabalhos/placas-premiacao-12.webp",
+   "img/trabalhos/placas-premiacao-13.webp"
+  ],
+  "capa": "img/trabalhos/placas-premiacao-01.webp",
+  "esteira": true
+ },
+ {
+  "slug": "crachas-summit",
+  "titulo": "Crachás Summit",
+  "categoria": "Design",
+  "cliente": "Viajaflux",
+  "formato": "retrato",
+  "galeria": [
+   "img/trabalhos/crachas-summit-01.webp",
+   "img/trabalhos/crachas-summit-02.webp",
+   "img/trabalhos/crachas-summit-03.webp"
+  ],
+  "capa": "img/trabalhos/crachas-summit-01.webp",
+  "loop": "media/trabalhos/crachas-summit-loop.mp4",
+  "video": "media/trabalhos/crachas-summit.mp4"
  },
  {
   "slug": "amanda-e-joao-vitor",
@@ -45,36 +132,14 @@
   "video": "media/trabalhos/amanda-e-joao-vitor.mp4"
  },
  {
-  "slug": "fly-scale",
-  "titulo": "Fly Scale",
-  "categoria": "Fotografia & vídeo",
-  "cliente": "Grupo Fly",
+  "slug": "amanda-e-joao-vitor-making-of",
+  "titulo": "Amanda & João Vitor — Making of",
+  "categoria": "Edição de vídeo",
+  "cliente": "Casamento",
   "formato": "retrato",
-  "capa": "img/trabalhos/fly-scale.webp",
-  "galeria": [
-   "img/trabalhos/fly-scale-01.webp",
-   "img/trabalhos/fly-scale-02.webp",
-   "img/trabalhos/fly-scale-03.webp",
-   "img/trabalhos/fly-scale-04.webp",
-   "img/trabalhos/fly-scale-05.webp",
-   "img/trabalhos/fly-scale-06.webp"
-  ],
-  "loop": "media/trabalhos/fly-scale-loop.mp4",
-  "video": "media/trabalhos/fly-scale.mp4"
- },
- {
-  "slug": "folder-grupo-fly",
-  "titulo": "Folder Grupo Fly",
-  "categoria": "Design editorial & motion",
-  "cliente": "Grupo Fly",
-  "formato": "paisagem",
-  "capa": "img/trabalhos/folder-grupo-fly.webp",
-  "galeria": [
-   "img/trabalhos/folder-grupo-fly-01.webp",
-   "img/trabalhos/folder-grupo-fly-02.webp"
-  ],
-  "loop": "media/trabalhos/folder-grupo-fly-loop.mp4",
-  "video": "media/trabalhos/folder-grupo-fly.mp4"
+  "capa": "img/trabalhos/amanda-e-joao-vitor-making-of.webp",
+  "loop": "media/trabalhos/amanda-e-joao-vitor-making-of-loop.mp4",
+  "video": "media/trabalhos/amanda-e-joao-vitor-making-of.mp4"
  },
  {
   "slug": "vitoria-e-marcus",
@@ -87,14 +152,133 @@
   "video": "media/trabalhos/vitoria-e-marcus.mp4"
  },
  {
-  "slug": "luiz-gregatti",
-  "titulo": "Depoimentos Luiz Gregatti",
+  "slug": "fly-scale",
+  "titulo": "Fly Scale",
+  "categoria": "Fotografia",
+  "cliente": "Grupo Fly",
+  "formato": "retrato",
+  "galeria": [
+   "img/trabalhos/fly-scale-01.webp",
+   "img/trabalhos/fly-scale-02.webp",
+   "img/trabalhos/fly-scale-03.webp",
+   "img/trabalhos/fly-scale-04.webp",
+   "img/trabalhos/fly-scale-05.webp",
+   "img/trabalhos/fly-scale-06.webp",
+   "img/trabalhos/fly-scale-07.webp",
+   "img/trabalhos/fly-scale-08.webp",
+   "img/trabalhos/fly-scale-09.webp",
+   "img/trabalhos/fly-scale-10.webp",
+   "img/trabalhos/fly-scale-11.webp",
+   "img/trabalhos/fly-scale-12.webp",
+   "img/trabalhos/fly-scale-13.webp",
+   "img/trabalhos/fly-scale-14.webp",
+   "img/trabalhos/fly-scale-15.webp",
+   "img/trabalhos/fly-scale-16.webp",
+   "img/trabalhos/fly-scale-17.webp",
+   "img/trabalhos/fly-scale-18.webp",
+   "img/trabalhos/fly-scale-19.webp",
+   "img/trabalhos/fly-scale-20.webp",
+   "img/trabalhos/fly-scale-21.webp",
+   "img/trabalhos/fly-scale-22.webp",
+   "img/trabalhos/fly-scale-23.webp",
+   "img/trabalhos/fly-scale-24.webp",
+   "img/trabalhos/fly-scale-25.webp",
+   "img/trabalhos/fly-scale-26.webp"
+  ],
+  "capa": "img/trabalhos/fly-scale-01.webp"
+ },
+ {
+  "slug": "fly-scale-aftermovie",
+  "titulo": "Fly Scale — Aftermovie",
+  "categoria": "Edição de vídeo",
+  "cliente": "Grupo Fly",
+  "formato": "retrato",
+  "capa": "img/trabalhos/fly-scale-aftermovie.webp",
+  "loop": "media/trabalhos/fly-scale-aftermovie-loop.mp4",
+  "video": "media/trabalhos/fly-scale-aftermovie.mp4"
+ },
+ {
+  "slug": "fly-scale-primeiro-dia",
+  "titulo": "Fly Scale — Primeiro dia",
+  "categoria": "Edição de vídeo",
+  "cliente": "Grupo Fly",
+  "formato": "retrato",
+  "capa": "img/trabalhos/fly-scale-primeiro-dia.webp",
+  "loop": "media/trabalhos/fly-scale-primeiro-dia-loop.mp4",
+  "video": "media/trabalhos/fly-scale-primeiro-dia.mp4"
+ },
+ {
+  "slug": "fly-scale-depoimentos",
+  "titulo": "Fly Scale — Depoimentos",
+  "categoria": "Edição de vídeo",
+  "cliente": "Grupo Fly",
+  "formato": "retrato",
+  "capa": "img/trabalhos/fly-scale-depoimentos.webp",
+  "loop": "media/trabalhos/fly-scale-depoimentos-loop.mp4",
+  "video": "media/trabalhos/fly-scale-depoimentos.mp4"
+ },
+ {
+  "slug": "folder-grupo-fly",
+  "titulo": "Folder Grupo Fly",
+  "categoria": "Design editorial",
+  "cliente": "Grupo Fly",
+  "formato": "paisagem",
+  "galeria": [
+   "img/trabalhos/folder-grupo-fly-01.webp",
+   "img/trabalhos/folder-grupo-fly-02.webp",
+   "img/trabalhos/folder-grupo-fly-03.webp"
+  ],
+  "capa": "img/trabalhos/folder-grupo-fly-01.webp"
+ },
+ {
+  "slug": "folder-grupo-fly-animacao",
+  "titulo": "Folder Grupo Fly — Animação",
+  "categoria": "Motion design",
+  "cliente": "Grupo Fly",
+  "formato": "retrato",
+  "capa": "img/trabalhos/folder-grupo-fly-animacao.webp",
+  "loop": "media/trabalhos/folder-grupo-fly-animacao-loop.mp4",
+  "video": "media/trabalhos/folder-grupo-fly-animacao.mp4"
+ },
+ {
+  "slug": "motion-solides",
+  "titulo": "Tutorial animado Sólides",
+  "categoria": "Motion design",
+  "cliente": "Grupo Fly",
+  "formato": "paisagem",
+  "capa": "img/trabalhos/motion-solides.webp",
+  "loop": "media/trabalhos/motion-solides-loop.mp4",
+  "video": "media/trabalhos/motion-solides.mp4"
+ },
+ {
+  "slug": "depoimento-luis",
+  "titulo": "Depoimento — Luis",
   "categoria": "Edição de vídeo",
   "cliente": "@luiz.gregatti",
   "formato": "retrato",
-  "capa": "img/trabalhos/luiz-gregatti.webp",
-  "loop": "media/trabalhos/luiz-gregatti-loop.mp4",
-  "video": "media/trabalhos/luiz-gregatti.mp4"
+  "capa": "img/trabalhos/depoimento-luis.webp",
+  "loop": "media/trabalhos/depoimento-luis-loop.mp4",
+  "video": "media/trabalhos/depoimento-luis.mp4"
+ },
+ {
+  "slug": "depoimento-klesia",
+  "titulo": "Depoimento — Klesia",
+  "categoria": "Edição de vídeo",
+  "cliente": "@luiz.gregatti",
+  "formato": "retrato",
+  "capa": "img/trabalhos/depoimento-klesia.webp",
+  "loop": "media/trabalhos/depoimento-klesia-loop.mp4",
+  "video": "media/trabalhos/depoimento-klesia.mp4"
+ },
+ {
+  "slug": "obrigado-200k",
+  "titulo": "Obrigado pelos 200k",
+  "categoria": "Motion design",
+  "cliente": "@luiz.gregatti",
+  "formato": "retrato",
+  "capa": "img/trabalhos/obrigado-200k.webp",
+  "loop": "media/trabalhos/obrigado-200k-loop.mp4",
+  "video": "media/trabalhos/obrigado-200k.mp4"
  },
  {
   "slug": "freedom-mastermind",
@@ -102,15 +286,24 @@
   "categoria": "Fotografia",
   "cliente": "Freedom Mastermind",
   "formato": "retrato",
-  "capa": "img/trabalhos/freedom-mastermind.webp",
   "galeria": [
    "img/trabalhos/freedom-mastermind-01.webp",
    "img/trabalhos/freedom-mastermind-02.webp",
    "img/trabalhos/freedom-mastermind-03.webp",
    "img/trabalhos/freedom-mastermind-04.webp",
    "img/trabalhos/freedom-mastermind-05.webp",
-   "img/trabalhos/freedom-mastermind-06.webp"
-  ]
+   "img/trabalhos/freedom-mastermind-06.webp",
+   "img/trabalhos/freedom-mastermind-07.webp",
+   "img/trabalhos/freedom-mastermind-08.webp",
+   "img/trabalhos/freedom-mastermind-09.webp",
+   "img/trabalhos/freedom-mastermind-10.webp",
+   "img/trabalhos/freedom-mastermind-11.webp",
+   "img/trabalhos/freedom-mastermind-12.webp",
+   "img/trabalhos/freedom-mastermind-13.webp",
+   "img/trabalhos/freedom-mastermind-14.webp",
+   "img/trabalhos/freedom-mastermind-15.webp"
+  ],
+  "capa": "img/trabalhos/freedom-mastermind-01.webp"
  },
  {
   "slug": "nany-kids",
@@ -118,24 +311,38 @@
   "categoria": "Design & fotografia",
   "cliente": "Nany Kids",
   "formato": "retrato",
-  "capa": "img/trabalhos/nany-kids.webp",
   "galeria": [
    "img/trabalhos/nany-kids-01.webp",
    "img/trabalhos/nany-kids-02.webp",
    "img/trabalhos/nany-kids-03.webp",
    "img/trabalhos/nany-kids-04.webp",
-   "img/trabalhos/nany-kids-05.webp"
-  ]
+   "img/trabalhos/nany-kids-05.webp",
+   "img/trabalhos/nany-kids-06.webp",
+   "img/trabalhos/nany-kids-07.webp",
+   "img/trabalhos/nany-kids-08.webp",
+   "img/trabalhos/nany-kids-09.webp"
+  ],
+  "capa": "img/trabalhos/nany-kids-01.webp"
  },
  {
-  "slug": "igreja-amor-e-cuidado",
+  "slug": "virada-2026",
   "titulo": "Virada 2026",
   "categoria": "Motion design",
   "cliente": "Igreja Amor e Cuidado",
   "formato": "paisagem",
-  "capa": "img/trabalhos/igreja-amor-e-cuidado.webp",
-  "loop": "media/trabalhos/igreja-amor-e-cuidado-loop.mp4",
-  "video": "media/trabalhos/igreja-amor-e-cuidado.mp4"
+  "capa": "img/trabalhos/virada-2026.webp",
+  "loop": "media/trabalhos/virada-2026-loop.mp4",
+  "video": "media/trabalhos/virada-2026.mp4"
+ },
+ {
+  "slug": "intro-culto",
+  "titulo": "Intro de culto",
+  "categoria": "Motion design",
+  "cliente": "Igreja Amor e Cuidado",
+  "formato": "paisagem",
+  "capa": "img/trabalhos/intro-culto.webp",
+  "loop": "media/trabalhos/intro-culto-loop.mp4",
+  "video": "media/trabalhos/intro-culto.mp4"
  },
  {
   "slug": "di-bari",
@@ -143,18 +350,19 @@
   "categoria": "Design",
   "cliente": "Di Bari Alimentos",
   "formato": "retrato",
-  "capa": "img/trabalhos/di-bari.webp",
   "galeria": [
    "img/trabalhos/di-bari-01.webp",
    "img/trabalhos/di-bari-02.webp",
    "img/trabalhos/di-bari-03.webp",
-   "img/trabalhos/di-bari-04.webp"
-  ]
+   "img/trabalhos/di-bari-04.webp",
+   "img/trabalhos/di-bari-05.webp"
+  ],
+  "capa": "img/trabalhos/di-bari-01.webp"
  },
  {
   "slug": "estudo-cafe",
   "titulo": "Estudo — Café",
-  "categoria": "Vídeo & fotografia",
+  "categoria": "Vídeo",
   "cliente": "Estudo pessoal",
   "formato": "paisagem",
   "capa": "img/trabalhos/estudo-cafe.webp",

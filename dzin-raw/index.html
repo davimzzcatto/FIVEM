@@ -1,16 +1,15 @@
-<title>dzin.raw</title>
+<title>Davi Mazzucatto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800;900&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap">
 
 <style>
 /* ============================================================
-   dzin.raw — portfólio de Davi Mazzucatto
+   Davi Mazzucatto — portfólio
    Sistema visual no pique de extrafazant.nl: off-white + tinta,
-   títulos gigantes misturando grotesca pesada e serifada,
-   azul elétrico / rosa / laranja / amarelo nos acentos, molduras
-   grossas, polaroids, rabisco à mão, esteira de logos, cards que
-   empilham na rolagem. Layout: página única, seções em faixa.
+   títulos gigantes misturando grotesca pesada e serifada, azul
+   elétrico / rosa / laranja / amarelo nos acentos, rabisco à mão,
+   esteira de logos, grade de cards brancos para os trabalhos.
    ============================================================ */
 :root{
   --bg:      #F4F4F4;
@@ -32,7 +31,6 @@
   --nav-h: 76px;
   --h1: clamp(40px, 10.8vw, 144px);
   --h2: clamp(36px, 8.5vw, 96px);
-  --h3: clamp(30px, 5vw, 72px);
   --eyebrow: clamp(20px, 2.1vw, 30px);
   --sec-y: clamp(72px, 10vw, 150px);
 
@@ -70,10 +68,10 @@ h1, h2, h3, p{ margin: 0; }
 .display .line__in{ display: block; }
 .h1{ font-size: var(--h1); }
 .h2{ font-size: var(--h2); }
-.h3{ font-size: var(--h3); }
 .lead{ font-size: clamp(16px, 1.25vw, 19px); line-height: 1.45; color: var(--ink-2); max-width: 46ch; }
 .theme-dark{ background: var(--ink); color: var(--bg); }
 .theme-dark .lead{ color: rgba(244,244,244,.78); }
+.theme-dark .eyebrow{ color: rgba(244,244,244,.85); }
 
 .sec{ padding-block: var(--sec-y); }
 .wrap{ padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
@@ -112,7 +110,7 @@ h1, h2, h3, p{ margin: 0; }
   pointer-events: none;
 }
 .nav > *{ pointer-events: auto; }
-.nav__mark{ justify-self: start; font-family: var(--f-serif); font-style: italic; font-size: 30px; line-height: 1; text-decoration: none; color: var(--ink); transition: color .3s; }
+.nav__mark{ justify-self: start; font-family: var(--f-serif); font-style: italic; font-size: 28px; line-height: 1; text-decoration: none; color: var(--ink); transition: color .3s; white-space: nowrap; }
 html.over-dark .nav__mark{ color: var(--bg); }
 html.over-dark .badge > svg text{ fill: var(--bg); }
 .nav__pill{ display: flex; gap: 2px; background: var(--white); padding: 6px; }
@@ -134,11 +132,10 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 /* ---------- selo giratório ---------- */
 .badge{
   position: fixed; z-index: 40; right: var(--gutter-r); top: calc(var(--nav-h) + 10px + env(safe-area-inset-top, 0px));
-  width: 104px; height: 104px; display: grid; place-items: center; cursor: pointer; border: 0; background: none; padding: 0;
+  width: 104px; height: 104px; display: grid; place-items: center; cursor: pointer; border: 0; background: none; padding: 0; overflow: clip;
   opacity: 0; transform: translateY(-8px); transition: opacity .5s, transform .5s; pointer-events: none;
 }
 .badge.is-on{ opacity: 1; transform: none; pointer-events: auto; }
-.badge{ overflow: clip; }
 .badge > svg{ position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 14s linear infinite; }
 .badge > svg text{ font-family: var(--f-display); font-weight: 800; font-size: 13.5px; letter-spacing: .12em; text-transform: uppercase; fill: var(--ink); }
 .badge__core{ width: 42px; height: 42px; border-radius: 50%; background: var(--blue); color: var(--white); display: grid; place-items: center; }
@@ -169,80 +166,65 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 /* ---------- quem ---------- */
 .quem{ display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: clamp(32px, 6vw, 96px); }
 .polaroids{ position: relative; aspect-ratio: 1 / .95; }
-.polaroid{ position: absolute; background: var(--white); padding: 10px 10px 42px; box-shadow: 0 24px 60px rgba(0,0,0,.18); }
+.polaroid{ position: absolute; margin: 0; background: var(--white); padding: 10px 10px 42px; box-shadow: 0 24px 60px rgba(0,0,0,.18); }
 .polaroid img{ width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 5; }
 .polaroid--a{ left: 0; top: 6%; width: 58%; transform: rotate(-6deg); z-index: 1; }
 .polaroid--b{ right: 0; bottom: 0; width: 56%; transform: rotate(4deg); z-index: 2; }
 .polaroid--b img{ aspect-ratio: 4 / 4.6; }
-.sticker{
-  position: absolute; z-index: 3; display: inline-block; padding: 10px 16px;
-  font-family: var(--f-display); font-weight: 900; text-transform: uppercase; font-size: clamp(14px, 1.5vw, 22px); letter-spacing: -.02em;
-  border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); transform: rotate(var(--r, -8deg));
-}
-.sticker--pink{ background: var(--pink); color: var(--ink); left: 44%; top: 2%; --r: -10deg; }
-.sticker--green{ background: var(--green); color: var(--ink); left: 8%; bottom: 8%; --r: 7deg; }
-.sticker--yellow{ background: var(--yellow); color: var(--ink); right: -2%; top: 38%; --r: 12deg; }
 .quem__copy{ display: grid; gap: 22px; justify-items: start; }
 .quem__copy .eyebrow{ color: var(--ink-2); }
 
-/* ---------- trabalhos ---------- */
-.stack{ display: grid; gap: 0; max-width: 980px; margin-inline: auto; }
-.card{
-  position: sticky; top: calc(var(--nav-h) + 16px);
-  margin-bottom: 44px;
-  display: block; width: 100%; text-align: left; border: 0; padding: clamp(10px, 1.4vw, 18px); cursor: pointer;
-  background: var(--frame, var(--orange)); color: var(--bg);
-  transform-origin: 50% 0;
-}
-.card:last-child{ margin-bottom: 0; }
-.card__media{ position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #000; isolation: isolate; }
-.card__bg{ position: absolute; inset: -6%; width: 112%; height: 112%; object-fit: cover; filter: blur(26px) brightness(.55); z-index: 0; }
-.card__img, .card__video{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-.card[data-formato="retrato"] .card__img, .card[data-formato="retrato"] .card__video{ object-fit: contain; }
-.card__video[hidden]{ display: none; }
-.card__title{ position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: clamp(14px, 3vw, 36px); display: grid; gap: 8px;
-  background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.55) 70%); color: var(--white); }
-.card__title .h3{ line-height: .86; text-shadow: 0 2px 18px rgba(0,0,0,.4); }
-.card__meta{ font-family: var(--f-serif); font-size: clamp(16px, 1.5vw, 22px); line-height: 1; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.card__meta .pill{ font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 11px; letter-spacing: .02em; padding: 7px 9px; background: var(--white); color: var(--ink); }
-.card__play{ position: absolute; right: clamp(14px, 3vw, 36px); top: clamp(14px, 3vw, 36px); z-index: 2; width: 48px; height: 48px; border-radius: 50%; background: var(--white); color: var(--ink); display: grid; place-items: center; }
-.grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 2vw, 28px); max-width: 1180px; margin: clamp(48px, 6vw, 96px) auto 0; }
-.tile{ display: block; text-align: left; border: 0; padding: 7px; cursor: pointer; background: var(--frame, var(--blue)); color: var(--bg); }
-.tile__media{ position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #000; }
-.tile__media img{ width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.22,.61,.36,1); }
-.tile__title{ position: absolute; inset: auto 0 0 0; padding: 16px; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.6)); color: var(--white); display: grid; gap: 4px; }
-.tile__title .t-sans{ font-size: clamp(20px, 2.2vw, 30px); line-height: .9; }
-.tile__title .t-meta{ font-family: var(--f-serif); font-size: 16px; opacity: .9; }
-@media (hover: hover){ .tile:hover .tile__media img{ transform: scale(1.05); } }
+/* ---------- trabalhos: esteira das placas + grade de cards brancos ---------- */
+.placas{ margin: 0 calc(-1 * var(--gutter-r)) clamp(40px, 6vw, 80px) calc(-1 * var(--gutter-l)); overflow: hidden; }
+.placas__label{ text-align: center; font-family: var(--f-serif); font-size: clamp(18px, 1.6vw, 24px); color: var(--ink-2); margin-bottom: 18px; padding-inline: var(--gutter-l) var(--gutter-r); }
+.placas__track{ display: flex; width: max-content; animation: marquee 70s linear infinite; }
+.placas__row{ display: flex; gap: clamp(12px, 1.4vw, 20px); padding-right: clamp(12px, 1.4vw, 20px); }
+.placas__row button{ border: 0; padding: 0; background: none; cursor: pointer; flex: none; height: clamp(170px, 24vw, 300px); }
+.placas__row img{ height: 100%; width: auto; box-shadow: 0 16px 40px rgba(0,0,0,.14); transition: transform .5s cubic-bezier(.22,.61,.36,1); }
+@media (hover: hover){ .placas:hover .placas__track{ animation-play-state: paused; } .placas__row button:hover img{ transform: translateY(-6px); } }
+
+.werk{ columns: 3; column-gap: clamp(16px, 2vw, 28px); max-width: 1280px; margin-inline: auto; }
+.werk > *{ break-inside: avoid; margin-bottom: clamp(16px, 2vw, 28px); }
+.wcard{ display: block; width: 100%; text-align: center; border: 0; padding: 16px 16px 24px; background: var(--white); color: var(--ink); cursor: pointer; }
+.wcard__media{ position: relative; overflow: hidden; background: #101010; aspect-ratio: 4 / 5; }
+.wcard[data-formato="paisagem"] .wcard__media{ aspect-ratio: 16 / 10; }
+.wcard__media img, .wcard__media video{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.wcard__media .slide{ opacity: 0; transition: opacity 1s ease; }
+.wcard__media .slide.is-on{ opacity: 1; }
+.wcard__media video{ z-index: 1; }
+.wcard__media video[hidden]{ display: none; }
+.wcard__tag{ position: absolute; z-index: 2; top: 12px; right: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; background: var(--white); color: var(--ink); font-family: var(--f-display); font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: .02em; }
+.wcard__title{ padding-top: 20px; display: grid; gap: 6px; }
+.wcard__title .t-sans{ font-size: clamp(24px, 2.3vw, 38px); line-height: .9; text-wrap: balance; }
+.wcard__title .t-sub{ font-family: var(--f-serif); font-size: clamp(18px, 1.5vw, 24px); line-height: 1.1; }
+@media (hover: hover){ .wcard__media img{ transition: transform .8s cubic-bezier(.22,.61,.36,1); } .wcard:hover .wcard__media img.is-on, .wcard:hover .wcard__media img:only-child{ transform: scale(1.04); } }
 .trabalhos__cta{ display: flex; justify-content: center; margin-top: clamp(40px, 5vw, 72px); }
 
 /* ---------- serviços ---------- */
 .svcs{ display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 2vw, 32px); max-width: 1240px; margin-inline: auto; padding-block: 20px; }
-.svc{ background: var(--frame); color: var(--white); padding: clamp(8px, 1vw, 14px); transform: rotate(var(--r)); transition: transform .6s cubic-bezier(.22,.61,.36,1); display: grid; gap: 14px; }
-.svc:nth-child(1){ --frame: var(--blue); --r: -4deg; }
-.svc:nth-child(2){ --frame: var(--pink); --r: 2deg; color: var(--ink); }
-.svc:nth-child(3){ --frame: var(--orange); --r: -2deg; }
-.svc:nth-child(4){ --frame: var(--yellow); --r: 4deg; color: var(--ink); }
-.svc__media{ aspect-ratio: 4 / 5; overflow: hidden; background: #101010; position: relative; }
-.svc__media img{ width: 100%; height: 100%; object-fit: cover; }
-.svc__media.is-gen img{ display: none; }
-.svc__media.is-gen::before{ content: ""; position: absolute; inset: 0; background:
-  radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 42%),
-  repeating-linear-gradient(135deg, rgba(255,255,255,.12) 0 14px, transparent 14px 28px), var(--frame); }
+.svc{ background: var(--frame); color: var(--white); padding: clamp(10px, 1.2vw, 16px); transform: rotate(var(--r)); transition: transform .6s cubic-bezier(.22,.61,.36,1); display: grid; gap: 14px; }
+.svc:nth-child(1){ --frame: var(--blue); --r: -4deg; --panel: rgba(255,255,255,.14); }
+.svc:nth-child(2){ --frame: var(--pink); --r: 2deg; color: var(--ink); --panel: rgba(16,16,16,.08); }
+.svc:nth-child(3){ --frame: var(--orange); --r: -2deg; --panel: rgba(255,255,255,.16); }
+.svc:nth-child(4){ --frame: var(--yellow); --r: 4deg; color: var(--ink); --panel: rgba(16,16,16,.07); }
+.svc__icon{ aspect-ratio: 1 / 1; display: grid; place-items: center; background: var(--panel); }
+.svc__icon svg{ width: 42%; height: 42%; }
 .svc__text{ padding: 2px 6px 12px; text-align: center; display: grid; gap: 6px; }
 .svc__text .t-sans{ font-size: clamp(28px, 2.6vw, 40px); line-height: .9; }
 .svc__text .t-sub{ font-family: var(--f-serif); font-size: clamp(16px, 1.3vw, 19px); line-height: 1.1; }
 @media (hover: hover){ .svc:hover{ transform: rotate(0deg) translateY(-6px); } }
 .svcs__cta{ display: flex; justify-content: center; margin-top: clamp(40px, 5vw, 72px); }
+.theme-dark .scribble{ color: var(--bg); }
 
 /* ---------- contato ---------- */
 .contato{ text-align: center; display: grid; justify-items: center; gap: 24px; min-height: 56vh; align-content: center; }
 .contato .lead{ max-width: 34ch; }
 .contato__btns{ display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+#contato{ border-top: 1px solid rgba(244,244,244,.12); }
 
 /* ---------- rodapé ---------- */
 .footer{ padding-top: clamp(40px, 6vw, 96px); padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid rgba(244,244,244,.14); }
-.footer__mark{ font-family: var(--f-serif); font-style: italic; font-size: clamp(64px, 14vw, 200px); line-height: .9; letter-spacing: -.03em; color: var(--bg); }
+.footer__mark{ font-family: var(--f-serif); font-style: italic; font-size: clamp(44px, 9.6vw, 150px); line-height: .95; letter-spacing: -.03em; color: var(--bg); }
 .footer__grid{ display: grid; grid-template-columns: 1.3fr repeat(3, 1fr); gap: 32px; margin-top: clamp(28px, 4vw, 56px); align-items: start; }
 .footer h3{ font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 15px; margin-bottom: 10px; }
 .footer ul{ list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-family: var(--f-serif); font-size: 19px; }
@@ -267,29 +249,27 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 /* ---------- responsivo ---------- */
 @media (max-width: 1100px){
   .svcs{ grid-template-columns: repeat(2, 1fr); max-width: 760px; }
+  .werk{ columns: 2; }
 }
 @media (max-width: 860px){
   :root{ --nav-h: 64px; }
   .nav{ grid-template-columns: 1fr auto; }
   .nav__pill{ display: none; }
   .nav__burger{ display: flex; }
-  .nav__mark{ font-size: 26px; }
+  .nav__mark{ font-size: 21px; }
   .badge{ width: 84px; height: 84px; top: calc(var(--nav-h) + 8px + env(safe-area-inset-top, 0px)); }
-  .badge svg text{ font-size: 12.5px; }
+  .badge > svg text{ font-size: 12.5px; }
   .badge__core{ width: 34px; height: 34px; }
   .hero__center{ padding-block: 24px 40px; }
   .quem{ grid-template-columns: 1fr; }
   .polaroids{ max-width: 520px; margin-inline: auto; width: 100%; }
   .quem__copy{ justify-items: center; text-align: center; }
   .quem__copy .lead{ text-align: center; }
-  .card{ top: calc(var(--nav-h) + 10px); margin-bottom: 28px; }
-  .card__media{ aspect-ratio: 4 / 5; }
-  .card[data-formato="retrato"] .card__img, .card[data-formato="retrato"] .card__video{ object-fit: cover; }
-  .card__bg{ display: none; }
-  .grid{ grid-template-columns: repeat(2, 1fr); }
   .footer__grid{ grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 560px){
+  .werk{ columns: 1; max-width: 420px; }
+  .wcard{ padding: 12px 12px 20px; }
   .svcs{ grid-template-columns: 1fr; max-width: 340px; gap: 26px; }
   .svc{ --r: 0deg; }
   .svc:nth-child(odd){ --r: -2.5deg; }
@@ -299,14 +279,14 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 }
 
 @media (prefers-reduced-motion: reduce){
-  .marquee__track, .badge > svg{ animation: none; }
+  .marquee__track, .placas__track, .badge > svg{ animation: none; }
   .rot__word.is-leaving, .rot__word.is-entering{ animation: none; }
-  .svc, .tile__media img, .btn__box svg{ transition: none; }
+  .svc, .wcard__media img, .btn__box svg, .wcard__media .slide{ transition: none; }
 }
 </style>
 
 <header class="nav" id="topo">
-  <a class="nav__mark" href="#topo" aria-label="dzin.raw — início">dzin.raw</a>
+  <a class="nav__mark" href="#topo" aria-label="Davi Mazzucatto — início">Davi Mazzucatto</a>
   <nav class="nav__pill" aria-label="Seções">
     <a href="#quem">Quem</a>
     <a href="#trabalhos" data-nav="trabalhos">Trabalhos</a>
@@ -353,7 +333,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
       <div class="marquee__track">
         <div class="marquee__row">
           <img src="img/clientes/grupo-fly.png" alt="Grupo Fly">
-          <img src="img/clientes/viajaflux-summit.png" alt="Viajaflux Summit">
+          <img src="img/clientes/viajaflux.svg" alt="Viajaflux">
           <img src="img/clientes/fly-scale.png" alt="Fly Scale">
           <img src="img/clientes/secret.png" alt="Secret">
           <img src="img/clientes/freedom-mastermind.png" alt="Freedom Mastermind">
@@ -363,7 +343,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
         </div>
         <div class="marquee__row" aria-hidden="true">
           <img src="img/clientes/grupo-fly.png" alt="">
-          <img src="img/clientes/viajaflux-summit.png" alt="">
+          <img src="img/clientes/viajaflux.svg" alt="">
           <img src="img/clientes/fly-scale.png" alt="">
           <img src="img/clientes/secret.png" alt="">
           <img src="img/clientes/freedom-mastermind.png" alt="">
@@ -379,10 +359,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     <div class="quem">
       <div class="polaroids" data-polaroids>
         <figure class="polaroid polaroid--a" data-polaroid><img src="img/retrato-camera.webp" alt="Davi Mazzucatto com a câmera na mão, no espelho" loading="lazy"></figure>
-        <figure class="polaroid polaroid--b" data-polaroid><img src="img/retrato.webp" alt="Davi Mazzucatto de óculos escuros com contraluz azul" loading="lazy"></figure>
-        <span class="sticker sticker--pink" data-sticker aria-hidden="true">dzin.raw</span>
-        <span class="sticker sticker--green" data-sticker aria-hidden="true">na prática</span>
-        <span class="sticker sticker--yellow" data-sticker aria-hidden="true">design · motion · vídeo · foto</span>
+        <figure class="polaroid polaroid--b" data-polaroid><img src="img/retrato-412.webp" alt="Davi Mazzucatto no evento 412, de crachá, com luz azul" loading="lazy"></figure>
       </div>
       <div class="quem__copy">
         <p class="eyebrow" data-reveal>Quem está por trás</p>
@@ -396,22 +373,25 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     </div>
   </section>
 
-  <section class="sec wrap theme-dark" id="trabalhos" aria-labelledby="h-trabalhos">
+  <section class="sec wrap" id="trabalhos" aria-labelledby="h-trabalhos">
     <div class="sec__head">
-      <p class="eyebrow" data-reveal>Uma amostra do que sai daqui.</p>
+      <p class="eyebrow" data-reveal>Um pouco do que sai daqui.</p>
       <h2 class="h2 display" id="h-trabalhos">
         <span class="line"><span class="line__in t-sans">Trabalhos</span></span>
         <span class="line"><span class="line__in t-serif">recentes</span></span>
       </h2>
     </div>
-    <div class="stack" data-stack></div>
-    <div class="grid" data-grid></div>
+    <div class="placas" data-placas hidden>
+      <p class="placas__label" data-placas-label></p>
+      <div class="placas__track"><div class="placas__row" data-placas-row></div><div class="placas__row" data-placas-copy aria-hidden="true"></div></div>
+    </div>
+    <div class="werk" data-werk></div>
     <div class="trabalhos__cta">
       <a class="btn" href="https://www.instagram.com/dzin.raw/" target="_blank" rel="noopener noreferrer"><span class="btn__box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span><span class="btn__label">Ver mais no Instagram</span></a>
     </div>
   </section>
 
-  <section class="sec wrap" id="servicos" aria-labelledby="h-servicos">
+  <section class="sec wrap theme-dark" id="servicos" aria-labelledby="h-servicos">
     <div class="sec__head">
       <p class="eyebrow" data-reveal>O que eu faço</p>
       <h2 class="h2 display" id="h-servicos">
@@ -421,19 +401,19 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     </div>
     <div class="svcs">
       <article class="svc" data-svc>
-        <div class="svc__media"><img src="img/servicos/design.webp" alt="Peça de design para a Nany Kids" loading="lazy" onerror="this.parentNode.classList.add('is-gen')"></div>
+        <div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
         <div class="svc__text"><h3 class="t-sans">Design</h3><p class="t-sub">Identidade, peças e layout que seguram o olhar</p></div>
       </article>
       <article class="svc" data-svc>
-        <div class="svc__media"><img src="img/servicos/motion.webp" alt="Frame de motion design para a Secret" loading="lazy" onerror="this.parentNode.classList.add('is-gen')"></div>
+        <div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><path d="M10.4 21.9a10 10 0 0 0 9.941-15.416"/><path d="M13.5 2.1a10 10 0 0 0-9.841 15.416"/></svg></div>
         <div class="svc__text"><h3 class="t-sans">Motion design</h3><p class="t-sub">Animação e motion graphics que dão vida à marca</p></div>
       </article>
       <article class="svc" data-svc>
-        <div class="svc__media"><img src="img/servicos/video.webp" alt="Frame do filme de casamento de Amanda e João Vitor" loading="lazy" onerror="this.parentNode.classList.add('is-gen')"></div>
+        <div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></div>
         <div class="svc__text"><h3 class="t-sans">Edição de vídeo</h3><p class="t-sub">Corte, ritmo e finalização que prendem até o fim</p></div>
       </article>
       <article class="svc" data-svc>
-        <div class="svc__media"><img src="img/servicos/foto.webp" alt="Retrato fotografado no Fly Scale" loading="lazy" onerror="this.parentNode.classList.add('is-gen')"></div>
+        <div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div>
         <div class="svc__text"><h3 class="t-sans">Fotografia</h3><p class="t-sub">Retrato, produto e evento com luz de verdade</p></div>
       </article>
     </div>
@@ -461,7 +441,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 </main>
 
 <footer class="footer wrap theme-dark">
-  <div class="footer__mark" aria-hidden="true">dzin.raw</div>
+  <div class="footer__mark" aria-hidden="true">Davi Mazzucatto</div>
   <div class="footer__grid">
     <div><h3>Davi Mazzucatto</h3><p>Design, motion design, edição de vídeo e fotografia.</p></div>
     <div><h3>Navegação</h3><ul><li><a href="#quem">Quem</a></li><li><a href="#trabalhos" data-nav="trabalhos">Trabalhos</a></li><li><a href="#servicos">Serviços</a></li><li><a href="#contato">Contato</a></li></ul></div>
@@ -483,102 +463,124 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 <script>
 (function () {
   /* ---------- trabalhos: o manifesto que o Davi edita ----------
-     capa é obrigatória. galeria, loop (8 s mudo no card) e video (completo, abre no
-     lightbox) são opcionais. formato "retrato" ou "paisagem" decide o encaixe no card.
-     Os 5 primeiros viram os cards grandes que empilham; o resto vai para a grade. */
+     capa é obrigatória. galeria (fotos que passam sozinhas no card e abrem no
+     lightbox), loop (8 s mudo no card) e video (completo, abre no lightbox) são
+     opcionais. formato "retrato" ou "paisagem" decide a proporção do card.
+     esteira: true tira o item da grade e vira a esteira de placas no topo. */
   var TRABALHOS = [
-    { slug: "secret", titulo: "Secret", categoria: "Design & motion", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret.webp", galeria: ["img/trabalhos/secret-01.webp", "img/trabalhos/secret-02.webp", "img/trabalhos/secret-03.webp", "img/trabalhos/secret-04.webp"], loop: "media/trabalhos/secret-loop.mp4", video: "media/trabalhos/secret.mp4" },
-    { slug: "viajaflux-summit", titulo: "Viajaflux Summit", categoria: "Design & fotografia", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/viajaflux-summit.webp", galeria: ["img/trabalhos/viajaflux-summit-01.webp", "img/trabalhos/viajaflux-summit-02.webp", "img/trabalhos/viajaflux-summit-03.webp", "img/trabalhos/viajaflux-summit-04.webp", "img/trabalhos/viajaflux-summit-05.webp", "img/trabalhos/viajaflux-summit-06.webp", "img/trabalhos/viajaflux-summit-07.webp"], loop: "media/trabalhos/viajaflux-summit-loop.mp4", video: "media/trabalhos/viajaflux-summit.mp4" },
+    { slug: "secret-stories", titulo: "Secret — Stories", categoria: "Design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-stories-01.webp", galeria: ["img/trabalhos/secret-stories-01.webp", "img/trabalhos/secret-stories-02.webp", "img/trabalhos/secret-stories-03.webp", "img/trabalhos/secret-stories-04.webp", "img/trabalhos/secret-stories-05.webp", "img/trabalhos/secret-stories-06.webp", "img/trabalhos/secret-stories-07.webp", "img/trabalhos/secret-stories-08.webp", "img/trabalhos/secret-stories-09.webp", "img/trabalhos/secret-stories-10.webp", "img/trabalhos/secret-stories-11.webp", "img/trabalhos/secret-stories-12.webp", "img/trabalhos/secret-stories-13.webp", "img/trabalhos/secret-stories-14.webp", "img/trabalhos/secret-stories-15.webp", "img/trabalhos/secret-stories-16.webp"] },
+    { slug: "secret-essa-sexta", titulo: "Secret — Essa sexta", categoria: "Motion design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-essa-sexta.webp", loop: "media/trabalhos/secret-essa-sexta-loop.mp4", video: "media/trabalhos/secret-essa-sexta.mp4" },
+    { slug: "secret-rio-beach-club", titulo: "Secret — Rio Beach Club", categoria: "Motion design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-rio-beach-club.webp", loop: "media/trabalhos/secret-rio-beach-club-loop.mp4", video: "media/trabalhos/secret-rio-beach-club.mp4" },
+    { slug: "secret-vendas-abertas", titulo: "Secret — Vendas abertas", categoria: "Motion design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-vendas-abertas.webp", loop: "media/trabalhos/secret-vendas-abertas-loop.mp4", video: "media/trabalhos/secret-vendas-abertas.mp4" },
+    { slug: "viajaflux-summit", titulo: "Viajaflux Summit", categoria: "Fotografia", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/viajaflux-summit-01.webp", galeria: ["img/trabalhos/viajaflux-summit-01.webp", "img/trabalhos/viajaflux-summit-02.webp", "img/trabalhos/viajaflux-summit-03.webp", "img/trabalhos/viajaflux-summit-04.webp", "img/trabalhos/viajaflux-summit-05.webp", "img/trabalhos/viajaflux-summit-06.webp", "img/trabalhos/viajaflux-summit-07.webp", "img/trabalhos/viajaflux-summit-08.webp", "img/trabalhos/viajaflux-summit-09.webp", "img/trabalhos/viajaflux-summit-10.webp", "img/trabalhos/viajaflux-summit-11.webp", "img/trabalhos/viajaflux-summit-12.webp", "img/trabalhos/viajaflux-summit-13.webp", "img/trabalhos/viajaflux-summit-14.webp", "img/trabalhos/viajaflux-summit-15.webp", "img/trabalhos/viajaflux-summit-16.webp", "img/trabalhos/viajaflux-summit-17.webp"] },
+    { slug: "placas-premiacao", titulo: "Placas de premiação", categoria: "Design", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/placas-premiacao-01.webp", galeria: ["img/trabalhos/placas-premiacao-01.webp", "img/trabalhos/placas-premiacao-02.webp", "img/trabalhos/placas-premiacao-03.webp", "img/trabalhos/placas-premiacao-04.webp", "img/trabalhos/placas-premiacao-05.webp", "img/trabalhos/placas-premiacao-06.webp", "img/trabalhos/placas-premiacao-07.webp", "img/trabalhos/placas-premiacao-08.webp", "img/trabalhos/placas-premiacao-09.webp", "img/trabalhos/placas-premiacao-10.webp", "img/trabalhos/placas-premiacao-11.webp", "img/trabalhos/placas-premiacao-12.webp", "img/trabalhos/placas-premiacao-13.webp"], esteira: true },
+    { slug: "crachas-summit", titulo: "Crachás Summit", categoria: "Design", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/crachas-summit-01.webp", galeria: ["img/trabalhos/crachas-summit-01.webp", "img/trabalhos/crachas-summit-02.webp", "img/trabalhos/crachas-summit-03.webp"], loop: "media/trabalhos/crachas-summit-loop.mp4", video: "media/trabalhos/crachas-summit.mp4" },
     { slug: "amanda-e-joao-vitor", titulo: "Amanda & João Vitor", categoria: "Edição de vídeo", cliente: "Casamento", formato: "retrato", capa: "img/trabalhos/amanda-e-joao-vitor.webp", loop: "media/trabalhos/amanda-e-joao-vitor-loop.mp4", video: "media/trabalhos/amanda-e-joao-vitor.mp4" },
-    { slug: "fly-scale", titulo: "Fly Scale", categoria: "Fotografia & vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale.webp", galeria: ["img/trabalhos/fly-scale-01.webp", "img/trabalhos/fly-scale-02.webp", "img/trabalhos/fly-scale-03.webp", "img/trabalhos/fly-scale-04.webp", "img/trabalhos/fly-scale-05.webp", "img/trabalhos/fly-scale-06.webp"], loop: "media/trabalhos/fly-scale-loop.mp4", video: "media/trabalhos/fly-scale.mp4" },
-    { slug: "folder-grupo-fly", titulo: "Folder Grupo Fly", categoria: "Design editorial & motion", cliente: "Grupo Fly", formato: "paisagem", capa: "img/trabalhos/folder-grupo-fly.webp", galeria: ["img/trabalhos/folder-grupo-fly-01.webp", "img/trabalhos/folder-grupo-fly-02.webp"], loop: "media/trabalhos/folder-grupo-fly-loop.mp4", video: "media/trabalhos/folder-grupo-fly.mp4" },
+    { slug: "amanda-e-joao-vitor-making-of", titulo: "Amanda & João Vitor — Making of", categoria: "Edição de vídeo", cliente: "Casamento", formato: "retrato", capa: "img/trabalhos/amanda-e-joao-vitor-making-of.webp", loop: "media/trabalhos/amanda-e-joao-vitor-making-of-loop.mp4", video: "media/trabalhos/amanda-e-joao-vitor-making-of.mp4" },
     { slug: "vitoria-e-marcus", titulo: "Vitória & Marcus", categoria: "Edição de vídeo", cliente: "Casamento", formato: "retrato", capa: "img/trabalhos/vitoria-e-marcus.webp", loop: "media/trabalhos/vitoria-e-marcus-loop.mp4", video: "media/trabalhos/vitoria-e-marcus.mp4" },
-    { slug: "luiz-gregatti", titulo: "Depoimentos Luiz Gregatti", categoria: "Edição de vídeo", cliente: "@luiz.gregatti", formato: "retrato", capa: "img/trabalhos/luiz-gregatti.webp", loop: "media/trabalhos/luiz-gregatti-loop.mp4", video: "media/trabalhos/luiz-gregatti.mp4" },
-    { slug: "freedom-mastermind", titulo: "Freedom Mastermind", categoria: "Fotografia", cliente: "Freedom Mastermind", formato: "retrato", capa: "img/trabalhos/freedom-mastermind.webp", galeria: ["img/trabalhos/freedom-mastermind-01.webp", "img/trabalhos/freedom-mastermind-02.webp", "img/trabalhos/freedom-mastermind-03.webp", "img/trabalhos/freedom-mastermind-04.webp", "img/trabalhos/freedom-mastermind-05.webp", "img/trabalhos/freedom-mastermind-06.webp"] },
-    { slug: "nany-kids", titulo: "Nany Kids", categoria: "Design & fotografia", cliente: "Nany Kids", formato: "retrato", capa: "img/trabalhos/nany-kids.webp", galeria: ["img/trabalhos/nany-kids-01.webp", "img/trabalhos/nany-kids-02.webp", "img/trabalhos/nany-kids-03.webp", "img/trabalhos/nany-kids-04.webp", "img/trabalhos/nany-kids-05.webp"] },
-    { slug: "igreja-amor-e-cuidado", titulo: "Virada 2026", categoria: "Motion design", cliente: "Igreja Amor e Cuidado", formato: "paisagem", capa: "img/trabalhos/igreja-amor-e-cuidado.webp", loop: "media/trabalhos/igreja-amor-e-cuidado-loop.mp4", video: "media/trabalhos/igreja-amor-e-cuidado.mp4" },
-    { slug: "di-bari", titulo: "Rótulos Di Bari", categoria: "Design", cliente: "Di Bari Alimentos", formato: "retrato", capa: "img/trabalhos/di-bari.webp", galeria: ["img/trabalhos/di-bari-01.webp", "img/trabalhos/di-bari-02.webp", "img/trabalhos/di-bari-03.webp", "img/trabalhos/di-bari-04.webp"] },
-    { slug: "estudo-cafe", titulo: "Estudo — Café", categoria: "Vídeo & fotografia", cliente: "Estudo pessoal", formato: "paisagem", capa: "img/trabalhos/estudo-cafe.webp", loop: "media/trabalhos/estudo-cafe-loop.mp4", video: "media/trabalhos/estudo-cafe.mp4" }
+    { slug: "fly-scale", titulo: "Fly Scale", categoria: "Fotografia", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-01.webp", galeria: ["img/trabalhos/fly-scale-01.webp", "img/trabalhos/fly-scale-02.webp", "img/trabalhos/fly-scale-03.webp", "img/trabalhos/fly-scale-04.webp", "img/trabalhos/fly-scale-05.webp", "img/trabalhos/fly-scale-06.webp", "img/trabalhos/fly-scale-07.webp", "img/trabalhos/fly-scale-08.webp", "img/trabalhos/fly-scale-09.webp", "img/trabalhos/fly-scale-10.webp", "img/trabalhos/fly-scale-11.webp", "img/trabalhos/fly-scale-12.webp", "img/trabalhos/fly-scale-13.webp", "img/trabalhos/fly-scale-14.webp", "img/trabalhos/fly-scale-15.webp", "img/trabalhos/fly-scale-16.webp", "img/trabalhos/fly-scale-17.webp", "img/trabalhos/fly-scale-18.webp", "img/trabalhos/fly-scale-19.webp", "img/trabalhos/fly-scale-20.webp", "img/trabalhos/fly-scale-21.webp", "img/trabalhos/fly-scale-22.webp", "img/trabalhos/fly-scale-23.webp", "img/trabalhos/fly-scale-24.webp", "img/trabalhos/fly-scale-25.webp", "img/trabalhos/fly-scale-26.webp"] },
+    { slug: "fly-scale-aftermovie", titulo: "Fly Scale — Aftermovie", categoria: "Edição de vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-aftermovie.webp", loop: "media/trabalhos/fly-scale-aftermovie-loop.mp4", video: "media/trabalhos/fly-scale-aftermovie.mp4" },
+    { slug: "fly-scale-primeiro-dia", titulo: "Fly Scale — Primeiro dia", categoria: "Edição de vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-primeiro-dia.webp", loop: "media/trabalhos/fly-scale-primeiro-dia-loop.mp4", video: "media/trabalhos/fly-scale-primeiro-dia.mp4" },
+    { slug: "fly-scale-depoimentos", titulo: "Fly Scale — Depoimentos", categoria: "Edição de vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-depoimentos.webp", loop: "media/trabalhos/fly-scale-depoimentos-loop.mp4", video: "media/trabalhos/fly-scale-depoimentos.mp4" },
+    { slug: "folder-grupo-fly", titulo: "Folder Grupo Fly", categoria: "Design editorial", cliente: "Grupo Fly", formato: "paisagem", capa: "img/trabalhos/folder-grupo-fly-01.webp", galeria: ["img/trabalhos/folder-grupo-fly-01.webp", "img/trabalhos/folder-grupo-fly-02.webp", "img/trabalhos/folder-grupo-fly-03.webp"] },
+    { slug: "folder-grupo-fly-animacao", titulo: "Folder Grupo Fly — Animação", categoria: "Motion design", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/folder-grupo-fly-animacao.webp", loop: "media/trabalhos/folder-grupo-fly-animacao-loop.mp4", video: "media/trabalhos/folder-grupo-fly-animacao.mp4" },
+    { slug: "motion-solides", titulo: "Tutorial animado Sólides", categoria: "Motion design", cliente: "Grupo Fly", formato: "paisagem", capa: "img/trabalhos/motion-solides.webp", loop: "media/trabalhos/motion-solides-loop.mp4", video: "media/trabalhos/motion-solides.mp4" },
+    { slug: "depoimento-luis", titulo: "Depoimento — Luis", categoria: "Edição de vídeo", cliente: "@luiz.gregatti", formato: "retrato", capa: "img/trabalhos/depoimento-luis.webp", loop: "media/trabalhos/depoimento-luis-loop.mp4", video: "media/trabalhos/depoimento-luis.mp4" },
+    { slug: "depoimento-klesia", titulo: "Depoimento — Klesia", categoria: "Edição de vídeo", cliente: "@luiz.gregatti", formato: "retrato", capa: "img/trabalhos/depoimento-klesia.webp", loop: "media/trabalhos/depoimento-klesia-loop.mp4", video: "media/trabalhos/depoimento-klesia.mp4" },
+    { slug: "obrigado-200k", titulo: "Obrigado pelos 200k", categoria: "Motion design", cliente: "@luiz.gregatti", formato: "retrato", capa: "img/trabalhos/obrigado-200k.webp", loop: "media/trabalhos/obrigado-200k-loop.mp4", video: "media/trabalhos/obrigado-200k.mp4" },
+    { slug: "freedom-mastermind", titulo: "Freedom Mastermind", categoria: "Fotografia", cliente: "Freedom Mastermind", formato: "retrato", capa: "img/trabalhos/freedom-mastermind-01.webp", galeria: ["img/trabalhos/freedom-mastermind-01.webp", "img/trabalhos/freedom-mastermind-02.webp", "img/trabalhos/freedom-mastermind-03.webp", "img/trabalhos/freedom-mastermind-04.webp", "img/trabalhos/freedom-mastermind-05.webp", "img/trabalhos/freedom-mastermind-06.webp", "img/trabalhos/freedom-mastermind-07.webp", "img/trabalhos/freedom-mastermind-08.webp", "img/trabalhos/freedom-mastermind-09.webp", "img/trabalhos/freedom-mastermind-10.webp", "img/trabalhos/freedom-mastermind-11.webp", "img/trabalhos/freedom-mastermind-12.webp", "img/trabalhos/freedom-mastermind-13.webp", "img/trabalhos/freedom-mastermind-14.webp", "img/trabalhos/freedom-mastermind-15.webp"] },
+    { slug: "nany-kids", titulo: "Nany Kids", categoria: "Design & fotografia", cliente: "Nany Kids", formato: "retrato", capa: "img/trabalhos/nany-kids-01.webp", galeria: ["img/trabalhos/nany-kids-01.webp", "img/trabalhos/nany-kids-02.webp", "img/trabalhos/nany-kids-03.webp", "img/trabalhos/nany-kids-04.webp", "img/trabalhos/nany-kids-05.webp", "img/trabalhos/nany-kids-06.webp", "img/trabalhos/nany-kids-07.webp", "img/trabalhos/nany-kids-08.webp", "img/trabalhos/nany-kids-09.webp"] },
+    { slug: "virada-2026", titulo: "Virada 2026", categoria: "Motion design", cliente: "Igreja Amor e Cuidado", formato: "paisagem", capa: "img/trabalhos/virada-2026.webp", loop: "media/trabalhos/virada-2026-loop.mp4", video: "media/trabalhos/virada-2026.mp4" },
+    { slug: "intro-culto", titulo: "Intro de culto", categoria: "Motion design", cliente: "Igreja Amor e Cuidado", formato: "paisagem", capa: "img/trabalhos/intro-culto.webp", loop: "media/trabalhos/intro-culto-loop.mp4", video: "media/trabalhos/intro-culto.mp4" },
+    { slug: "di-bari", titulo: "Rótulos Di Bari", categoria: "Design", cliente: "Di Bari Alimentos", formato: "retrato", capa: "img/trabalhos/di-bari-01.webp", galeria: ["img/trabalhos/di-bari-01.webp", "img/trabalhos/di-bari-02.webp", "img/trabalhos/di-bari-03.webp", "img/trabalhos/di-bari-04.webp", "img/trabalhos/di-bari-05.webp"] },
+    { slug: "estudo-cafe", titulo: "Estudo — Café", categoria: "Vídeo", cliente: "Estudo pessoal", formato: "paisagem", capa: "img/trabalhos/estudo-cafe.webp", loop: "media/trabalhos/estudo-cafe-loop.mp4", video: "media/trabalhos/estudo-cafe.mp4" }
   ];
-  var DESTAQUES = 5;
-  var CORES = ["var(--orange)", "var(--blue)", "var(--yellow)", "var(--pink)", "var(--green)"];
 
   var calmo = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
-  function icone(nome) {
-    if (nome === "play") return '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
-    return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>';
-  }
+  var ICO_PLAY = '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+  var ICO_FOTO = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="12" cy="12" r="3"/></svg>';
 
-  /* ---------- trabalhos ---------- */
-  var stack = $("[data-stack]"), grid = $("[data-grid]"), secTrab = $("#trabalhos");
-  var vivos = 0, mortos = 0;
-  function contabiliza(ok) {
-    if (ok) vivos++; else mortos++;
-    if (!vivos && mortos >= TRABALHOS.length) esconderTrabalhos();
-  }
-  function esconderTrabalhos() {
-    secTrab.hidden = true;
-    $$("[data-nav='trabalhos']").forEach(function (a) { a.hidden = true; });
-  }
-  function abreLightbox(t) {
-    var lb = $("[data-lb]"), body = $("[data-lb-body]");
+  /* ---------- lightbox ---------- */
+  var lb = $("[data-lb]"), lbBody = $("[data-lb-body]");
+  function abreLightbox(t, idx) {
     $("[data-lb-title]").textContent = t.titulo;
     $("[data-lb-meta]").textContent = t.categoria + (t.cliente ? " · " + t.cliente : "");
-    body.innerHTML = "";
+    lbBody.innerHTML = "";
     if (t.video) {
       var v = el("video"); v.controls = true; v.playsInline = true; v.autoplay = true; v.poster = t.capa; v.src = t.video; v.setAttribute("aria-label", t.titulo);
-      body.appendChild(v);
+      lbBody.appendChild(v);
     } else {
-      var g = el("div", "lb__gal"); [t.capa].concat(t.galeria || []).forEach(function (src) { var im = el("img"); im.src = src; im.alt = t.titulo; im.loading = "lazy"; g.appendChild(im); });
-      body.appendChild(g);
+      var g = el("div", "lb__gal"), fotos = t.galeria && t.galeria.length ? t.galeria : [t.capa];
+      fotos.forEach(function (src, i) { var im = el("img"); im.src = src; im.alt = t.titulo + " — " + (i + 1); im.loading = "lazy"; g.appendChild(im); });
+      lbBody.appendChild(g);
+      if (idx) requestAnimationFrame(function () { var alvo = g.children[idx]; if (alvo) alvo.scrollIntoView({ inline: "center", block: "nearest" }); });
     }
     if (typeof lb.showModal === "function") lb.showModal(); else lb.setAttribute("open", "");
   }
-  function fechaLightbox() { var lb = $("[data-lb]"); var v = $("video", lb); if (v) v.pause(); $("[data-lb-body]").innerHTML = ""; if (lb.open) lb.close(); }
+  function fechaLightbox() { var v = $("video", lb); if (v) v.pause(); lbBody.innerHTML = ""; if (lb.open) lb.close(); }
   $("[data-lb-close]").addEventListener("click", fechaLightbox);
-  $("[data-lb]").addEventListener("click", function (e) { if (e.target === e.currentTarget) fechaLightbox(); });
-  $("[data-lb]").addEventListener("close", function () { $("[data-lb-body]").innerHTML = ""; });
+  lb.addEventListener("click", function (e) { if (e.target === e.currentTarget) fechaLightbox(); });
+  lb.addEventListener("close", function () { lbBody.innerHTML = ""; });
 
-  TRABALHOS.forEach(function (t, i) {
-    var destaque = i < DESTAQUES;
-    var temVideo = !!(t.video || t.loop);
-    var btn = el("button", destaque ? "card" : "tile");
-    btn.type = "button"; btn.style.setProperty("--frame", CORES[i % CORES.length]); btn.setAttribute("data-formato", t.formato || "paisagem");
+  /* ---------- esteira das placas + grade ---------- */
+  var werk = $("[data-werk]"), secTrab = $("#trabalhos"), vivos = 0, mortos = 0, total = 0;
+  function esconderTrabalhos() { secTrab.hidden = true; $$("[data-nav='trabalhos']").forEach(function (a) { a.hidden = true; }); }
+  function contabiliza(ok) { if (ok) vivos++; else mortos++; if (!vivos && mortos >= total) esconderTrabalhos(); }
+
+  TRABALHOS.filter(function (t) { return t.esteira && t.galeria && t.galeria.length; }).forEach(function (t) {
+    var box = $("[data-placas]"); if (!box || !box.hidden) return;
+    box.hidden = false; $("[data-placas-label]").textContent = t.titulo + " — " + t.cliente + " · " + t.categoria;
+    [$("[data-placas-row]"), $("[data-placas-copy]")].forEach(function (row, c) {
+      t.galeria.forEach(function (src, i) {
+        var b = el("button"); b.type = "button"; b.setAttribute("aria-label", t.titulo + " " + (i + 1)); if (c) b.tabIndex = -1;
+        var im = el("img"); im.src = src; im.alt = c ? "" : t.titulo + " " + (i + 1); im.loading = "lazy"; b.appendChild(im);
+        b.addEventListener("click", function () { abreLightbox(t, i); }); row.appendChild(b);
+      });
+    });
+  });
+
+  var grade = TRABALHOS.filter(function (t) { return !t.esteira; }); total = grade.length;
+  grade.forEach(function (t, i) {
+    var temVideo = !!t.video, fotos = t.galeria && t.galeria.length > 1 ? t.galeria.slice(0, 6) : null;
+    var btn = el("button", "wcard"); btn.type = "button"; btn.setAttribute("data-formato", t.formato || "retrato");
     btn.setAttribute("aria-label", t.titulo + " — " + t.categoria + (temVideo ? " (abrir vídeo)" : " (abrir fotos)"));
-    var media = el("div", destaque ? "card__media" : "tile__media");
-    if (destaque && t.formato === "retrato") { var bg = el("img", "card__bg"); bg.src = t.capa; bg.alt = ""; bg.loading = "lazy"; bg.setAttribute("aria-hidden", "true"); media.appendChild(bg); }
-    var img = el("img", destaque ? "card__img" : ""); img.src = t.capa; img.alt = t.titulo; img.loading = i < 2 ? "eager" : "lazy";
+    var media = el("div", "wcard__media");
+    var img = el("img", fotos ? "slide is-on" : ""); img.src = t.capa; img.alt = t.titulo; img.loading = i < 3 ? "eager" : "lazy";
     img.addEventListener("load", function () { contabiliza(true); });
     img.addEventListener("error", function () { btn.hidden = true; contabiliza(false); });
     media.appendChild(img);
-    if (destaque && t.loop && !calmo) {
-      var vid = el("video", "card__video"); vid.muted = true; vid.loop = true; vid.playsInline = true; vid.preload = "metadata"; vid.poster = t.capa; vid.src = t.loop; vid.setAttribute("aria-hidden", "true"); vid.tabIndex = -1;
-      vid.addEventListener("error", function () { vid.hidden = true; });
-      media.appendChild(vid);
+    if (fotos) fotos.slice(1).forEach(function (src) { var s = el("img", "slide"); s.src = src; s.alt = ""; s.loading = "lazy"; s.setAttribute("aria-hidden", "true"); media.appendChild(s); });
+    if (t.loop && !calmo) {
+      var vid = el("video"); vid.muted = true; vid.loop = true; vid.playsInline = true; vid.preload = "metadata"; vid.poster = t.capa; vid.src = t.loop; vid.setAttribute("aria-hidden", "true"); vid.tabIndex = -1;
+      vid.addEventListener("error", function () { vid.hidden = true; }); media.appendChild(vid);
     }
-    var title = el("div", destaque ? "card__title" : "tile__title");
-    if (destaque) {
-      title.innerHTML = '<h3 class="h3 t-sans"></h3><div class="card__meta"><span class="pill"></span><span></span></div>';
-      $("h3", title).textContent = t.titulo; $(".pill", title).textContent = t.categoria; $(".card__meta span:last-child", title).textContent = t.cliente || "";
-      var play = el("span", "card__play", icone(temVideo ? "play" : "seta")); play.setAttribute("aria-hidden", "true"); media.appendChild(play);
-    } else {
-      title.innerHTML = '<span class="t-sans"></span><span class="t-meta"></span>';
-      $(".t-sans", title).textContent = t.titulo; $(".t-meta", title).textContent = t.categoria;
-    }
-    media.appendChild(title); btn.appendChild(media);
+    var tag = el("span", "wcard__tag", temVideo ? ICO_PLAY + " Vídeo" : ICO_FOTO + " " + (t.galeria ? t.galeria.length : 1) + (t.galeria && t.galeria.length > 1 ? " fotos" : " foto")); tag.setAttribute("aria-hidden", "true"); media.appendChild(tag);
+    var title = el("div", "wcard__title", '<h3 class="t-sans"></h3><p class="t-sub"></p>');
+    $("h3", title).textContent = t.titulo; $(".t-sub", title).textContent = t.categoria + (t.cliente ? " · " + t.cliente : "");
+    btn.appendChild(media); btn.appendChild(title);
     btn.addEventListener("click", function () { abreLightbox(t); });
-    (destaque ? stack : grid).appendChild(btn);
+    werk.appendChild(btn);
   });
   if (!TRABALHOS.length) esconderTrabalhos();
-  if (!$$(".tile", grid).length) grid.hidden = true;
 
-  /* loops só tocam visíveis */
+  /* loops e slideshows só rodam quando o card está na tela */
+  function ativaSlides(media) {
+    var slides = $$(".slide", media); if (slides.length < 2 || media._timer) return;
+    var k = 0; media._timer = setInterval(function () { slides[k].classList.remove("is-on"); k = (k + 1) % slides.length; slides[k].classList.add("is-on"); }, 2600 + (Math.random() * 900 | 0));
+  }
+  function paraSlides(media) { if (media._timer) { clearInterval(media._timer); media._timer = null; } }
   if ("IntersectionObserver" in window) {
-    var ioV = new IntersectionObserver(function (es) { es.forEach(function (e) { var v = e.target; if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); }); }, { threshold: .35 });
-    $$(".card__video").forEach(function (v) { ioV.observe(v); });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var m = e.target, v = $("video", m);
+        if (e.isIntersecting) { if (v && !v.hidden) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } if (!calmo) ativaSlides(m); }
+        else { if (v) v.pause(); paraSlides(m); }
+      });
+    }, { threshold: .3 });
+    $$(".wcard__media").forEach(function (m) { io.observe(m); });
   }
 
   /* ---------- menu mobile ---------- */
@@ -586,27 +588,27 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
   burger.addEventListener("click", function () { var aberto = burger.getAttribute("aria-expanded") === "true"; burger.setAttribute("aria-expanded", String(!aberto)); menu.hidden = aberto; burger.setAttribute("aria-label", aberto ? "Abrir menu" : "Fechar menu"); });
   $$("a", menu).forEach(function (a) { a.addEventListener("click", function () { burger.setAttribute("aria-expanded", "false"); menu.hidden = true; }); });
 
-  /* ---------- selo giratório ---------- */
+  /* ---------- selo giratório + cor da nav sobre faixas escuras ---------- */
   var badge = $(".badge");
   function secoes() { return $$("main > section").filter(function (s) { return !s.hidden; }); }
   badge.addEventListener("click", function () {
     var y = window.scrollY + 10, prox = secoes().filter(function (s) { return s.offsetTop > y + 40; })[0];
     (prox || $("footer")).scrollIntoView({ behavior: calmo ? "auto" : "smooth" });
   });
-  function badgeToggle() { badge.classList.toggle("is-on", window.scrollY > 240 && window.scrollY < document.documentElement.scrollHeight - window.innerHeight - 200); }
-  /* wordmark e selo invertem a cor quando a nav está sobre uma faixa escura */
   var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 76, pedido = false;
   function sobEscuro() {
     pedido = false;
-    var y = navH / 2 + 2, pts = [[Math.round(window.innerWidth * .5), y], [Math.round(window.innerWidth * .2), y]];
-    var escuro = false;
+    var y = navH / 2 + 2, pts = [[Math.round(window.innerWidth * .5), y], [Math.round(window.innerWidth * .2), y]], escuro = false;
     for (var i = 0; i < pts.length && !escuro; i++) {
       var els = document.elementsFromPoint(pts[i][0], pts[i][1]);
       for (var j = 0; j < els.length; j++) { var e = els[j]; if (e.closest(".nav, .badge, dialog")) continue; escuro = !!e.closest(".theme-dark"); break; }
     }
     document.documentElement.classList.toggle("over-dark", escuro);
   }
-  function aoRolar() { badgeToggle(); if (!pedido) { pedido = true; requestAnimationFrame(sobEscuro); } }
+  function aoRolar() {
+    badge.classList.toggle("is-on", window.scrollY > 240 && window.scrollY < document.documentElement.scrollHeight - window.innerHeight - 200);
+    if (!pedido) { pedido = true; requestAnimationFrame(sobEscuro); }
+  }
   window.addEventListener("scroll", aoRolar, { passive: true }); window.addEventListener("resize", aoRolar); aoRolar();
 
   /* ---------- palavra que gira ---------- */
@@ -623,11 +625,8 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
   /* ---------- motion (GSAP) ---------- */
   if (calmo || !window.gsap || !window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);
-  document.documentElement.classList.add("js-motion");
   var EASE = "power4.out";
-
   function arma() {
-    /* hero: linhas sobem de dentro da máscara, depois o rabisco se desenha */
     var heroLines = $$(".hero .line__in"), heroReveal = $$(".hero [data-reveal]");
     var tl = gsap.timeline({ defaults: { ease: EASE } });
     tl.from(heroReveal[0], { y: 18, autoAlpha: 0, duration: .8 }, .1)
@@ -636,8 +635,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
       .from(".marquee", { y: 24, autoAlpha: 0, duration: .9 }, 1);
     $$(".hero .js-scribble").forEach(function (p, i) { var L = p.getTotalLength(); gsap.set(p, { strokeDasharray: L, strokeDashoffset: L }); tl.to(p, { strokeDashoffset: 0, duration: .55, ease: "power2.inOut" }, 1.05 + i * .25); });
 
-    /* títulos de seção: mesma revelação por linhas ao entrar */
-    $$("main section:not(.hero) .display, footer .display").forEach(function (h) {
+    $$("main section:not(.hero) .display").forEach(function (h) {
       gsap.from($$(".line__in", h), { yPercent: 112, duration: 1.1, ease: EASE, stagger: .1, scrollTrigger: { trigger: h, start: "top 85%", once: true } });
     });
     $$("main section:not(.hero) [data-reveal]").forEach(function (e) {
@@ -647,31 +645,19 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
       var L = p.getTotalLength(); gsap.set(p, { strokeDasharray: L, strokeDashoffset: L });
       gsap.to(p, { strokeDashoffset: 0, duration: .7, ease: "power2.inOut", scrollTrigger: { trigger: p, start: "top 92%", once: true } });
     });
-
-    /* quem: polaroids entram giradas, stickers estalam */
     var pols = $$("[data-polaroid]");
-    if (pols.length) {
-      gsap.from(pols, { y: 60, rotate: function (i) { return i ? 14 : -16; }, autoAlpha: 0, duration: 1.2, ease: EASE, stagger: .15, scrollTrigger: { trigger: "[data-polaroids]", start: "top 80%", once: true } });
-      gsap.from("[data-sticker]", { scale: 0, autoAlpha: 0, duration: .7, ease: "back.out(1.8)", stagger: .12, delay: .5, scrollTrigger: { trigger: "[data-polaroids]", start: "top 80%", once: true } });
-    }
-
-    /* trabalhos: o card de baixo encolhe e escurece quando o próximo sobe por cima */
-    var cards = $$(".card");
-    cards.forEach(function (c, i) {
-      var prox = cards[i + 1]; if (!prox) return;
-      gsap.to(c, { scale: .94, filter: "brightness(.55)", ease: "none", scrollTrigger: { trigger: prox, start: "top bottom", end: "top top+=" + (parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) + 16), scrub: true } });
+    if (pols.length) gsap.from(pols, { y: 60, rotate: function (i) { return i ? 14 : -16; }, autoAlpha: 0, duration: 1.2, ease: EASE, stagger: .15, scrollTrigger: { trigger: "[data-polaroids]", start: "top 80%", once: true } });
+    var placas = $("[data-placas]");
+    if (placas && !placas.hidden) gsap.from(placas, { y: 40, autoAlpha: 0, duration: 1, ease: EASE, scrollTrigger: { trigger: placas, start: "top 88%", once: true } });
+    $$(".wcard").forEach(function (c, i) {
+      gsap.from(c, { y: 50, autoAlpha: 0, duration: .9, ease: EASE, delay: (i % 3) * .08, scrollTrigger: { trigger: c, start: "top 92%", once: true } });
     });
-    gsap.from(cards, { y: 80, autoAlpha: 0, duration: 1, ease: EASE, stagger: .08, scrollTrigger: { trigger: "[data-stack]", start: "top 85%", once: true } });
-    var tiles = $$(".tile");
-    if (tiles.length) gsap.from(tiles, { y: 50, autoAlpha: 0, duration: .9, ease: EASE, stagger: .06, scrollTrigger: { trigger: "[data-grid]", start: "top 88%", once: true } });
-
-    /* serviços: entram girando além da inclinação final */
     $$("[data-svc]").forEach(function (s, i) {
       var r = parseFloat(getComputedStyle(s).getPropertyValue("--r")) || 0;
       gsap.from(s, { y: 70, rotate: r * 3, autoAlpha: 0, duration: 1.1, ease: EASE, delay: i * .08, scrollTrigger: { trigger: ".svcs", start: "top 82%", once: true } });
     });
   }
-  function pronto() { try { arma(); } catch (e) { gsap.set("[data-reveal], .line__in, .card, .tile, [data-svc], [data-polaroid], [data-sticker]", { clearProps: "all" }); } }
+  function pronto() { try { arma(); } catch (e) { gsap.set("[data-reveal], .line__in, .wcard, [data-svc], [data-polaroid], [data-placas]", { clearProps: "all" }); } }
   var armou = false; function umaVez() { if (!armou) { armou = true; pronto(); } }
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(umaVez); setTimeout(umaVez, 1800); } else umaVez();
 })();
