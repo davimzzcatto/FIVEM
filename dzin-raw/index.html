@@ -175,45 +175,13 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 .quem__copy{ display: grid; gap: 22px; justify-items: start; }
 .quem__copy .eyebrow{ color: var(--ink-2); }
 
-/* ---------- trabalhos: bloco do Summit (vídeo + colagem + esteira de placas + crachás) ---------- */
-.summit{ max-width: 1280px; margin: 0 auto clamp(56px, 8vw, 110px); display: grid; gap: clamp(22px, 3vw, 40px); }
-.summit__head{ text-align: center; display: grid; gap: 16px; justify-items: center; }
-.summit__title{ font-size: clamp(30px, 5.2vw, 68px); }
-.summit__head .lead{ text-align: center; max-width: 52ch; }
-.summit__grid{ display: grid; grid-template-columns: minmax(240px, 2fr) 3fr; gap: clamp(12px, 1.6vw, 22px); align-items: stretch; }
-.summit__video{ position: relative; aspect-ratio: 9 / 16; overflow: hidden; background: #101010; border: 0; padding: 0; cursor: pointer; }
-.summit__video img, .summit__video video{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.summit__video video{ z-index: 1; }
-.summit__collage{ display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: clamp(8px, 1vw, 14px); }
-.summit__tile{ position: relative; overflow: hidden; background: #101010; border: 0; padding: 0; cursor: pointer; min-height: 0; }
-.summit__tile img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.22,.61,.36,1); }
-.summit__tile--placa img{ object-fit: contain; background: #fff; }
-.summit__crachas{ display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: clamp(8px, 1vw, 14px); }
-.summit__crachas .summit__tile{ aspect-ratio: 838 / 1184; }
-.summit__crachas .summit__tile--video{ aspect-ratio: auto; }
-.summit__crachas .summit__tile--video video{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-.summit .wcard__tag{ z-index: 3; }
-@media (hover: hover){ .summit__tile:hover img, .summit__video:hover img{ transform: scale(1.04); } }
-@media (max-width: 860px){
-  .summit__grid{ grid-template-columns: 1fr; }
-  .summit__video{ aspect-ratio: 4 / 5; }
-  .summit__collage{ grid-auto-rows: auto; }
-  .summit__tile{ aspect-ratio: 4 / 5; }
-  .summit__crachas{ grid-template-columns: repeat(2, 1fr); }
-  .summit__crachas .summit__tile--video{ grid-column: 1 / -1; aspect-ratio: 16 / 9; }
-}
-
-/* ---------- trabalhos: esteira das placas + grade de cards brancos ---------- */
-.placas{ margin: 0 calc(-1 * var(--gutter-r)) 0 calc(-1 * var(--gutter-l)); overflow: hidden; }
-.placas__label{ text-align: center; font-family: var(--f-serif); font-size: clamp(18px, 1.6vw, 24px); color: var(--ink-2); margin-bottom: 18px; padding-inline: var(--gutter-l) var(--gutter-r); }
-.placas__track{ display: flex; width: max-content; animation: marquee 70s linear infinite; }
-.placas__row{ display: flex; gap: clamp(12px, 1.4vw, 20px); padding-right: clamp(12px, 1.4vw, 20px); }
-.placas__row button{ border: 0; padding: 0; background: none; cursor: pointer; flex: none; height: clamp(170px, 24vw, 300px); }
-.placas__row img{ height: 100%; width: auto; box-shadow: 0 16px 40px rgba(0,0,0,.14); transition: transform .5s cubic-bezier(.22,.61,.36,1); }
-@media (hover: hover){ .placas:hover .placas__track{ animation-play-state: paused; } .placas__row button:hover img{ transform: translateY(-6px); } }
-
-.werk{ columns: 3; column-gap: clamp(16px, 2vw, 28px); max-width: 1280px; margin-inline: auto; }
-.werk > *{ break-inside: avoid; margin-bottom: clamp(16px, 2vw, 28px); }
+/* ---------- trabalhos: grade de cards brancos, agrupada por empresa ---------- */
+.grupo{ max-width: 1280px; margin-inline: auto; }
+.grupo + .grupo{ margin-top: clamp(28px, 4vw, 56px); }
+.grupo__head{ display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-bottom: 14px; margin-bottom: clamp(14px, 2vw, 24px); border-bottom: 1px solid rgba(16,16,16,.14); }
+.grupo__head .t-sans{ font-size: clamp(26px, 3vw, 44px); line-height: .9; }
+.grupo__head .t-meta{ font-family: var(--f-serif); font-size: clamp(17px, 1.4vw, 22px); color: var(--ink-2); }
+.werk{ display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 28px); align-items: start; }
 .wcard{ display: block; width: 100%; text-align: center; border: 0; padding: 16px 16px 24px; background: var(--white); color: var(--ink); cursor: pointer; }
 .wcard__media{ position: relative; overflow: hidden; background: #101010; aspect-ratio: 4 / 5; }
 .wcard[data-formato="paisagem"] .wcard__media{ aspect-ratio: 16 / 10; }
@@ -279,7 +247,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 /* ---------- responsivo ---------- */
 @media (max-width: 1100px){
   .svcs{ grid-template-columns: repeat(2, 1fr); max-width: 760px; }
-  .werk{ columns: 2; }
+  .werk{ grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 860px){
   :root{ --nav-h: 64px; }
@@ -298,7 +266,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
   .footer__grid{ grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 560px){
-  .werk{ columns: 1; max-width: 420px; }
+  .werk{ grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; }
   .wcard{ padding: 12px 12px 20px; }
   .svcs{ grid-template-columns: 1fr; max-width: 340px; gap: 26px; }
   .svc{ --r: 0deg; }
@@ -309,7 +277,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 }
 
 @media (prefers-reduced-motion: reduce){
-  .marquee__track, .placas__track, .badge > svg{ animation: none; }
+  .marquee__track, .badge > svg{ animation: none; }
   .rot__word.is-leaving, .rot__word.is-entering{ animation: none; }
   .svc, .wcard__media img, .btn__box svg, .wcard__media .slide{ transition: none; }
 }
@@ -411,26 +379,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
         <span class="line"><span class="line__in t-serif">recentes</span></span>
       </h2>
     </div>
-    <div class="summit" data-summit hidden>
-      <div class="summit__head">
-        <p class="eyebrow" data-reveal>Viajaflux Summit · Olímpia 2026</p>
-        <h3 class="display summit__title">
-          <span class="line"><span class="line__in t-sans">Eu desenhei as placas.</span></span>
-          <span class="line"><span class="line__in t-serif">Eles levaram pra casa.</span></span>
-        </h3>
-        <p class="lead" data-reveal>Identidade da premiação, as 13 placas de vendas (de 50K a 45M) e os crachás do evento. As fotos são do Summit; o design é meu.</p>
-      </div>
-      <div class="summit__grid">
-        <button class="summit__video" type="button" data-summit-video aria-label="Premiação Viajaflux Summit (abrir vídeo)"></button>
-        <div class="summit__collage" data-summit-collage></div>
-      </div>
-      <div class="placas" data-placas hidden>
-        <p class="placas__label" data-placas-label></p>
-        <div class="placas__track"><div class="placas__row" data-placas-row></div><div class="placas__row" data-placas-copy aria-hidden="true"></div></div>
-      </div>
-      <div class="summit__crachas" data-summit-crachas></div>
-    </div>
-    <div class="werk" data-werk></div>
+    <div data-werk></div>
     <div class="trabalhos__cta">
       <a class="btn" href="https://www.instagram.com/dzin.raw/" target="_blank" rel="noopener noreferrer"><span class="btn__box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span><span class="btn__label">Ver mais no Instagram</span></a>
     </div>
@@ -508,36 +457,35 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 <script>
 (function () {
   /* ---------- trabalhos: o manifesto que o Davi edita ----------
-     capa é obrigatória. galeria (fotos que passam sozinhas no card e abrem no
-     lightbox), loop (8 s mudo no card) e video (completo, abre no lightbox) são
-     opcionais. formato "retrato" ou "paisagem" decide a proporção do card.
-     esteira: true tira o item da grade e vira a esteira de placas no topo. */
+     grupo é a empresa/categoria (os cards ficam juntos, na ordem em que o grupo
+     aparece). capa é obrigatória. galeria (fotos que passam sozinhas no card e
+     abrem no lightbox), loop (8 s mudo no card) e video (completo, abre no
+     lightbox) são opcionais. formato "retrato" ou "paisagem" decide a proporção. */
   var TRABALHOS = [
-    { slug: "secret-stories", titulo: "Secret — Posts", categoria: "Design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-stories-01.webp", galeria: ["img/trabalhos/secret-stories-01.webp", "img/trabalhos/secret-stories-02.webp", "img/trabalhos/secret-stories-03.webp", "img/trabalhos/secret-stories-04.webp", "img/trabalhos/secret-stories-05.webp", "img/trabalhos/secret-stories-06.webp", "img/trabalhos/secret-stories-07.webp", "img/trabalhos/secret-stories-08.webp", "img/trabalhos/secret-stories-09.webp", "img/trabalhos/secret-stories-10.webp", "img/trabalhos/secret-stories-11.webp", "img/trabalhos/secret-stories-12.webp", "img/trabalhos/secret-stories-13.webp", "img/trabalhos/secret-stories-14.webp", "img/trabalhos/secret-stories-15.webp", "img/trabalhos/secret-stories-16.webp"] },
-    { slug: "secret-essa-sexta", titulo: "Secret — Antecipação", categoria: "Motion design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-essa-sexta.webp", loop: "media/trabalhos/secret-essa-sexta-loop.mp4", video: "media/trabalhos/secret-essa-sexta.mp4" },
-    { slug: "secret-rio-beach-club", titulo: "Secret — Rio Beach Club", categoria: "Motion design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-rio-beach-club.webp", loop: "media/trabalhos/secret-rio-beach-club-loop.mp4", video: "media/trabalhos/secret-rio-beach-club.mp4" },
-    { slug: "secret-vendas-abertas", titulo: "Secret — Vendas abertas", categoria: "Motion design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-vendas-abertas.webp", loop: "media/trabalhos/secret-vendas-abertas-loop.mp4", video: "media/trabalhos/secret-vendas-abertas.mp4" },
-    { slug: "viajaflux-summit", titulo: "Premiação Viajaflux Summit", categoria: "Design das placas", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/viajaflux-summit-01.webp", galeria: ["img/trabalhos/viajaflux-summit-01.webp", "img/trabalhos/viajaflux-summit-02.webp", "img/trabalhos/viajaflux-summit-03.webp", "img/trabalhos/viajaflux-summit-04.webp", "img/trabalhos/viajaflux-summit-05.webp", "img/trabalhos/viajaflux-summit-06.webp", "img/trabalhos/viajaflux-summit-07.webp", "img/trabalhos/viajaflux-summit-08.webp", "img/trabalhos/viajaflux-summit-09.webp", "img/trabalhos/viajaflux-summit-10.webp", "img/trabalhos/viajaflux-summit-11.webp", "img/trabalhos/viajaflux-summit-12.webp", "img/trabalhos/viajaflux-summit-13.webp", "img/trabalhos/viajaflux-summit-14.webp", "img/trabalhos/viajaflux-summit-15.webp", "img/trabalhos/viajaflux-summit-16.webp", "img/trabalhos/viajaflux-summit-17.webp"], loop: "media/trabalhos/viajaflux-summit-loop.mp4", video: "media/trabalhos/viajaflux-summit.mp4", destaque: true },
-    { slug: "placas-premiacao", titulo: "Placas de premiação", categoria: "Design", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/placas-premiacao-01.webp", galeria: ["img/trabalhos/placas-premiacao-01.webp", "img/trabalhos/placas-premiacao-02.webp", "img/trabalhos/placas-premiacao-03.webp", "img/trabalhos/placas-premiacao-04.webp", "img/trabalhos/placas-premiacao-05.webp", "img/trabalhos/placas-premiacao-06.webp", "img/trabalhos/placas-premiacao-07.webp", "img/trabalhos/placas-premiacao-08.webp", "img/trabalhos/placas-premiacao-09.webp", "img/trabalhos/placas-premiacao-10.webp", "img/trabalhos/placas-premiacao-11.webp", "img/trabalhos/placas-premiacao-12.webp", "img/trabalhos/placas-premiacao-13.webp"], esteira: true },
-    { slug: "crachas-summit", titulo: "Crachás do Summit", categoria: "Design", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/crachas-summit-pdf-01.webp", galeria: ["img/trabalhos/crachas-summit-pdf-01.webp", "img/trabalhos/crachas-summit-pdf-02.webp", "img/trabalhos/crachas-summit-pdf-03.webp", "img/trabalhos/crachas-summit-pdf-04.webp", "img/trabalhos/crachas-summit-01.webp", "img/trabalhos/crachas-summit-02.webp", "img/trabalhos/crachas-summit-03.webp"], loop: "media/trabalhos/crachas-summit-loop.mp4", video: "media/trabalhos/crachas-summit.mp4", destaque: true },
-    { slug: "amanda-e-joao-vitor", titulo: "Amanda & João Vitor", categoria: "Edição de vídeo", cliente: "Casamento", formato: "retrato", capa: "img/trabalhos/amanda-e-joao-vitor.webp", loop: "media/trabalhos/amanda-e-joao-vitor-loop.mp4", video: "media/trabalhos/amanda-e-joao-vitor.mp4" },
-    { slug: "amanda-e-joao-vitor-making-of", titulo: "Amanda & João Vitor — Making of", categoria: "Edição de vídeo", cliente: "Casamento", formato: "retrato", capa: "img/trabalhos/amanda-e-joao-vitor-making-of.webp", loop: "media/trabalhos/amanda-e-joao-vitor-making-of-loop.mp4", video: "media/trabalhos/amanda-e-joao-vitor-making-of.mp4" },
-    { slug: "vitoria-e-marcus", titulo: "Vitória & Marcus", categoria: "Edição de vídeo", cliente: "Casamento", formato: "retrato", capa: "img/trabalhos/vitoria-e-marcus.webp", loop: "media/trabalhos/vitoria-e-marcus-loop.mp4", video: "media/trabalhos/vitoria-e-marcus.mp4" },
-    { slug: "fly-scale", titulo: "Fly Scale — Fotografia", categoria: "Fotografia", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-01.webp", galeria: ["img/trabalhos/fly-scale-01.webp", "img/trabalhos/fly-scale-02.webp", "img/trabalhos/fly-scale-03.webp", "img/trabalhos/fly-scale-04.webp", "img/trabalhos/fly-scale-05.webp", "img/trabalhos/fly-scale-06.webp", "img/trabalhos/fly-scale-07.webp", "img/trabalhos/fly-scale-08.webp", "img/trabalhos/fly-scale-09.webp", "img/trabalhos/fly-scale-10.webp", "img/trabalhos/fly-scale-11.webp", "img/trabalhos/fly-scale-12.webp", "img/trabalhos/fly-scale-13.webp", "img/trabalhos/fly-scale-14.webp", "img/trabalhos/fly-scale-15.webp", "img/trabalhos/fly-scale-16.webp", "img/trabalhos/fly-scale-17.webp", "img/trabalhos/fly-scale-18.webp", "img/trabalhos/fly-scale-19.webp", "img/trabalhos/fly-scale-20.webp", "img/trabalhos/fly-scale-21.webp", "img/trabalhos/fly-scale-22.webp", "img/trabalhos/fly-scale-23.webp", "img/trabalhos/fly-scale-24.webp", "img/trabalhos/fly-scale-25.webp", "img/trabalhos/fly-scale-26.webp"] },
-    { slug: "fly-scale-aftermovie", titulo: "Fly Scale — Teaser", categoria: "Edição de vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-aftermovie.webp", loop: "media/trabalhos/fly-scale-aftermovie-loop.mp4", video: "media/trabalhos/fly-scale-aftermovie.mp4" },
-    { slug: "fly-scale-primeiro-dia", titulo: "Fly Scale — Aftermovie", categoria: "Edição de vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-primeiro-dia.webp", loop: "media/trabalhos/fly-scale-primeiro-dia-loop.mp4", video: "media/trabalhos/fly-scale-primeiro-dia.mp4" },
-    { slug: "fly-scale-depoimentos", titulo: "Fly Scale — Depoimentos", categoria: "Edição de vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-depoimentos.webp", loop: "media/trabalhos/fly-scale-depoimentos-loop.mp4", video: "media/trabalhos/fly-scale-depoimentos.mp4" },
-    { slug: "folder-grupo-fly", titulo: "Folder Grupo Fly", categoria: "Design editorial & motion", cliente: "Grupo Fly", formato: "paisagem", capa: "img/trabalhos/folder-grupo-fly-01.webp", galeria: ["img/trabalhos/folder-grupo-fly-01.webp", "img/trabalhos/folder-grupo-fly-02.webp", "img/trabalhos/folder-grupo-fly-03.webp"], loop: "media/trabalhos/folder-grupo-fly-animacao-loop.mp4", video: "media/trabalhos/folder-grupo-fly-animacao.mp4" },
-    { slug: "motion-solides", titulo: "Tutorial animado Sólides", categoria: "Motion design", cliente: "Grupo Fly", formato: "paisagem", capa: "img/trabalhos/motion-solides.webp", loop: "media/trabalhos/motion-solides-loop.mp4", video: "media/trabalhos/motion-solides.mp4" },
-    { slug: "depoimento-luis", titulo: "Depoimento — Luis", categoria: "Edição de vídeo", cliente: "@luiz.gregatti", formato: "retrato", capa: "img/trabalhos/depoimento-luis.webp", loop: "media/trabalhos/depoimento-luis-loop.mp4", video: "media/trabalhos/depoimento-luis.mp4" },
-    { slug: "depoimento-klesia", titulo: "Depoimento — Klesia", categoria: "Edição de vídeo", cliente: "@luiz.gregatti", formato: "retrato", capa: "img/trabalhos/depoimento-klesia.webp", loop: "media/trabalhos/depoimento-klesia-loop.mp4", video: "media/trabalhos/depoimento-klesia.mp4" },
-    { slug: "obrigado-200k", titulo: "Obrigado pelos 200k", categoria: "Motion design", cliente: "@luiz.gregatti", formato: "retrato", capa: "img/trabalhos/obrigado-200k.webp", loop: "media/trabalhos/obrigado-200k-loop.mp4", video: "media/trabalhos/obrigado-200k.mp4" },
-    { slug: "freedom-mastermind", titulo: "Freedom Mastermind", categoria: "Fotografia", cliente: "Freedom Mastermind", formato: "retrato", capa: "img/trabalhos/freedom-mastermind-01.webp", galeria: ["img/trabalhos/freedom-mastermind-01.webp", "img/trabalhos/freedom-mastermind-02.webp", "img/trabalhos/freedom-mastermind-03.webp", "img/trabalhos/freedom-mastermind-04.webp", "img/trabalhos/freedom-mastermind-05.webp", "img/trabalhos/freedom-mastermind-06.webp", "img/trabalhos/freedom-mastermind-07.webp", "img/trabalhos/freedom-mastermind-08.webp", "img/trabalhos/freedom-mastermind-09.webp", "img/trabalhos/freedom-mastermind-10.webp", "img/trabalhos/freedom-mastermind-11.webp", "img/trabalhos/freedom-mastermind-12.webp", "img/trabalhos/freedom-mastermind-13.webp", "img/trabalhos/freedom-mastermind-14.webp", "img/trabalhos/freedom-mastermind-15.webp"] },
-    { slug: "nany-kids", titulo: "Nany Kids", categoria: "Design & fotografia", cliente: "Nany Kids", formato: "retrato", capa: "img/trabalhos/nany-kids-01.webp", galeria: ["img/trabalhos/nany-kids-01.webp", "img/trabalhos/nany-kids-02.webp", "img/trabalhos/nany-kids-03.webp", "img/trabalhos/nany-kids-04.webp", "img/trabalhos/nany-kids-05.webp", "img/trabalhos/nany-kids-06.webp", "img/trabalhos/nany-kids-07.webp", "img/trabalhos/nany-kids-08.webp", "img/trabalhos/nany-kids-09.webp"] },
-    { slug: "virada-2026", titulo: "Virada 2026", categoria: "Motion design", cliente: "Igreja Amor e Cuidado", formato: "paisagem", capa: "img/trabalhos/virada-2026.webp", loop: "media/trabalhos/virada-2026-loop.mp4", video: "media/trabalhos/virada-2026.mp4" },
-    { slug: "intro-culto", titulo: "Intro de culto", categoria: "Motion design", cliente: "Igreja Amor e Cuidado", formato: "paisagem", capa: "img/trabalhos/intro-culto.webp", loop: "media/trabalhos/intro-culto-loop.mp4", video: "media/trabalhos/intro-culto.mp4" },
-    { slug: "di-bari", titulo: "Rótulos Di Bari", categoria: "Design", cliente: "Di Bari Alimentos", formato: "retrato", capa: "img/trabalhos/di-bari-01.webp", galeria: ["img/trabalhos/di-bari-01.webp", "img/trabalhos/di-bari-02.webp", "img/trabalhos/di-bari-03.webp", "img/trabalhos/di-bari-04.webp", "img/trabalhos/di-bari-05.webp"] },
-    { slug: "estudo-cafe", titulo: "Estudo — Café", categoria: "Vídeo", cliente: "Estudo pessoal", formato: "paisagem", capa: "img/trabalhos/estudo-cafe.webp", loop: "media/trabalhos/estudo-cafe-loop.mp4", video: "media/trabalhos/estudo-cafe.mp4" }
+    { grupo: "Viajaflux", slug: "premiacao", titulo: "Premiação do Summit", categoria: "Design das placas", formato: "retrato", capa: "img/trabalhos/viajaflux-summit-01.webp", galeria: ["img/trabalhos/viajaflux-summit-01.webp", "img/trabalhos/placas-premiacao-01.webp", "img/trabalhos/viajaflux-summit-02.webp", "img/trabalhos/placas-premiacao-02.webp", "img/trabalhos/viajaflux-summit-03.webp", "img/trabalhos/placas-premiacao-03.webp", "img/trabalhos/viajaflux-summit-04.webp", "img/trabalhos/placas-premiacao-04.webp", "img/trabalhos/viajaflux-summit-05.webp", "img/trabalhos/placas-premiacao-05.webp", "img/trabalhos/viajaflux-summit-06.webp", "img/trabalhos/placas-premiacao-06.webp", "img/trabalhos/viajaflux-summit-07.webp", "img/trabalhos/placas-premiacao-07.webp", "img/trabalhos/viajaflux-summit-08.webp", "img/trabalhos/placas-premiacao-08.webp", "img/trabalhos/viajaflux-summit-09.webp", "img/trabalhos/placas-premiacao-09.webp", "img/trabalhos/viajaflux-summit-10.webp", "img/trabalhos/placas-premiacao-10.webp", "img/trabalhos/viajaflux-summit-11.webp", "img/trabalhos/placas-premiacao-11.webp", "img/trabalhos/viajaflux-summit-12.webp", "img/trabalhos/placas-premiacao-12.webp", "img/trabalhos/viajaflux-summit-13.webp", "img/trabalhos/placas-premiacao-13.webp", "img/trabalhos/viajaflux-summit-14.webp", "img/trabalhos/viajaflux-summit-15.webp", "img/trabalhos/viajaflux-summit-16.webp", "img/trabalhos/viajaflux-summit-17.webp"], loop: "media/trabalhos/viajaflux-summit-loop.mp4", video: "media/trabalhos/viajaflux-summit.mp4" },
+    { grupo: "Viajaflux", slug: "crachas", titulo: "Crachás do Summit", categoria: "Design", formato: "retrato", capa: "img/trabalhos/crachas-summit-pdf-01.webp", galeria: ["img/trabalhos/crachas-summit-01.webp", "img/trabalhos/crachas-summit-02.webp", "img/trabalhos/crachas-summit-03.webp"], loop: "media/trabalhos/crachas-summit-loop.mp4", video: "media/trabalhos/crachas-summit.mp4" },
+    { grupo: "Fly Scale", slug: "fly-scale-fotografia", titulo: "Fotos do evento", categoria: "Fotografia", formato: "retrato", capa: "img/trabalhos/fly-scale-01.webp", galeria: ["img/trabalhos/fly-scale-01.webp", "img/trabalhos/fly-scale-02.webp", "img/trabalhos/fly-scale-03.webp", "img/trabalhos/fly-scale-04.webp", "img/trabalhos/fly-scale-05.webp", "img/trabalhos/fly-scale-06.webp", "img/trabalhos/fly-scale-07.webp", "img/trabalhos/fly-scale-08.webp", "img/trabalhos/fly-scale-09.webp", "img/trabalhos/fly-scale-10.webp", "img/trabalhos/fly-scale-11.webp", "img/trabalhos/fly-scale-12.webp", "img/trabalhos/fly-scale-13.webp", "img/trabalhos/fly-scale-14.webp", "img/trabalhos/fly-scale-15.webp", "img/trabalhos/fly-scale-16.webp", "img/trabalhos/fly-scale-17.webp", "img/trabalhos/fly-scale-18.webp", "img/trabalhos/fly-scale-19.webp", "img/trabalhos/fly-scale-20.webp", "img/trabalhos/fly-scale-21.webp", "img/trabalhos/fly-scale-22.webp", "img/trabalhos/fly-scale-23.webp", "img/trabalhos/fly-scale-24.webp", "img/trabalhos/fly-scale-25.webp", "img/trabalhos/fly-scale-26.webp"] },
+    { grupo: "Fly Scale", slug: "fly-scale-aftermovie", titulo: "Aftermovie", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/fly-scale-primeiro-dia.webp", loop: "media/trabalhos/fly-scale-primeiro-dia-loop.mp4", video: "media/trabalhos/fly-scale-primeiro-dia.mp4" },
+    { grupo: "Fly Scale", slug: "fly-scale-teaser", titulo: "Teaser", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/fly-scale-aftermovie.webp", loop: "media/trabalhos/fly-scale-aftermovie-loop.mp4", video: "media/trabalhos/fly-scale-aftermovie.mp4" },
+    { grupo: "Fly Scale", slug: "fly-scale-depoimentos", titulo: "Depoimentos", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/fly-scale-depoimentos.webp", loop: "media/trabalhos/fly-scale-depoimentos-loop.mp4", video: "media/trabalhos/fly-scale-depoimentos.mp4" },
+    { grupo: "Secret", slug: "secret-posts", titulo: "Posts", categoria: "Design", formato: "retrato", capa: "img/trabalhos/secret-stories-01.webp", galeria: ["img/trabalhos/secret-stories-01.webp", "img/trabalhos/secret-stories-02.webp", "img/trabalhos/secret-stories-03.webp", "img/trabalhos/secret-stories-04.webp", "img/trabalhos/secret-stories-05.webp", "img/trabalhos/secret-stories-06.webp", "img/trabalhos/secret-stories-07.webp", "img/trabalhos/secret-stories-08.webp", "img/trabalhos/secret-stories-09.webp", "img/trabalhos/secret-stories-10.webp", "img/trabalhos/secret-stories-11.webp", "img/trabalhos/secret-stories-12.webp", "img/trabalhos/secret-stories-13.webp", "img/trabalhos/secret-stories-14.webp", "img/trabalhos/secret-stories-15.webp", "img/trabalhos/secret-stories-16.webp"] },
+    { grupo: "Secret", slug: "secret-antecipacao", titulo: "Antecipação", categoria: "Motion design", formato: "retrato", capa: "img/trabalhos/secret-essa-sexta.webp", loop: "media/trabalhos/secret-essa-sexta-loop.mp4", video: "media/trabalhos/secret-essa-sexta.mp4" },
+    { grupo: "Secret", slug: "secret-rio-beach-club", titulo: "Rio Beach Club", categoria: "Motion design", formato: "retrato", capa: "img/trabalhos/secret-rio-beach-club.webp", loop: "media/trabalhos/secret-rio-beach-club-loop.mp4", video: "media/trabalhos/secret-rio-beach-club.mp4" },
+    { grupo: "Secret", slug: "secret-vendas-abertas", titulo: "Vendas abertas", categoria: "Motion design", formato: "retrato", capa: "img/trabalhos/secret-vendas-abertas.webp", loop: "media/trabalhos/secret-vendas-abertas-loop.mp4", video: "media/trabalhos/secret-vendas-abertas.mp4" },
+    { grupo: "Casamentos", slug: "amanda-e-joao-vitor", titulo: "Amanda & João Vitor", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/amanda-e-joao-vitor.webp", loop: "media/trabalhos/amanda-e-joao-vitor-loop.mp4", video: "media/trabalhos/amanda-e-joao-vitor.mp4" },
+    { grupo: "Casamentos", slug: "amanda-e-joao-vitor-making-of", titulo: "Amanda & João Vitor — Making of", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/amanda-e-joao-vitor-making-of.webp", loop: "media/trabalhos/amanda-e-joao-vitor-making-of-loop.mp4", video: "media/trabalhos/amanda-e-joao-vitor-making-of.mp4" },
+    { grupo: "Casamentos", slug: "vitoria-e-marcus", titulo: "Vitória & Marcus", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/vitoria-e-marcus.webp", loop: "media/trabalhos/vitoria-e-marcus-loop.mp4", video: "media/trabalhos/vitoria-e-marcus.mp4" },
+    { grupo: "Grupo Fly", slug: "folder-grupo-fly", titulo: "Folder A3", categoria: "Design editorial & motion", formato: "paisagem", capa: "img/trabalhos/folder-grupo-fly-01.webp", galeria: ["img/trabalhos/folder-grupo-fly-01.webp", "img/trabalhos/folder-grupo-fly-02.webp", "img/trabalhos/folder-grupo-fly-03.webp"], loop: "media/trabalhos/folder-grupo-fly-animacao-loop.mp4", video: "media/trabalhos/folder-grupo-fly-animacao.mp4" },
+    { grupo: "Grupo Fly", slug: "motion-solides", titulo: "Tutorial animado Sólides", categoria: "Motion design", formato: "paisagem", capa: "img/trabalhos/motion-solides.webp", loop: "media/trabalhos/motion-solides-loop.mp4", video: "media/trabalhos/motion-solides.mp4" },
+    { grupo: "Luiz Gregatti", slug: "depoimento-luis", titulo: "Depoimento — Luis", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/depoimento-luis.webp", loop: "media/trabalhos/depoimento-luis-loop.mp4", video: "media/trabalhos/depoimento-luis.mp4" },
+    { grupo: "Luiz Gregatti", slug: "depoimento-klesia", titulo: "Depoimento — Klesia", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/depoimento-klesia.webp", loop: "media/trabalhos/depoimento-klesia-loop.mp4", video: "media/trabalhos/depoimento-klesia.mp4" },
+    { grupo: "Luiz Gregatti", slug: "obrigado-200k", titulo: "Obrigado pelos 200k", categoria: "Motion design", formato: "retrato", capa: "img/trabalhos/obrigado-200k.webp", loop: "media/trabalhos/obrigado-200k-loop.mp4", video: "media/trabalhos/obrigado-200k.mp4" },
+    { grupo: "Igreja Amor e Cuidado", slug: "virada-2026", titulo: "Virada 2026", categoria: "Motion design", formato: "paisagem", capa: "img/trabalhos/virada-2026.webp", loop: "media/trabalhos/virada-2026-loop.mp4", video: "media/trabalhos/virada-2026.mp4" },
+    { grupo: "Igreja Amor e Cuidado", slug: "intro-culto", titulo: "Intro de culto", categoria: "Motion design", formato: "paisagem", capa: "img/trabalhos/intro-culto.webp", loop: "media/trabalhos/intro-culto-loop.mp4", video: "media/trabalhos/intro-culto.mp4" },
+    { grupo: "Freedom Mastermind", slug: "freedom-mastermind", titulo: "Fotografia do evento", categoria: "Fotografia", formato: "retrato", capa: "img/trabalhos/freedom-mastermind-01.webp", galeria: ["img/trabalhos/freedom-mastermind-01.webp", "img/trabalhos/freedom-mastermind-02.webp", "img/trabalhos/freedom-mastermind-03.webp", "img/trabalhos/freedom-mastermind-04.webp", "img/trabalhos/freedom-mastermind-05.webp", "img/trabalhos/freedom-mastermind-06.webp", "img/trabalhos/freedom-mastermind-07.webp", "img/trabalhos/freedom-mastermind-08.webp", "img/trabalhos/freedom-mastermind-09.webp", "img/trabalhos/freedom-mastermind-10.webp", "img/trabalhos/freedom-mastermind-11.webp", "img/trabalhos/freedom-mastermind-12.webp", "img/trabalhos/freedom-mastermind-13.webp", "img/trabalhos/freedom-mastermind-14.webp", "img/trabalhos/freedom-mastermind-15.webp"] },
+    { grupo: "Nany Kids", slug: "nany-kids", titulo: "Logo, fotos e posts", categoria: "Design & fotografia", formato: "retrato", capa: "img/trabalhos/nany-kids-01.webp", galeria: ["img/trabalhos/nany-kids-01.webp", "img/trabalhos/nany-kids-02.webp", "img/trabalhos/nany-kids-03.webp", "img/trabalhos/nany-kids-04.webp", "img/trabalhos/nany-kids-05.webp", "img/trabalhos/nany-kids-06.webp", "img/trabalhos/nany-kids-07.webp", "img/trabalhos/nany-kids-08.webp", "img/trabalhos/nany-kids-09.webp"] },
+    { grupo: "Di Bari Alimentos", slug: "di-bari", titulo: "Rótulos", categoria: "Design", formato: "retrato", capa: "img/trabalhos/di-bari-01.webp", galeria: ["img/trabalhos/di-bari-01.webp", "img/trabalhos/di-bari-02.webp", "img/trabalhos/di-bari-03.webp", "img/trabalhos/di-bari-04.webp", "img/trabalhos/di-bari-05.webp"] },
+    { grupo: "Estudos", slug: "estudo-cafe", titulo: "Café", categoria: "Vídeo", formato: "paisagem", capa: "img/trabalhos/estudo-cafe.webp", loop: "media/trabalhos/estudo-cafe-loop.mp4", video: "media/trabalhos/estudo-cafe.mp4" }
   ];
 
   var calmo = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -550,8 +498,8 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
   /* ---------- lightbox ---------- */
   var lb = $("[data-lb]"), lbBody = $("[data-lb-body]");
   function abreLightbox(t, idx) {
-    $("[data-lb-title]").textContent = t.titulo;
-    $("[data-lb-meta]").textContent = t.categoria + (t.cliente ? " · " + t.cliente : "");
+    $("[data-lb-title]").textContent = (t.grupo ? t.grupo + " — " : "") + t.titulo;
+    $("[data-lb-meta]").textContent = t.categoria;
     lbBody.innerHTML = "";
     var temGal = t.galeria && t.galeria.length > 0;
     if (t.video && !temGal) {
@@ -577,57 +525,14 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
   function esconderTrabalhos() { secTrab.hidden = true; $$("[data-nav='trabalhos']").forEach(function (a) { a.hidden = true; }); }
   function contabiliza(ok) { if (ok) vivos++; else mortos++; if (!vivos && mortos >= total) esconderTrabalhos(); }
 
-  TRABALHOS.filter(function (t) { return t.esteira && t.galeria && t.galeria.length; }).forEach(function (t) {
-    var box = $("[data-placas]"); if (!box || !box.hidden) return;
-    box.hidden = false; $("[data-placas-label]").textContent = t.titulo + " — " + t.cliente + " · " + t.categoria;
-    [$("[data-placas-row]"), $("[data-placas-copy]")].forEach(function (row, c) {
-      t.galeria.forEach(function (src, i) {
-        var b = el("button"); b.type = "button"; b.setAttribute("aria-label", t.titulo + " " + (i + 1)); if (c) b.tabIndex = -1;
-        var im = el("img"); im.src = src; im.alt = c ? "" : t.titulo + " " + (i + 1); im.loading = "lazy"; b.appendChild(im);
-        b.addEventListener("click", function () { abreLightbox(t, i); }); row.appendChild(b);
-      });
-    });
+  var grade = TRABALHOS; total = grade.length;
+  var grupos = {}, ordemGrupos = [];
+  grade.forEach(function (t) { var gname = t.grupo || "Outros"; if (!grupos[gname]) { grupos[gname] = []; ordemGrupos.push(gname); } grupos[gname].push(t); });
+  ordemGrupos.forEach(function (gname) {
+    var sec = el("div", "grupo"), head = el("div", "grupo__head", '<h3 class="t-sans"></h3><span class="t-meta"></span>'), cols = el("div", "werk");
+    $("h3", head).textContent = gname; $(".t-meta", head).textContent = grupos[gname].length + (grupos[gname].length > 1 ? " projetos" : " projeto");
+    sec.appendChild(head); sec.appendChild(cols); werk.appendChild(sec); grupos[gname]._cols = cols;
   });
-
-  /* bloco do Summit: vídeo da premiação + colagem (fotos e placas) + esteira + crachás */
-  function porSlug(slug) { return TRABALHOS.filter(function (t) { return t.slug === slug; })[0]; }
-  function loopEm(container, t) {
-    var im = el("img"); im.src = t.capa; im.alt = t.titulo; im.loading = "lazy"; container.appendChild(im);
-    if (t.loop && !calmo) { var v = el("video"); v.muted = true; v.loop = true; v.playsInline = true; v.preload = "metadata"; v.poster = t.capa; v.src = t.loop; v.setAttribute("aria-hidden", "true"); v.tabIndex = -1; v.addEventListener("error", function () { v.hidden = true; }); container.appendChild(v); }
-    var tag = el("span", "wcard__tag", ICO_PLAY + " Vídeo"); tag.setAttribute("aria-hidden", "true"); container.appendChild(tag);
-  }
-  (function () {
-    var summit = porSlug("viajaflux-summit"), placas = porSlug("placas-premiacao"), crachas = porSlug("crachas-summit"), box = $("[data-summit]");
-    if (!box || !summit) return;
-    box.hidden = false;
-    var bv = $("[data-summit-video]"); loopEm(bv, summit); bv.addEventListener("click", function () { abreLightbox(summit); });
-    /* colagem: fotos de gente recebendo intercaladas com as placas desenhadas */
-    var col = $("[data-summit-collage]"), ordem = [0, 13, "p12", 10, 7, 8, "p7", 14, 3], plac = placas && placas.galeria ? placas.galeria : [];
-    ordem.forEach(function (fi) {
-      if (typeof fi === "string") { var pi = +fi.slice(1); if (plac[pi]) col.appendChild(tilePlaca(plac[pi], pi)); return; }
-      var src = summit.galeria[fi]; if (!src) return;
-      var b = el("button", "summit__tile"); b.type = "button"; b.setAttribute("aria-label", summit.titulo + " — foto " + (fi + 1));
-      var im = el("img"); im.src = src; im.alt = ""; im.loading = "lazy"; b.appendChild(im);
-      b.addEventListener("click", function () { abreLightbox(summit, fi); }); col.appendChild(b);
-    });
-    function tilePlaca(src, i) {
-      var b = el("button", "summit__tile summit__tile--placa"); b.type = "button"; b.setAttribute("aria-label", placas.titulo + " " + (i + 1));
-      var im = el("img"); im.src = src; im.alt = ""; im.loading = "lazy"; b.appendChild(im);
-      b.addEventListener("click", function () { abreLightbox(placas, i); }); return b;
-    }
-    if (crachas) {
-      var row = $("[data-summit-crachas]");
-      var bc = el("button", "summit__tile summit__tile--video"); bc.type = "button"; bc.setAttribute("aria-label", crachas.titulo + " (abrir vídeo)"); loopEm(bc, crachas);
-      bc.addEventListener("click", function () { abreLightbox(crachas); }); row.appendChild(bc);
-      (crachas.galeria || []).slice(0, 4).forEach(function (src, i) {
-        var b = el("button", "summit__tile"); b.type = "button"; b.setAttribute("aria-label", crachas.titulo + " " + (i + 1));
-        var im = el("img"); im.src = src; im.alt = ""; im.loading = "lazy"; b.appendChild(im);
-        b.addEventListener("click", function () { abreLightbox(crachas, i); }); row.appendChild(b);
-      });
-    }
-  })();
-
-  var grade = TRABALHOS.filter(function (t) { return !t.esteira && !t.destaque; }); total = grade.length;
   grade.forEach(function (t, i) {
     var temVideo = !!t.video, fotos = t.galeria && t.galeria.length > 1 ? t.galeria.slice(0, 6) : null;
     var btn = el("button", "wcard"); btn.type = "button"; btn.setAttribute("data-formato", t.formato || "retrato");
@@ -644,10 +549,10 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     }
     var tag = el("span", "wcard__tag", temVideo ? ICO_PLAY + " Vídeo" : ICO_FOTO + " " + (t.galeria ? t.galeria.length : 1) + (t.galeria && t.galeria.length > 1 ? " fotos" : " foto")); tag.setAttribute("aria-hidden", "true"); media.appendChild(tag);
     var title = el("div", "wcard__title", '<h3 class="t-sans"></h3><p class="t-sub"></p>');
-    $("h3", title).textContent = t.titulo; $(".t-sub", title).textContent = t.categoria + (t.cliente ? " · " + t.cliente : "");
+    $("h3", title).textContent = t.titulo; $(".t-sub", title).textContent = t.categoria;
     btn.appendChild(media); btn.appendChild(title);
     btn.addEventListener("click", function () { abreLightbox(t); });
-    werk.appendChild(btn);
+    grupos[t.grupo || "Outros"]._cols.appendChild(btn);
   });
   if (!TRABALHOS.length) esconderTrabalhos();
 
@@ -665,7 +570,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
         else { if (v) v.pause(); paraSlides(m); }
       });
     }, { threshold: .3 });
-    $$(".wcard__media, .summit__video, .summit__tile--video").forEach(function (m) { io.observe(m); });
+    $$(".wcard__media").forEach(function (m) { io.observe(m); });
   }
 
   /* ---------- menu mobile ---------- */
@@ -732,12 +637,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     });
     var pols = $$("[data-polaroid]");
     if (pols.length) gsap.from(pols, { y: 60, rotate: function (i) { return i ? 14 : -16; }, autoAlpha: 0, duration: 1.2, ease: EASE, stagger: .15, scrollTrigger: { trigger: "[data-polaroids]", start: "top 80%", once: true } });
-    var placas = $("[data-placas]");
-    if (placas && !placas.hidden) gsap.from(placas, { y: 40, autoAlpha: 0, duration: 1, ease: EASE, scrollTrigger: { trigger: placas, start: "top 88%", once: true } });
-    var sg = $(".summit__grid");
-    if (sg) gsap.from($$(".summit__video, .summit__tile", sg), { y: 40, autoAlpha: 0, duration: .9, ease: EASE, stagger: .07, scrollTrigger: { trigger: sg, start: "top 85%", once: true } });
-    var sc = $("[data-summit-crachas]");
-    if (sc && sc.children.length) gsap.from(sc.children, { y: 30, autoAlpha: 0, duration: .8, ease: EASE, stagger: .06, scrollTrigger: { trigger: sc, start: "top 90%", once: true } });
+    $$(".grupo__head").forEach(function (h) { gsap.from(h, { y: 24, autoAlpha: 0, duration: .8, ease: EASE, scrollTrigger: { trigger: h, start: "top 92%", once: true } }); });
     $$(".wcard").forEach(function (c, i) {
       gsap.from(c, { y: 50, autoAlpha: 0, duration: .9, ease: EASE, delay: (i % 3) * .08, scrollTrigger: { trigger: c, start: "top 92%", once: true } });
     });
@@ -746,7 +646,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
       gsap.from(s, { y: 70, rotate: r * 3, autoAlpha: 0, duration: 1.1, ease: EASE, delay: i * .08, scrollTrigger: { trigger: ".svcs", start: "top 82%", once: true } });
     });
   }
-  function pronto() { try { arma(); } catch (e) { gsap.set("[data-reveal], .line__in, .wcard, [data-svc], [data-polaroid], [data-placas], .summit__video, .summit__tile", { clearProps: "all" }); } }
+  function pronto() { try { arma(); } catch (e) { gsap.set("[data-reveal], .line__in, .wcard, [data-svc], [data-polaroid]", { clearProps: "all" }); } }
   var armou = false; function umaVez() { if (!armou) { armou = true; pronto(); } }
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(umaVez); setTimeout(umaVez, 1800); } else umaVez();
 })();
