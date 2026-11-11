@@ -180,7 +180,8 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 .marquee{ overflow: hidden; padding-block: 22px 28px; border-top: 1px solid rgba(16,16,16,.08); }
 .marquee__track{ display: flex; width: max-content; animation: marquee 38s linear infinite; }
 .marquee__row{ display: flex; align-items: center; gap: clamp(44px, 6vw, 96px); padding-right: clamp(44px, 6vw, 96px); }
-.marquee__row img{ height: clamp(30px, 3.3vw, 46px); width: auto; flex: none; }
+.marquee__row img{ height: calc(var(--lh, 40px) * var(--ls, 1)); width: auto; flex: none; }
+@media (max-width: 1100px){ .marquee__row img{ --ls: .85; } }
 @keyframes marquee{ to{ transform: translateX(-50%); } }
 
 /* ---------- quem ---------- */
@@ -194,8 +195,36 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 .quem__copy{ display: grid; gap: 22px; justify-items: start; }
 .quem__copy .eyebrow{ color: var(--ink-2); }
 
+/* ---------- trabalhos: bloco do Summit (vídeo + colagem + esteira de placas + crachás) ---------- */
+.summit{ max-width: 1280px; margin: 0 auto clamp(56px, 8vw, 110px); display: grid; gap: clamp(22px, 3vw, 40px); }
+.summit__head{ text-align: center; display: grid; gap: 16px; justify-items: center; }
+.summit__title{ font-size: clamp(30px, 5.2vw, 68px); }
+.summit__head .lead{ text-align: center; max-width: 52ch; }
+.summit__grid{ display: grid; grid-template-columns: minmax(240px, 2fr) 3fr; gap: clamp(12px, 1.6vw, 22px); align-items: stretch; }
+.summit__video{ position: relative; aspect-ratio: 9 / 16; overflow: hidden; background: #101010; border: 0; padding: 0; cursor: pointer; }
+.summit__video img, .summit__video video{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.summit__video video{ z-index: 1; }
+.summit__collage{ display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: clamp(8px, 1vw, 14px); }
+.summit__tile{ position: relative; overflow: hidden; background: #101010; border: 0; padding: 0; cursor: pointer; min-height: 0; }
+.summit__tile img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.22,.61,.36,1); }
+.summit__tile--placa img{ object-fit: contain; background: #fff; }
+.summit__crachas{ display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: clamp(8px, 1vw, 14px); }
+.summit__crachas .summit__tile{ aspect-ratio: 838 / 1184; }
+.summit__crachas .summit__tile--video{ aspect-ratio: auto; }
+.summit__crachas .summit__tile--video video{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.summit .wcard__tag{ z-index: 3; }
+@media (hover: hover){ .summit__tile:hover img, .summit__video:hover img{ transform: scale(1.04); } }
+@media (max-width: 860px){
+  .summit__grid{ grid-template-columns: 1fr; }
+  .summit__video{ aspect-ratio: 4 / 5; }
+  .summit__collage{ grid-auto-rows: auto; }
+  .summit__tile{ aspect-ratio: 4 / 5; }
+  .summit__crachas{ grid-template-columns: repeat(2, 1fr); }
+  .summit__crachas .summit__tile--video{ grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+}
+
 /* ---------- trabalhos: esteira das placas + grade de cards brancos ---------- */
-.placas{ margin: 0 calc(-1 * var(--gutter-r)) clamp(40px, 6vw, 80px) calc(-1 * var(--gutter-l)); overflow: hidden; }
+.placas{ margin: 0 calc(-1 * var(--gutter-r)) 0 calc(-1 * var(--gutter-l)); overflow: hidden; }
 .placas__label{ text-align: center; font-family: var(--f-serif); font-size: clamp(18px, 1.6vw, 24px); color: var(--ink-2); margin-bottom: 18px; padding-inline: var(--gutter-l) var(--gutter-r); }
 .placas__track{ display: flex; width: max-content; animation: marquee 70s linear infinite; }
 .placas__row{ display: flex; gap: clamp(12px, 1.4vw, 20px); padding-right: clamp(12px, 1.4vw, 20px); }
@@ -264,7 +293,8 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 .lb__body{ min-height: 0; display: grid; place-items: center; }
 .lb__body video{ max-height: 100%; max-width: 100%; height: 100%; object-fit: contain; background: #000; }
 .lb__gal{ width: 100%; height: 100%; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; align-items: center; scrollbar-width: thin; }
-.lb__gal img{ height: 100%; max-height: 100%; width: auto; max-width: 90vw; object-fit: contain; scroll-snap-align: center; flex: none; }
+.lb__gal img, .lb__gal video{ height: 100%; max-height: 100%; width: auto; max-width: 90vw; object-fit: contain; scroll-snap-align: center; flex: none; }
+.lb__gal video{ background: #000; min-width: min(60vw, 90vh * .5625); }
 
 /* ---------- responsivo ---------- */
 @media (max-width: 1100px){
@@ -295,7 +325,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
   .svc:nth-child(odd){ --r: -2.5deg; }
   .svc:nth-child(even){ --r: 2.5deg; }
   .footer__grid{ grid-template-columns: 1fr; }
-  .marquee__row img{ height: 28px; }
+  .marquee__row img{ --ls: .68; }
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -354,24 +384,24 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     <div class="marquee" aria-label="Marcas que já passaram por aqui">
       <div class="marquee__track">
         <div class="marquee__row">
-          <img src="img/clientes/grupo-fly.png" alt="Grupo Fly">
-          <img src="img/clientes/viajaflux.svg" alt="Viajaflux">
-          <img src="img/clientes/fly-scale.png" alt="Fly Scale">
-          <img src="img/clientes/secret.png" alt="Secret">
-          <img src="img/clientes/freedom-mastermind.png" alt="Freedom Mastermind">
-          <img src="img/clientes/di-bari.png" alt="Di Bari Alimentos">
-          <img src="img/clientes/happier-films.png" alt="Happier Films">
-          <img src="img/clientes/voefly.png" alt="Voefly">
+          <img src="img/clientes/grupo-fly.png" alt="Grupo Fly" style="--lh:30px">
+          <img src="img/clientes/viajaflux.svg" alt="Viajaflux" style="--lh:25px">
+          <img src="img/clientes/fly-scale.png" alt="Fly Scale" style="--lh:36px">
+          <img src="img/clientes/secret.png" alt="Secret" style="--lh:34px">
+          <img src="img/clientes/freedom-mastermind.png" alt="Freedom Mastermind" style="--lh:46px">
+          <img src="img/clientes/di-bari.png" alt="Di Bari Alimentos" style="--lh:40px">
+          <img src="img/clientes/happier-films.png" alt="Happier Films" style="--lh:45px">
+          <img src="img/clientes/voefly.png" alt="Voefly" style="--lh:33px">
         </div>
         <div class="marquee__row" aria-hidden="true">
-          <img src="img/clientes/grupo-fly.png" alt="">
-          <img src="img/clientes/viajaflux.svg" alt="">
-          <img src="img/clientes/fly-scale.png" alt="">
-          <img src="img/clientes/secret.png" alt="">
-          <img src="img/clientes/freedom-mastermind.png" alt="">
-          <img src="img/clientes/di-bari.png" alt="">
-          <img src="img/clientes/happier-films.png" alt="">
-          <img src="img/clientes/voefly.png" alt="">
+          <img src="img/clientes/grupo-fly.png" alt="" style="--lh:30px">
+          <img src="img/clientes/viajaflux.svg" alt="" style="--lh:25px">
+          <img src="img/clientes/fly-scale.png" alt="" style="--lh:36px">
+          <img src="img/clientes/secret.png" alt="" style="--lh:34px">
+          <img src="img/clientes/freedom-mastermind.png" alt="" style="--lh:46px">
+          <img src="img/clientes/di-bari.png" alt="" style="--lh:40px">
+          <img src="img/clientes/happier-films.png" alt="" style="--lh:45px">
+          <img src="img/clientes/voefly.png" alt="" style="--lh:33px">
         </div>
       </div>
     </div>
@@ -403,9 +433,24 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
         <span class="line"><span class="line__in t-serif">recentes</span></span>
       </h2>
     </div>
-    <div class="placas" data-placas hidden>
-      <p class="placas__label" data-placas-label></p>
-      <div class="placas__track"><div class="placas__row" data-placas-row></div><div class="placas__row" data-placas-copy aria-hidden="true"></div></div>
+    <div class="summit" data-summit hidden>
+      <div class="summit__head">
+        <p class="eyebrow" data-reveal>Viajaflux Summit · Olímpia 2026</p>
+        <h3 class="display summit__title">
+          <span class="line"><span class="line__in t-sans">Eu desenhei as placas.</span></span>
+          <span class="line"><span class="line__in t-serif">Eles levaram pra casa.</span></span>
+        </h3>
+        <p class="lead" data-reveal>Identidade da premiação, as 13 placas de vendas (de 50K a 45M) e os crachás do evento. As fotos são do Summit; o design é meu.</p>
+      </div>
+      <div class="summit__grid">
+        <button class="summit__video" type="button" data-summit-video aria-label="Premiação Viajaflux Summit (abrir vídeo)"></button>
+        <div class="summit__collage" data-summit-collage></div>
+      </div>
+      <div class="placas" data-placas hidden>
+        <p class="placas__label" data-placas-label></p>
+        <div class="placas__track"><div class="placas__row" data-placas-row></div><div class="placas__row" data-placas-copy aria-hidden="true"></div></div>
+      </div>
+      <div class="summit__crachas" data-summit-crachas></div>
     </div>
     <div class="werk" data-werk></div>
     <div class="trabalhos__cta">
@@ -490,22 +535,21 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
      opcionais. formato "retrato" ou "paisagem" decide a proporção do card.
      esteira: true tira o item da grade e vira a esteira de placas no topo. */
   var TRABALHOS = [
-    { slug: "secret-stories", titulo: "Secret — Stories", categoria: "Design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-stories-01.webp", galeria: ["img/trabalhos/secret-stories-01.webp", "img/trabalhos/secret-stories-02.webp", "img/trabalhos/secret-stories-03.webp", "img/trabalhos/secret-stories-04.webp", "img/trabalhos/secret-stories-05.webp", "img/trabalhos/secret-stories-06.webp", "img/trabalhos/secret-stories-07.webp", "img/trabalhos/secret-stories-08.webp", "img/trabalhos/secret-stories-09.webp", "img/trabalhos/secret-stories-10.webp", "img/trabalhos/secret-stories-11.webp", "img/trabalhos/secret-stories-12.webp", "img/trabalhos/secret-stories-13.webp", "img/trabalhos/secret-stories-14.webp", "img/trabalhos/secret-stories-15.webp", "img/trabalhos/secret-stories-16.webp"] },
-    { slug: "secret-essa-sexta", titulo: "Secret — Essa sexta", categoria: "Motion design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-essa-sexta.webp", loop: "media/trabalhos/secret-essa-sexta-loop.mp4", video: "media/trabalhos/secret-essa-sexta.mp4" },
+    { slug: "secret-stories", titulo: "Secret — Posts", categoria: "Design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-stories-01.webp", galeria: ["img/trabalhos/secret-stories-01.webp", "img/trabalhos/secret-stories-02.webp", "img/trabalhos/secret-stories-03.webp", "img/trabalhos/secret-stories-04.webp", "img/trabalhos/secret-stories-05.webp", "img/trabalhos/secret-stories-06.webp", "img/trabalhos/secret-stories-07.webp", "img/trabalhos/secret-stories-08.webp", "img/trabalhos/secret-stories-09.webp", "img/trabalhos/secret-stories-10.webp", "img/trabalhos/secret-stories-11.webp", "img/trabalhos/secret-stories-12.webp", "img/trabalhos/secret-stories-13.webp", "img/trabalhos/secret-stories-14.webp", "img/trabalhos/secret-stories-15.webp", "img/trabalhos/secret-stories-16.webp"] },
+    { slug: "secret-essa-sexta", titulo: "Secret — Antecipação", categoria: "Motion design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-essa-sexta.webp", loop: "media/trabalhos/secret-essa-sexta-loop.mp4", video: "media/trabalhos/secret-essa-sexta.mp4" },
     { slug: "secret-rio-beach-club", titulo: "Secret — Rio Beach Club", categoria: "Motion design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-rio-beach-club.webp", loop: "media/trabalhos/secret-rio-beach-club-loop.mp4", video: "media/trabalhos/secret-rio-beach-club.mp4" },
     { slug: "secret-vendas-abertas", titulo: "Secret — Vendas abertas", categoria: "Motion design", cliente: "Festa Secret", formato: "retrato", capa: "img/trabalhos/secret-vendas-abertas.webp", loop: "media/trabalhos/secret-vendas-abertas-loop.mp4", video: "media/trabalhos/secret-vendas-abertas.mp4" },
-    { slug: "viajaflux-summit", titulo: "Viajaflux Summit", categoria: "Fotografia", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/viajaflux-summit-01.webp", galeria: ["img/trabalhos/viajaflux-summit-01.webp", "img/trabalhos/viajaflux-summit-02.webp", "img/trabalhos/viajaflux-summit-03.webp", "img/trabalhos/viajaflux-summit-04.webp", "img/trabalhos/viajaflux-summit-05.webp", "img/trabalhos/viajaflux-summit-06.webp", "img/trabalhos/viajaflux-summit-07.webp", "img/trabalhos/viajaflux-summit-08.webp", "img/trabalhos/viajaflux-summit-09.webp", "img/trabalhos/viajaflux-summit-10.webp", "img/trabalhos/viajaflux-summit-11.webp", "img/trabalhos/viajaflux-summit-12.webp", "img/trabalhos/viajaflux-summit-13.webp", "img/trabalhos/viajaflux-summit-14.webp", "img/trabalhos/viajaflux-summit-15.webp", "img/trabalhos/viajaflux-summit-16.webp", "img/trabalhos/viajaflux-summit-17.webp"] },
+    { slug: "viajaflux-summit", titulo: "Premiação Viajaflux Summit", categoria: "Design das placas", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/viajaflux-summit-01.webp", galeria: ["img/trabalhos/viajaflux-summit-01.webp", "img/trabalhos/viajaflux-summit-02.webp", "img/trabalhos/viajaflux-summit-03.webp", "img/trabalhos/viajaflux-summit-04.webp", "img/trabalhos/viajaflux-summit-05.webp", "img/trabalhos/viajaflux-summit-06.webp", "img/trabalhos/viajaflux-summit-07.webp", "img/trabalhos/viajaflux-summit-08.webp", "img/trabalhos/viajaflux-summit-09.webp", "img/trabalhos/viajaflux-summit-10.webp", "img/trabalhos/viajaflux-summit-11.webp", "img/trabalhos/viajaflux-summit-12.webp", "img/trabalhos/viajaflux-summit-13.webp", "img/trabalhos/viajaflux-summit-14.webp", "img/trabalhos/viajaflux-summit-15.webp", "img/trabalhos/viajaflux-summit-16.webp", "img/trabalhos/viajaflux-summit-17.webp"], loop: "media/trabalhos/viajaflux-summit-loop.mp4", video: "media/trabalhos/viajaflux-summit.mp4", destaque: true },
     { slug: "placas-premiacao", titulo: "Placas de premiação", categoria: "Design", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/placas-premiacao-01.webp", galeria: ["img/trabalhos/placas-premiacao-01.webp", "img/trabalhos/placas-premiacao-02.webp", "img/trabalhos/placas-premiacao-03.webp", "img/trabalhos/placas-premiacao-04.webp", "img/trabalhos/placas-premiacao-05.webp", "img/trabalhos/placas-premiacao-06.webp", "img/trabalhos/placas-premiacao-07.webp", "img/trabalhos/placas-premiacao-08.webp", "img/trabalhos/placas-premiacao-09.webp", "img/trabalhos/placas-premiacao-10.webp", "img/trabalhos/placas-premiacao-11.webp", "img/trabalhos/placas-premiacao-12.webp", "img/trabalhos/placas-premiacao-13.webp"], esteira: true },
-    { slug: "crachas-summit", titulo: "Crachás Summit", categoria: "Design", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/crachas-summit-01.webp", galeria: ["img/trabalhos/crachas-summit-01.webp", "img/trabalhos/crachas-summit-02.webp", "img/trabalhos/crachas-summit-03.webp"], loop: "media/trabalhos/crachas-summit-loop.mp4", video: "media/trabalhos/crachas-summit.mp4" },
+    { slug: "crachas-summit", titulo: "Crachás do Summit", categoria: "Design", cliente: "Viajaflux", formato: "retrato", capa: "img/trabalhos/crachas-summit-pdf-01.webp", galeria: ["img/trabalhos/crachas-summit-pdf-01.webp", "img/trabalhos/crachas-summit-pdf-02.webp", "img/trabalhos/crachas-summit-pdf-03.webp", "img/trabalhos/crachas-summit-pdf-04.webp", "img/trabalhos/crachas-summit-01.webp", "img/trabalhos/crachas-summit-02.webp", "img/trabalhos/crachas-summit-03.webp"], loop: "media/trabalhos/crachas-summit-loop.mp4", video: "media/trabalhos/crachas-summit.mp4", destaque: true },
     { slug: "amanda-e-joao-vitor", titulo: "Amanda & João Vitor", categoria: "Edição de vídeo", cliente: "Casamento", formato: "retrato", capa: "img/trabalhos/amanda-e-joao-vitor.webp", loop: "media/trabalhos/amanda-e-joao-vitor-loop.mp4", video: "media/trabalhos/amanda-e-joao-vitor.mp4" },
     { slug: "amanda-e-joao-vitor-making-of", titulo: "Amanda & João Vitor — Making of", categoria: "Edição de vídeo", cliente: "Casamento", formato: "retrato", capa: "img/trabalhos/amanda-e-joao-vitor-making-of.webp", loop: "media/trabalhos/amanda-e-joao-vitor-making-of-loop.mp4", video: "media/trabalhos/amanda-e-joao-vitor-making-of.mp4" },
     { slug: "vitoria-e-marcus", titulo: "Vitória & Marcus", categoria: "Edição de vídeo", cliente: "Casamento", formato: "retrato", capa: "img/trabalhos/vitoria-e-marcus.webp", loop: "media/trabalhos/vitoria-e-marcus-loop.mp4", video: "media/trabalhos/vitoria-e-marcus.mp4" },
-    { slug: "fly-scale", titulo: "Fly Scale", categoria: "Fotografia", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-01.webp", galeria: ["img/trabalhos/fly-scale-01.webp", "img/trabalhos/fly-scale-02.webp", "img/trabalhos/fly-scale-03.webp", "img/trabalhos/fly-scale-04.webp", "img/trabalhos/fly-scale-05.webp", "img/trabalhos/fly-scale-06.webp", "img/trabalhos/fly-scale-07.webp", "img/trabalhos/fly-scale-08.webp", "img/trabalhos/fly-scale-09.webp", "img/trabalhos/fly-scale-10.webp", "img/trabalhos/fly-scale-11.webp", "img/trabalhos/fly-scale-12.webp", "img/trabalhos/fly-scale-13.webp", "img/trabalhos/fly-scale-14.webp", "img/trabalhos/fly-scale-15.webp", "img/trabalhos/fly-scale-16.webp", "img/trabalhos/fly-scale-17.webp", "img/trabalhos/fly-scale-18.webp", "img/trabalhos/fly-scale-19.webp", "img/trabalhos/fly-scale-20.webp", "img/trabalhos/fly-scale-21.webp", "img/trabalhos/fly-scale-22.webp", "img/trabalhos/fly-scale-23.webp", "img/trabalhos/fly-scale-24.webp", "img/trabalhos/fly-scale-25.webp", "img/trabalhos/fly-scale-26.webp"] },
-    { slug: "fly-scale-aftermovie", titulo: "Fly Scale — Aftermovie", categoria: "Edição de vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-aftermovie.webp", loop: "media/trabalhos/fly-scale-aftermovie-loop.mp4", video: "media/trabalhos/fly-scale-aftermovie.mp4" },
-    { slug: "fly-scale-primeiro-dia", titulo: "Fly Scale — Primeiro dia", categoria: "Edição de vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-primeiro-dia.webp", loop: "media/trabalhos/fly-scale-primeiro-dia-loop.mp4", video: "media/trabalhos/fly-scale-primeiro-dia.mp4" },
+    { slug: "fly-scale", titulo: "Fly Scale — Fotografia", categoria: "Fotografia", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-01.webp", galeria: ["img/trabalhos/fly-scale-01.webp", "img/trabalhos/fly-scale-02.webp", "img/trabalhos/fly-scale-03.webp", "img/trabalhos/fly-scale-04.webp", "img/trabalhos/fly-scale-05.webp", "img/trabalhos/fly-scale-06.webp", "img/trabalhos/fly-scale-07.webp", "img/trabalhos/fly-scale-08.webp", "img/trabalhos/fly-scale-09.webp", "img/trabalhos/fly-scale-10.webp", "img/trabalhos/fly-scale-11.webp", "img/trabalhos/fly-scale-12.webp", "img/trabalhos/fly-scale-13.webp", "img/trabalhos/fly-scale-14.webp", "img/trabalhos/fly-scale-15.webp", "img/trabalhos/fly-scale-16.webp", "img/trabalhos/fly-scale-17.webp", "img/trabalhos/fly-scale-18.webp", "img/trabalhos/fly-scale-19.webp", "img/trabalhos/fly-scale-20.webp", "img/trabalhos/fly-scale-21.webp", "img/trabalhos/fly-scale-22.webp", "img/trabalhos/fly-scale-23.webp", "img/trabalhos/fly-scale-24.webp", "img/trabalhos/fly-scale-25.webp", "img/trabalhos/fly-scale-26.webp"] },
+    { slug: "fly-scale-aftermovie", titulo: "Fly Scale — Teaser", categoria: "Edição de vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-aftermovie.webp", loop: "media/trabalhos/fly-scale-aftermovie-loop.mp4", video: "media/trabalhos/fly-scale-aftermovie.mp4" },
+    { slug: "fly-scale-primeiro-dia", titulo: "Fly Scale — Aftermovie", categoria: "Edição de vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-primeiro-dia.webp", loop: "media/trabalhos/fly-scale-primeiro-dia-loop.mp4", video: "media/trabalhos/fly-scale-primeiro-dia.mp4" },
     { slug: "fly-scale-depoimentos", titulo: "Fly Scale — Depoimentos", categoria: "Edição de vídeo", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/fly-scale-depoimentos.webp", loop: "media/trabalhos/fly-scale-depoimentos-loop.mp4", video: "media/trabalhos/fly-scale-depoimentos.mp4" },
-    { slug: "folder-grupo-fly", titulo: "Folder Grupo Fly", categoria: "Design editorial", cliente: "Grupo Fly", formato: "paisagem", capa: "img/trabalhos/folder-grupo-fly-01.webp", galeria: ["img/trabalhos/folder-grupo-fly-01.webp", "img/trabalhos/folder-grupo-fly-02.webp", "img/trabalhos/folder-grupo-fly-03.webp"] },
-    { slug: "folder-grupo-fly-animacao", titulo: "Folder Grupo Fly — Animação", categoria: "Motion design", cliente: "Grupo Fly", formato: "retrato", capa: "img/trabalhos/folder-grupo-fly-animacao.webp", loop: "media/trabalhos/folder-grupo-fly-animacao-loop.mp4", video: "media/trabalhos/folder-grupo-fly-animacao.mp4" },
+    { slug: "folder-grupo-fly", titulo: "Folder Grupo Fly", categoria: "Design editorial & motion", cliente: "Grupo Fly", formato: "paisagem", capa: "img/trabalhos/folder-grupo-fly-01.webp", galeria: ["img/trabalhos/folder-grupo-fly-01.webp", "img/trabalhos/folder-grupo-fly-02.webp", "img/trabalhos/folder-grupo-fly-03.webp"], loop: "media/trabalhos/folder-grupo-fly-animacao-loop.mp4", video: "media/trabalhos/folder-grupo-fly-animacao.mp4" },
     { slug: "motion-solides", titulo: "Tutorial animado Sólides", categoria: "Motion design", cliente: "Grupo Fly", formato: "paisagem", capa: "img/trabalhos/motion-solides.webp", loop: "media/trabalhos/motion-solides-loop.mp4", video: "media/trabalhos/motion-solides.mp4" },
     { slug: "depoimento-luis", titulo: "Depoimento — Luis", categoria: "Edição de vídeo", cliente: "@luiz.gregatti", formato: "retrato", capa: "img/trabalhos/depoimento-luis.webp", loop: "media/trabalhos/depoimento-luis-loop.mp4", video: "media/trabalhos/depoimento-luis.mp4" },
     { slug: "depoimento-klesia", titulo: "Depoimento — Klesia", categoria: "Edição de vídeo", cliente: "@luiz.gregatti", formato: "retrato", capa: "img/trabalhos/depoimento-klesia.webp", loop: "media/trabalhos/depoimento-klesia-loop.mp4", video: "media/trabalhos/depoimento-klesia.mp4" },
@@ -531,14 +575,17 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     $("[data-lb-title]").textContent = t.titulo;
     $("[data-lb-meta]").textContent = t.categoria + (t.cliente ? " · " + t.cliente : "");
     lbBody.innerHTML = "";
-    if (t.video) {
+    var temGal = t.galeria && t.galeria.length > 0;
+    if (t.video && !temGal) {
       var v = el("video"); v.controls = true; v.playsInline = true; v.autoplay = true; v.poster = t.capa; v.src = t.video; v.setAttribute("aria-label", t.titulo);
       lbBody.appendChild(v);
     } else {
-      var g = el("div", "lb__gal"), fotos = t.galeria && t.galeria.length ? t.galeria : [t.capa];
+      /* vídeo (quando existe) é o primeiro item da faixa, depois as fotos */
+      var g = el("div", "lb__gal"), fotos = temGal ? t.galeria : [t.capa];
+      if (t.video) { var vv = el("video"); vv.controls = true; vv.playsInline = true; vv.autoplay = !idx; vv.poster = t.capa; vv.src = t.video; vv.setAttribute("aria-label", t.titulo); g.appendChild(vv); }
       fotos.forEach(function (src, i) { var im = el("img"); im.src = src; im.alt = t.titulo + " — " + (i + 1); im.loading = "lazy"; g.appendChild(im); });
       lbBody.appendChild(g);
-      if (idx) requestAnimationFrame(function () { var alvo = g.children[idx]; if (alvo) alvo.scrollIntoView({ inline: "center", block: "nearest" }); });
+      if (idx) requestAnimationFrame(function () { var alvo = g.children[idx + (t.video ? 1 : 0)]; if (alvo) alvo.scrollIntoView({ inline: "center", block: "nearest" }); });
     }
     if (typeof lb.showModal === "function") lb.showModal(); else lb.setAttribute("open", "");
   }
@@ -564,7 +611,45 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     });
   });
 
-  var grade = TRABALHOS.filter(function (t) { return !t.esteira; }); total = grade.length;
+  /* bloco do Summit: vídeo da premiação + colagem (fotos e placas) + esteira + crachás */
+  function porSlug(slug) { return TRABALHOS.filter(function (t) { return t.slug === slug; })[0]; }
+  function loopEm(container, t) {
+    var im = el("img"); im.src = t.capa; im.alt = t.titulo; im.loading = "lazy"; container.appendChild(im);
+    if (t.loop && !calmo) { var v = el("video"); v.muted = true; v.loop = true; v.playsInline = true; v.preload = "metadata"; v.poster = t.capa; v.src = t.loop; v.setAttribute("aria-hidden", "true"); v.tabIndex = -1; v.addEventListener("error", function () { v.hidden = true; }); container.appendChild(v); }
+    var tag = el("span", "wcard__tag", ICO_PLAY + " Vídeo"); tag.setAttribute("aria-hidden", "true"); container.appendChild(tag);
+  }
+  (function () {
+    var summit = porSlug("viajaflux-summit"), placas = porSlug("placas-premiacao"), crachas = porSlug("crachas-summit"), box = $("[data-summit]");
+    if (!box || !summit) return;
+    box.hidden = false;
+    var bv = $("[data-summit-video]"); loopEm(bv, summit); bv.addEventListener("click", function () { abreLightbox(summit); });
+    /* colagem: fotos de gente recebendo intercaladas com as placas desenhadas */
+    var col = $("[data-summit-collage]"), ordem = [0, 13, "p12", 10, 7, 8, "p7", 14, 3], plac = placas && placas.galeria ? placas.galeria : [];
+    ordem.forEach(function (fi) {
+      if (typeof fi === "string") { var pi = +fi.slice(1); if (plac[pi]) col.appendChild(tilePlaca(plac[pi], pi)); return; }
+      var src = summit.galeria[fi]; if (!src) return;
+      var b = el("button", "summit__tile"); b.type = "button"; b.setAttribute("aria-label", summit.titulo + " — foto " + (fi + 1));
+      var im = el("img"); im.src = src; im.alt = ""; im.loading = "lazy"; b.appendChild(im);
+      b.addEventListener("click", function () { abreLightbox(summit, fi); }); col.appendChild(b);
+    });
+    function tilePlaca(src, i) {
+      var b = el("button", "summit__tile summit__tile--placa"); b.type = "button"; b.setAttribute("aria-label", placas.titulo + " " + (i + 1));
+      var im = el("img"); im.src = src; im.alt = ""; im.loading = "lazy"; b.appendChild(im);
+      b.addEventListener("click", function () { abreLightbox(placas, i); }); return b;
+    }
+    if (crachas) {
+      var row = $("[data-summit-crachas]");
+      var bc = el("button", "summit__tile summit__tile--video"); bc.type = "button"; bc.setAttribute("aria-label", crachas.titulo + " (abrir vídeo)"); loopEm(bc, crachas);
+      bc.addEventListener("click", function () { abreLightbox(crachas); }); row.appendChild(bc);
+      (crachas.galeria || []).slice(0, 4).forEach(function (src, i) {
+        var b = el("button", "summit__tile"); b.type = "button"; b.setAttribute("aria-label", crachas.titulo + " " + (i + 1));
+        var im = el("img"); im.src = src; im.alt = ""; im.loading = "lazy"; b.appendChild(im);
+        b.addEventListener("click", function () { abreLightbox(crachas, i); }); row.appendChild(b);
+      });
+    }
+  })();
+
+  var grade = TRABALHOS.filter(function (t) { return !t.esteira && !t.destaque; }); total = grade.length;
   grade.forEach(function (t, i) {
     var temVideo = !!t.video, fotos = t.galeria && t.galeria.length > 1 ? t.galeria.slice(0, 6) : null;
     var btn = el("button", "wcard"); btn.type = "button"; btn.setAttribute("data-formato", t.formato || "retrato");
@@ -602,7 +687,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
         else { if (v) v.pause(); paraSlides(m); }
       });
     }, { threshold: .3 });
-    $$(".wcard__media").forEach(function (m) { io.observe(m); });
+    $$(".wcard__media, .summit__video, .summit__tile--video").forEach(function (m) { io.observe(m); });
   }
 
   /* ---------- menu mobile ---------- */
@@ -671,6 +756,10 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     if (pols.length) gsap.from(pols, { y: 60, rotate: function (i) { return i ? 14 : -16; }, autoAlpha: 0, duration: 1.2, ease: EASE, stagger: .15, scrollTrigger: { trigger: "[data-polaroids]", start: "top 80%", once: true } });
     var placas = $("[data-placas]");
     if (placas && !placas.hidden) gsap.from(placas, { y: 40, autoAlpha: 0, duration: 1, ease: EASE, scrollTrigger: { trigger: placas, start: "top 88%", once: true } });
+    var sg = $(".summit__grid");
+    if (sg) gsap.from($$(".summit__video, .summit__tile", sg), { y: 40, autoAlpha: 0, duration: .9, ease: EASE, stagger: .07, scrollTrigger: { trigger: sg, start: "top 85%", once: true } });
+    var sc = $("[data-summit-crachas]");
+    if (sc && sc.children.length) gsap.from(sc.children, { y: 30, autoAlpha: 0, duration: .8, ease: EASE, stagger: .06, scrollTrigger: { trigger: sc, start: "top 90%", once: true } });
     $$(".wcard").forEach(function (c, i) {
       gsap.from(c, { y: 50, autoAlpha: 0, duration: .9, ease: EASE, delay: (i % 3) * .08, scrollTrigger: { trigger: c, start: "top 92%", once: true } });
     });
@@ -679,7 +768,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
       gsap.from(s, { y: 70, rotate: r * 3, autoAlpha: 0, duration: 1.1, ease: EASE, delay: i * .08, scrollTrigger: { trigger: ".svcs", start: "top 82%", once: true } });
     });
   }
-  function pronto() { try { arma(); } catch (e) { gsap.set("[data-reveal], .line__in, .wcard, [data-svc], [data-polaroid], [data-placas]", { clearProps: "all" }); } }
+  function pronto() { try { arma(); } catch (e) { gsap.set("[data-reveal], .line__in, .wcard, [data-svc], [data-polaroid], [data-placas], .summit__video, .summit__tile", { clearProps: "all" }); } }
   var armou = false; function umaVez() { if (!armou) { armou = true; pronto(); } }
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(umaVez); setTimeout(umaVez, 1800); } else umaVez();
 })();
