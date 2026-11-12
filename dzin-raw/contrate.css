@@ -1,0 +1,44 @@
+
+/* ---------- currículo (contrate.davimazzucatto.art) ---------- */
+.cv-hero{ padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + clamp(40px, 6vw, 90px)); padding-bottom: clamp(40px, 5vw, 72px); display: grid; gap: 22px; justify-items: center; text-align: center; }
+.cv-hero .h1{ font-size: clamp(44px, 9vw, 120px); }
+.cv-hero__meta{ display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 14px; font-family: var(--f-serif); font-size: clamp(18px, 1.6vw, 24px); color: var(--ink-2); }
+.cv-hero__meta span + span::before{ content: "·"; margin-right: 14px; }
+.cv-hero__btns{ display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.cv{ display: grid; grid-template-columns: minmax(260px, 1fr) 2.2fr; gap: clamp(28px, 5vw, 80px); max-width: 1180px; margin-inline: auto; align-items: start; }
+.cv__aside{ position: sticky; top: calc(var(--nav-h) + 20px); display: grid; gap: 22px; }
+.cv__foto{ background: var(--white); padding: 10px 10px 36px; box-shadow: 0 24px 60px rgba(0,0,0,.14); transform: rotate(-2.5deg); max-width: 340px; }
+.cv__foto img{ width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.cv__dados{ display: grid; gap: 14px; }
+.cv__dados dt{ font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 12px; letter-spacing: .04em; color: var(--ink-2); }
+.cv__dados dd{ margin: 2px 0 0; font-family: var(--f-serif); font-size: 20px; line-height: 1.2; }
+.cv__dados a{ text-decoration: none; }
+.cv__main{ display: grid; gap: clamp(36px, 5vw, 64px); }
+.cv__sec{ display: grid; gap: 16px; }
+.cv__sec > h2{ font-size: clamp(30px, 3.6vw, 52px); line-height: .9; }
+.cv__sec > h2 .t-serif{ margin-left: .18em; }
+.cv__texto{ display: grid; gap: 14px; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.55; color: var(--ink-2); max-width: 62ch; }
+.cv__texto p:first-child{ color: var(--ink); font-size: clamp(18px, 1.4vw, 22px); }
+.cv__ps{ font-family: var(--f-serif); font-size: 18px; color: var(--ink-2); border-left: 3px solid var(--blue); padding-left: 14px; }
+.tl{ list-style: none; margin: 0; padding: 0; display: grid; }
+.tl li{ display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 18px 0; border-top: 1px solid rgba(16,16,16,.14); }
+.tl li:last-child{ border-bottom: 1px solid rgba(16,16,16,.14); }
+.tl__quando{ font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 12.5px; letter-spacing: .03em; color: var(--ink-2); padding-top: 5px; }
+.tl__onde{ font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: clamp(18px, 1.5vw, 22px); letter-spacing: -.02em; line-height: 1.05; }
+.tl__o-que{ margin-top: 6px; color: var(--ink-2); line-height: 1.5; max-width: 60ch; }
+.chips{ display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li{ list-style: none; font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 12.5px; letter-spacing: .02em; padding: 10px 12px; background: var(--white); border: 1px solid rgba(16,16,16,.12); }
+.chips li.is-basico{ color: var(--ink-2); }
+.chips{ padding: 0; margin: 0; }
+.cv__reel{ padding-top: clamp(56px, 8vw, 110px); text-align: center; display: grid; justify-items: center; gap: 14px; }
+@media (max-width: 860px){
+  .cv{ grid-template-columns: 1fr; }
+  .cv__aside{ position: static; justify-items: center; text-align: center; }
+  .cv__foto{ max-width: 280px; }
+  .cv__dados{ justify-items: center; }
+  .tl li{ grid-template-columns: 1fr; gap: 4px; }
+}
+@media (max-width: 560px){
+  .cv-hero__meta{ flex-direction: column; align-items: center; gap: 2px; }
+  .cv-hero__meta span + span::before{ content: none; }
+}

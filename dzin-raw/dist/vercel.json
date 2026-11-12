@@ -1,0 +1,14 @@
+{
+ "rewrites": [
+  {
+   "source": "/",
+   "has": [
+    {
+     "type": "host",
+     "value": "contrate.davimazzucatto.art"
+    }
+   ],
+   "destination": "/contrate/index.html"
+  }
+ ]
+}

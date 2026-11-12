@@ -627,7 +627,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
   var VARIACOES = [{ art: "Seu", palavra: "negócio" }, { art: "Seu", palavra: "evento" }, { art: "Seu", palavra: "casamento" }, { art: "Sua", palavra: "marca" }, { art: "Seu", palavra: "business" }];
   var art = $(".rot__art"), word = $(".rot__word"), iv = 0;
   function aplica(v) { art.textContent = v.art; word.textContent = v.palavra; }
-  if (VARIACOES.length > 1) setInterval(function () {
+  if (art && word && VARIACOES.length > 1) setInterval(function () {
     iv = (iv + 1) % VARIACOES.length;
     if (calmo) { aplica(VARIACOES[iv]); return; }
     word.classList.add("is-leaving");
@@ -639,21 +639,21 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
   gsap.registerPlugin(ScrollTrigger);
   var EASE = "power4.out";
   function arma() {
-    var heroLines = $$(".hero .line__in"), heroReveal = $$(".hero [data-reveal]");
+    var heroLines = $$(".hero .line__in, .cv-hero .line__in"), heroReveal = $$(".hero [data-reveal], .cv-hero [data-reveal]");
     var tl = gsap.timeline({ defaults: { ease: EASE } });
-    tl.from(heroReveal[0], { y: 18, autoAlpha: 0, duration: .8 }, .1)
-      .from(heroLines, { yPercent: 112, duration: 1.15, stagger: .09 }, .2)
-      .from(heroReveal[1], { y: 14, autoAlpha: 0, duration: .7 }, .9)
-      .from(".marquee", { y: 24, autoAlpha: 0, duration: .9 }, 1);
+    if (heroReveal[0]) tl.from(heroReveal[0], { y: 18, autoAlpha: 0, duration: .8 }, .1);
+    if (heroLines.length) tl.from(heroLines, { yPercent: 112, duration: 1.15, stagger: .09 }, .2);
+    if (heroReveal.length > 1) tl.from(heroReveal.slice(1), { y: 14, autoAlpha: 0, duration: .7, stagger: .1 }, .9);
+    if ($(".marquee")) tl.from(".marquee", { y: 24, autoAlpha: 0, duration: .9 }, 1);
     $$(".hero .js-scribble").forEach(function (p, i) { var L = p.getTotalLength(); gsap.set(p, { strokeDasharray: L, strokeDashoffset: L }); tl.to(p, { strokeDashoffset: 0, duration: .55, ease: "power2.inOut" }, 1.05 + i * .25); });
 
-    $$("main section:not(.hero) .display").forEach(function (h) {
+    $$("main section:not(.hero):not(.cv-hero) .display").forEach(function (h) {
       gsap.from($$(".line__in", h), { yPercent: 112, duration: 1.1, ease: EASE, stagger: .1, scrollTrigger: { trigger: h, start: "top 85%", once: true } });
     });
-    $$("main section:not(.hero) [data-reveal]").forEach(function (e) {
+    $$("main section:not(.hero):not(.cv-hero) [data-reveal]").forEach(function (e) {
       gsap.from(e, { y: 22, autoAlpha: 0, duration: .9, ease: EASE, scrollTrigger: { trigger: e, start: "top 90%", once: true } });
     });
-    $$("main section:not(.hero) .js-scribble").forEach(function (p) {
+    $$("main section:not(.hero):not(.cv-hero) .js-scribble").forEach(function (p) {
       var L = p.getTotalLength(); gsap.set(p, { strokeDasharray: L, strokeDashoffset: L });
       gsap.to(p, { strokeDashoffset: 0, duration: .7, ease: "power2.inOut", scrollTrigger: { trigger: p, start: "top 92%", once: true } });
     });
