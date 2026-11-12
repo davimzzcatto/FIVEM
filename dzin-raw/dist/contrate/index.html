@@ -205,6 +205,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 .wcard{ display: block; width: 100%; text-align: center; border: 0; padding: 16px 16px 24px; background: var(--white); color: var(--ink); cursor: pointer; }
 .wcard__media{ position: relative; overflow: hidden; background: #101010; aspect-ratio: 4 / 5; }
 .wcard[data-formato="paisagem"] .wcard__media{ aspect-ratio: 16 / 10; }
+.wcard[data-formato="quadrado"] .wcard__media{ aspect-ratio: 1 / 1; }
 .wcard__media img, .wcard__media video{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .wcard__media .slide{ opacity: 0; transition: opacity 1s ease; }
 .wcard__media .slide.is-on{ opacity: 1; }
@@ -384,7 +385,6 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 
 <main>
   <section class="cv-hero wrap" id="curriculo" aria-labelledby="h1">
-    <p class="eyebrow" data-reveal>Currículo · Design, motion design, edição de vídeo &amp; fotografia</p>
     <h1 class="h1 display" id="h1">
       <span class="line"><span class="line__in t-sans">Davi</span></span>
       <span class="line"><span class="line__in t-serif">Mazzucatto</span></span>
@@ -392,7 +392,6 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     <p class="cv-hero__meta" data-reveal><span>20 anos</span><span>Birigui (SP)</span><span>Disponível para Birigui, Araçatuba ou trabalho remoto</span></p>
     <div class="cv-hero__btns" data-reveal>
       <a class="btn" href="https://wa.me/5518997695327?text=Oi%21%20Vi%20seu%20curr%C3%ADculo%20e%20quero%20conversar" target="_blank" rel="noopener noreferrer"><span class="btn__box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span><span class="btn__label">Chamar no WhatsApp</span></a>
-      <a class="btn btn--white" href="#trabalhos"><span class="btn__box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span><span class="btn__label">Ver o demoreel</span></a>
     </div>
   </section>
 
@@ -405,7 +404,6 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
           <div><dt>Onde</dt><dd>Birigui (SP)</dd></div>
           <div><dt>Disponibilidade</dt><dd>Birigui, Araçatuba ou remoto</dd></div>
           <div><dt>WhatsApp</dt><dd><a href="https://wa.me/5518997695327?text=Oi%21%20Vi%20seu%20curr%C3%ADculo%20e%20quero%20conversar" target="_blank" rel="noopener noreferrer">(18) 99769-5327</a></dd></div>
-          <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/dzin.raw/" target="_blank" rel="noopener noreferrer">@dzin.raw</a></dd></div>
           <div><dt>Portfólio</dt><dd><a href="https://davimazzucatto.art">davimazzucatto.art</a></dd></div>
         </dl>
       </aside>
@@ -543,7 +541,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
      aparece). capa é obrigatória. galeria (fotos que passam sozinhas no card e
      abrem no lightbox), slides (imagens que alternam na capa, quando não devem ser
      as primeiras da galeria), loop (8 s mudo no card) e video (completo, abre no
-     lightbox) são opcionais. formato "retrato" ou "paisagem" decide a proporção. */
+     lightbox) são opcionais. formato "retrato", "paisagem" ou "quadrado" decide a proporção. */
   var TRABALHOS = [
     { grupo: "Viajaflux", slug: "premiacao", titulo: "Placas de premiação", categoria: "Viajaflux Summit", formato: "retrato", capa: "/img/trabalhos/premiacao-capa.webp", slides: ["/img/trabalhos/premiacao-capa.webp", "/img/trabalhos/placas-premiacao-04.webp", "/img/trabalhos/placas-premiacao-05.webp", "/img/trabalhos/placas-premiacao-11.webp"], galeria: ["/img/trabalhos/premiacao-capa.webp", "/img/trabalhos/placas-premiacao-04.webp", "/img/trabalhos/placas-premiacao-05.webp", "/img/trabalhos/placas-premiacao-11.webp", "/img/trabalhos/placas-premiacao-01.webp", "/img/trabalhos/placas-premiacao-02.webp", "/img/trabalhos/placas-premiacao-03.webp", "/img/trabalhos/placas-premiacao-06.webp", "/img/trabalhos/placas-premiacao-07.webp", "/img/trabalhos/placas-premiacao-08.webp", "/img/trabalhos/placas-premiacao-09.webp", "/img/trabalhos/placas-premiacao-10.webp", "/img/trabalhos/placas-premiacao-12.webp", "/img/trabalhos/placas-premiacao-13.webp", "/img/trabalhos/viajaflux-summit-01.webp", "/img/trabalhos/viajaflux-summit-02.webp", "/img/trabalhos/viajaflux-summit-03.webp", "/img/trabalhos/viajaflux-summit-04.webp", "/img/trabalhos/viajaflux-summit-05.webp", "/img/trabalhos/viajaflux-summit-06.webp", "/img/trabalhos/viajaflux-summit-07.webp", "/img/trabalhos/viajaflux-summit-08.webp", "/img/trabalhos/viajaflux-summit-09.webp", "/img/trabalhos/viajaflux-summit-10.webp", "/img/trabalhos/viajaflux-summit-11.webp", "/img/trabalhos/viajaflux-summit-12.webp", "/img/trabalhos/viajaflux-summit-13.webp", "/img/trabalhos/viajaflux-summit-14.webp", "/img/trabalhos/viajaflux-summit-15.webp", "/img/trabalhos/viajaflux-summit-16.webp", "/img/trabalhos/viajaflux-summit-17.webp"], video: "/media/trabalhos/viajaflux-summit.mp4" },
     { grupo: "Viajaflux", slug: "crachas", titulo: "Crachás do Summit", categoria: "Design", formato: "retrato", capa: "/img/trabalhos/crachas-summit-capa.webp", galeria: ["/img/trabalhos/crachas-summit-capa.webp", "/img/trabalhos/crachas-summit-pdf-03.webp", "/img/trabalhos/crachas-summit-pdf-01.webp", "/img/trabalhos/crachas-summit-pdf-02.webp", "/img/trabalhos/crachas-summit-pdf-04.webp", "/img/trabalhos/crachas-summit-01.webp", "/img/trabalhos/crachas-summit-02.webp", "/img/trabalhos/crachas-summit-03.webp"], video: "/media/trabalhos/crachas-summit.mp4" },
@@ -566,11 +564,13 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     { grupo: "Luiz Gregatti", slug: "depoimento-luis", titulo: "Depoimento — Luis", categoria: "Edição de vídeo", formato: "retrato", capa: "/img/trabalhos/depoimento-luis.webp", loop: "/media/trabalhos/depoimento-luis-loop.mp4", video: "/media/trabalhos/depoimento-luis.mp4" },
     { grupo: "Luiz Gregatti", slug: "depoimento-klesia", titulo: "Depoimento — Klesia", categoria: "Edição de vídeo", formato: "retrato", capa: "/img/trabalhos/depoimento-klesia.webp", loop: "/media/trabalhos/depoimento-klesia-loop.mp4", video: "/media/trabalhos/depoimento-klesia.mp4" },
     { grupo: "Luiz Gregatti", slug: "obrigado-200k", titulo: "Obrigado pelos 200k", categoria: "Motion design", formato: "retrato", capa: "/img/trabalhos/obrigado-200k.webp", loop: "/media/trabalhos/obrigado-200k-loop.mp4", video: "/media/trabalhos/obrigado-200k.mp4" },
+    { grupo: "Luiz Gregatti", slug: "dia-liberdade-impostos", titulo: "Dia da Liberdade de Impostos", categoria: "Carrossel", formato: "retrato", capa: "/img/trabalhos/luiz-impostos-01.webp", galeria: ["/img/trabalhos/luiz-impostos-01.webp", "/img/trabalhos/luiz-impostos-02.webp", "/img/trabalhos/luiz-impostos-03.webp", "/img/trabalhos/luiz-impostos-04.webp"] },
     { grupo: "Igreja Amor e Cuidado", slug: "virada-2026", titulo: "Virada 2026", categoria: "Motion design", formato: "paisagem", capa: "/img/trabalhos/virada-2026.webp", loop: "/media/trabalhos/virada-2026-loop.mp4", video: "/media/trabalhos/virada-2026.mp4" },
     { grupo: "Igreja Amor e Cuidado", slug: "intro-culto", titulo: "Intro de culto", categoria: "Motion design", formato: "paisagem", capa: "/img/trabalhos/intro-culto.webp", loop: "/media/trabalhos/intro-culto-loop.mp4", video: "/media/trabalhos/intro-culto.mp4" },
     { grupo: "Freedom Mastermind", slug: "freedom-mastermind", titulo: "Fotografia do evento", categoria: "Fotografia", formato: "retrato", capa: "/img/trabalhos/freedom-mastermind-01.webp", galeria: ["/img/trabalhos/freedom-mastermind-01.webp", "/img/trabalhos/freedom-mastermind-02.webp", "/img/trabalhos/freedom-mastermind-03.webp", "/img/trabalhos/freedom-mastermind-04.webp", "/img/trabalhos/freedom-mastermind-05.webp", "/img/trabalhos/freedom-mastermind-06.webp", "/img/trabalhos/freedom-mastermind-07.webp", "/img/trabalhos/freedom-mastermind-08.webp", "/img/trabalhos/freedom-mastermind-09.webp", "/img/trabalhos/freedom-mastermind-10.webp", "/img/trabalhos/freedom-mastermind-11.webp", "/img/trabalhos/freedom-mastermind-12.webp", "/img/trabalhos/freedom-mastermind-13.webp", "/img/trabalhos/freedom-mastermind-14.webp", "/img/trabalhos/freedom-mastermind-15.webp"] },
     { grupo: "Nany Kids", slug: "nany-kids", titulo: "Logo, fotos e posts", categoria: "Design & fotografia", formato: "retrato", capa: "/img/trabalhos/nany-kids-01.webp", galeria: ["/img/trabalhos/nany-kids-01.webp", "/img/trabalhos/nany-kids-02.webp", "/img/trabalhos/nany-kids-03.webp", "/img/trabalhos/nany-kids-04.webp", "/img/trabalhos/nany-kids-05.webp", "/img/trabalhos/nany-kids-06.webp", "/img/trabalhos/nany-kids-07.webp", "/img/trabalhos/nany-kids-08.webp", "/img/trabalhos/nany-kids-09.webp"] },
     { grupo: "Di Bari Alimentos", slug: "di-bari", titulo: "Rótulos", categoria: "Design", formato: "retrato", capa: "/img/trabalhos/di-bari-01.webp", galeria: ["/img/trabalhos/di-bari-01.webp", "/img/trabalhos/di-bari-02.webp", "/img/trabalhos/di-bari-03.webp", "/img/trabalhos/di-bari-04.webp", "/img/trabalhos/di-bari-05.webp"] },
+    { grupo: "Casa de Carnes Mula Mansa", slug: "mula-mansa", titulo: "Pacote de posts", categoria: "Social media", formato: "quadrado", capa: "/img/trabalhos/mula-mansa-01.webp", galeria: ["/img/trabalhos/mula-mansa-01.webp", "/img/trabalhos/mula-mansa-02.webp", "/img/trabalhos/mula-mansa-03.webp", "/img/trabalhos/mula-mansa-04.webp", "/img/trabalhos/mula-mansa-05.webp"] },
     { grupo: "Estudos", slug: "estudo-cafe", titulo: "Café", categoria: "Vídeo", formato: "paisagem", capa: "/img/trabalhos/estudo-cafe.webp", loop: "/media/trabalhos/estudo-cafe-loop.mp4", video: "/media/trabalhos/estudo-cafe.mp4" }
   ];
 
