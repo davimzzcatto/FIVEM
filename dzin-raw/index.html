@@ -243,6 +243,12 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 .lb__gal{ width: 100%; height: 100%; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; align-items: center; scrollbar-width: thin; }
 .lb__gal img, .lb__gal video{ height: 100%; max-height: 100%; width: auto; max-width: 90vw; object-fit: contain; scroll-snap-align: center; flex: none; }
 .lb__gal video{ background: #000; min-width: min(60vw, 90vh * .5625); }
+.lb__gal img, .lb__gal video{ max-width: 84vw; }
+.lb__count{ font-family: var(--f-display); font-weight: 800; font-size: 13px; letter-spacing: .02em; text-transform: uppercase; opacity: .9; margin-left: 8px; }
+.lb__arrow{ position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border: 0; border-radius: 50%; background: var(--white); color: var(--ink); display: grid; place-items: center; cursor: pointer; z-index: 2; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+.lb__arrow--prev{ left: max(10px, env(safe-area-inset-left, 0px)); }
+.lb__arrow--next{ right: max(10px, env(safe-area-inset-right, 0px)); }
+.lb__arrow[hidden]{ display: none; }
 
 /* ---------- responsivo ---------- */
 @media (max-width: 1100px){
@@ -447,8 +453,10 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 
 <dialog class="lb" data-lb aria-label="Trabalho em destaque">
   <div class="lb__inner">
-    <div class="lb__bar"><div><div class="t-sans" data-lb-title></div><div class="t-meta" data-lb-meta></div></div><button class="lb__close" type="button" data-lb-close aria-label="Fechar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <div class="lb__bar"><div><div class="t-sans" data-lb-title></div><div class="t-meta" data-lb-meta><span data-lb-meta-text></span> <span class="lb__count" data-lb-count></span></div></div><button class="lb__close" type="button" data-lb-close aria-label="Fechar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
     <div class="lb__body" data-lb-body></div>
+    <button class="lb__arrow lb__arrow--prev" type="button" data-lb-prev aria-label="Anterior" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+    <button class="lb__arrow lb__arrow--next" type="button" data-lb-next aria-label="Próximo" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
   </div>
 </dialog>
 
@@ -463,8 +471,8 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
      as primeiras da galeria), loop (8 s mudo no card) e video (completo, abre no
      lightbox) são opcionais. formato "retrato" ou "paisagem" decide a proporção. */
   var TRABALHOS = [
-    { grupo: "Viajaflux", slug: "premiacao", titulo: "Premiação do Summit", categoria: "Design das placas", formato: "retrato", capa: "img/trabalhos/premiacao-capa.webp", galeria: ["img/trabalhos/premiacao-capa.webp", "img/trabalhos/viajaflux-summit-01.webp", "img/trabalhos/placas-premiacao-01.webp", "img/trabalhos/viajaflux-summit-02.webp", "img/trabalhos/placas-premiacao-02.webp", "img/trabalhos/viajaflux-summit-03.webp", "img/trabalhos/placas-premiacao-03.webp", "img/trabalhos/viajaflux-summit-04.webp", "img/trabalhos/placas-premiacao-04.webp", "img/trabalhos/viajaflux-summit-05.webp", "img/trabalhos/placas-premiacao-05.webp", "img/trabalhos/viajaflux-summit-06.webp", "img/trabalhos/placas-premiacao-06.webp", "img/trabalhos/viajaflux-summit-07.webp", "img/trabalhos/placas-premiacao-07.webp", "img/trabalhos/viajaflux-summit-08.webp", "img/trabalhos/placas-premiacao-08.webp", "img/trabalhos/viajaflux-summit-09.webp", "img/trabalhos/placas-premiacao-09.webp", "img/trabalhos/viajaflux-summit-10.webp", "img/trabalhos/placas-premiacao-10.webp", "img/trabalhos/viajaflux-summit-11.webp", "img/trabalhos/placas-premiacao-11.webp", "img/trabalhos/viajaflux-summit-12.webp", "img/trabalhos/placas-premiacao-12.webp", "img/trabalhos/viajaflux-summit-13.webp", "img/trabalhos/placas-premiacao-13.webp", "img/trabalhos/viajaflux-summit-14.webp", "img/trabalhos/viajaflux-summit-15.webp", "img/trabalhos/viajaflux-summit-16.webp", "img/trabalhos/viajaflux-summit-17.webp"], video: "media/trabalhos/viajaflux-summit.mp4" },
-    { grupo: "Viajaflux", slug: "crachas", titulo: "Crachás do Summit", categoria: "Design", formato: "retrato", capa: "img/trabalhos/crachas-summit-capa.webp", galeria: ["img/trabalhos/crachas-summit-01.webp", "img/trabalhos/crachas-summit-02.webp", "img/trabalhos/crachas-summit-03.webp"], video: "media/trabalhos/crachas-summit.mp4" },
+    { grupo: "Viajaflux", slug: "premiacao", titulo: "Placas de premiação", categoria: "Viajaflux Summit", formato: "retrato", capa: "img/trabalhos/premiacao-capa.webp", slides: ["img/trabalhos/premiacao-capa.webp", "img/trabalhos/placas-premiacao-04.webp", "img/trabalhos/placas-premiacao-05.webp", "img/trabalhos/placas-premiacao-11.webp"], galeria: ["img/trabalhos/premiacao-capa.webp", "img/trabalhos/placas-premiacao-04.webp", "img/trabalhos/placas-premiacao-05.webp", "img/trabalhos/placas-premiacao-11.webp", "img/trabalhos/placas-premiacao-01.webp", "img/trabalhos/placas-premiacao-02.webp", "img/trabalhos/placas-premiacao-03.webp", "img/trabalhos/placas-premiacao-06.webp", "img/trabalhos/placas-premiacao-07.webp", "img/trabalhos/placas-premiacao-08.webp", "img/trabalhos/placas-premiacao-09.webp", "img/trabalhos/placas-premiacao-10.webp", "img/trabalhos/placas-premiacao-12.webp", "img/trabalhos/placas-premiacao-13.webp", "img/trabalhos/viajaflux-summit-01.webp", "img/trabalhos/viajaflux-summit-02.webp", "img/trabalhos/viajaflux-summit-03.webp", "img/trabalhos/viajaflux-summit-04.webp", "img/trabalhos/viajaflux-summit-05.webp", "img/trabalhos/viajaflux-summit-06.webp", "img/trabalhos/viajaflux-summit-07.webp", "img/trabalhos/viajaflux-summit-08.webp", "img/trabalhos/viajaflux-summit-09.webp", "img/trabalhos/viajaflux-summit-10.webp", "img/trabalhos/viajaflux-summit-11.webp", "img/trabalhos/viajaflux-summit-12.webp", "img/trabalhos/viajaflux-summit-13.webp", "img/trabalhos/viajaflux-summit-14.webp", "img/trabalhos/viajaflux-summit-15.webp", "img/trabalhos/viajaflux-summit-16.webp", "img/trabalhos/viajaflux-summit-17.webp"], video: "media/trabalhos/viajaflux-summit.mp4" },
+    { grupo: "Viajaflux", slug: "crachas", titulo: "Crachás do Summit", categoria: "Design", formato: "retrato", capa: "img/trabalhos/crachas-summit-capa.webp", galeria: ["img/trabalhos/crachas-summit-capa.webp", "img/trabalhos/crachas-summit-pdf-03.webp", "img/trabalhos/crachas-summit-pdf-01.webp", "img/trabalhos/crachas-summit-pdf-02.webp", "img/trabalhos/crachas-summit-pdf-04.webp", "img/trabalhos/crachas-summit-01.webp", "img/trabalhos/crachas-summit-02.webp", "img/trabalhos/crachas-summit-03.webp"], video: "media/trabalhos/crachas-summit.mp4" },
     { grupo: "Fly Scale", slug: "fly-scale-fotografia", titulo: "Fotos do evento", categoria: "Fotografia", formato: "retrato", capa: "img/trabalhos/fly-scale-01.webp", galeria: ["img/trabalhos/fly-scale-01.webp", "img/trabalhos/fly-scale-02.webp", "img/trabalhos/fly-scale-03.webp", "img/trabalhos/fly-scale-04.webp", "img/trabalhos/fly-scale-05.webp", "img/trabalhos/fly-scale-06.webp", "img/trabalhos/fly-scale-07.webp", "img/trabalhos/fly-scale-08.webp", "img/trabalhos/fly-scale-09.webp", "img/trabalhos/fly-scale-10.webp", "img/trabalhos/fly-scale-11.webp", "img/trabalhos/fly-scale-12.webp", "img/trabalhos/fly-scale-13.webp", "img/trabalhos/fly-scale-14.webp", "img/trabalhos/fly-scale-15.webp", "img/trabalhos/fly-scale-16.webp", "img/trabalhos/fly-scale-17.webp", "img/trabalhos/fly-scale-18.webp", "img/trabalhos/fly-scale-19.webp", "img/trabalhos/fly-scale-20.webp", "img/trabalhos/fly-scale-21.webp", "img/trabalhos/fly-scale-22.webp", "img/trabalhos/fly-scale-23.webp", "img/trabalhos/fly-scale-24.webp", "img/trabalhos/fly-scale-25.webp", "img/trabalhos/fly-scale-26.webp"] },
     { grupo: "Fly Scale", slug: "fly-scale-aftermovie", titulo: "Aftermovie", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/fly-scale-primeiro-dia.webp", loop: "media/trabalhos/fly-scale-primeiro-dia-loop.mp4", video: "media/trabalhos/fly-scale-primeiro-dia.mp4" },
     { grupo: "Fly Scale", slug: "fly-scale-teaser", titulo: "Teaser", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/fly-scale-aftermovie.webp", loop: "media/trabalhos/fly-scale-aftermovie-loop.mp4", video: "media/trabalhos/fly-scale-aftermovie.mp4" },
@@ -500,7 +508,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
   var lb = $("[data-lb]"), lbBody = $("[data-lb-body]");
   function abreLightbox(t, idx) {
     $("[data-lb-title]").textContent = (t.grupo ? t.grupo + " — " : "") + t.titulo;
-    $("[data-lb-meta]").textContent = t.categoria;
+    $("[data-lb-meta-text]").textContent = t.categoria;
     lbBody.innerHTML = "";
     var temGal = t.galeria && t.galeria.length > 0;
     if (t.video && !temGal) {
@@ -515,8 +523,18 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
       if (idx) requestAnimationFrame(function () { var alvo = g.children[idx + (t.video ? 1 : 0)]; if (alvo) alvo.scrollIntoView({ inline: "center", block: "nearest" }); });
     }
     if (typeof lb.showModal === "function") lb.showModal(); else lb.setAttribute("open", "");
+    armaFaixa();
   }
-  function fechaLightbox() { var v = $("video", lb); if (v) v.pause(); lbBody.innerHTML = ""; if (lb.open) lb.close(); }
+  /* setas e contador da faixa (vídeo + fotos) */
+  var lbPrev = $("[data-lb-prev]"), lbNext = $("[data-lb-next]"), lbCount = $("[data-lb-count]"), faixaAtual = null;
+  function itemAtual() { var g = faixaAtual; if (!g) return 0; var c = g.scrollLeft + g.clientWidth / 2, best = 0, bd = 1e9; Array.prototype.forEach.call(g.children, function (ch, i) { var d = Math.abs(ch.offsetLeft + ch.offsetWidth / 2 - c); if (d < bd) { bd = d; best = i; } }); return best; }
+  function atualizaContador() { if (!faixaAtual) { lbCount.textContent = ""; return; } var n = faixaAtual.children.length, i = itemAtual(); lbCount.textContent = (i + 1) + " / " + n; lbPrev.hidden = lbNext.hidden = n < 2; }
+  function vaiPara(i) { if (!faixaAtual) return; var ch = faixaAtual.children[Math.max(0, Math.min(faixaAtual.children.length - 1, i))]; if (ch) ch.scrollIntoView({ inline: "center", block: "nearest", behavior: calmo ? "auto" : "smooth" }); var v = $("video", faixaAtual); if (v && ch !== v) v.pause(); }
+  function armaFaixa() { faixaAtual = $(".lb__gal", lbBody); atualizaContador(); if (faixaAtual) faixaAtual.addEventListener("scroll", function () { requestAnimationFrame(atualizaContador); }, { passive: true }); }
+  lbPrev.addEventListener("click", function () { vaiPara(itemAtual() - 1); });
+  lbNext.addEventListener("click", function () { vaiPara(itemAtual() + 1); });
+  lb.addEventListener("keydown", function (e) { if (e.key === "ArrowRight") { vaiPara(itemAtual() + 1); e.preventDefault(); } if (e.key === "ArrowLeft") { vaiPara(itemAtual() - 1); e.preventDefault(); } });
+  function fechaLightbox() { var v = $("video", lb); if (v) v.pause(); lbBody.innerHTML = ""; faixaAtual = null; if (lb.open) lb.close(); }
   $("[data-lb-close]").addEventListener("click", fechaLightbox);
   lb.addEventListener("click", function (e) { if (e.target === e.currentTarget) fechaLightbox(); });
   lb.addEventListener("close", function () { lbBody.innerHTML = ""; });
