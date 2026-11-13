@@ -367,6 +367,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
           <img src="img/clientes/di-bari.png" alt="Di Bari Alimentos" style="--lh:40px">
           <img src="img/clientes/happier-films.png" alt="Happier Films" style="--lh:45px">
           <img src="img/clientes/voefly.png" alt="Voefly" style="--lh:33px">
+          <img src="img/clientes/ecolume.png" alt="Ecolume" style="--lh:30px">
         </div>
         <div class="marquee__row" aria-hidden="true">
           <img src="img/clientes/grupo-fly.png" alt="" style="--lh:30px">
@@ -377,6 +378,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
           <img src="img/clientes/di-bari.png" alt="" style="--lh:40px">
           <img src="img/clientes/happier-films.png" alt="" style="--lh:45px">
           <img src="img/clientes/voefly.png" alt="" style="--lh:33px">
+          <img src="img/clientes/ecolume.png" alt="" style="--lh:30px">
         </div>
       </div>
     </div>
@@ -512,6 +514,8 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
     { grupo: "Casamentos", slug: "vitoria-e-marcus", titulo: "Vitória & Marcus", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/vitoria-e-marcus.webp", loop: "media/trabalhos/vitoria-e-marcus-loop.mp4", video: "media/trabalhos/vitoria-e-marcus.mp4" },
     { grupo: "Grupo Fly", slug: "folder-grupo-fly", titulo: "Folder A3", categoria: "Design editorial & motion", formato: "paisagem", capa: "img/trabalhos/folder-grupo-fly-01.webp", galeria: ["img/trabalhos/folder-grupo-fly-01.webp", "img/trabalhos/folder-grupo-fly-02.webp", "img/trabalhos/folder-grupo-fly-03.webp"], loop: "media/trabalhos/folder-grupo-fly-animacao-loop.mp4", video: "media/trabalhos/folder-grupo-fly-animacao.mp4" },
     { grupo: "Grupo Fly", slug: "motion-solides", titulo: "Tutorial animado Sólides", categoria: "Motion design", formato: "paisagem", capa: "img/trabalhos/motion-solides.webp", loop: "media/trabalhos/motion-solides-loop.mp4", video: "media/trabalhos/motion-solides.mp4" },
+    { grupo: "Grupo Fly", slug: "outubro-rosa", titulo: "Outubro Rosa", categoria: "Design · Endomarketing", formato: "retrato", capa: "img/trabalhos/grupo-fly-outubro-rosa.webp", galeria: ["img/trabalhos/grupo-fly-outubro-rosa.webp"] },
+    { grupo: "Grupo Fly", slug: "setembro-amarelo", titulo: "Setembro Amarelo", categoria: "Design · Endomarketing", formato: "retrato", capa: "img/trabalhos/grupo-fly-setembro-amarelo.webp", galeria: ["img/trabalhos/grupo-fly-setembro-amarelo.webp"] },
     { grupo: "Voefly", slug: "voefly-amazonia", titulo: "Experience Amazônia", categoria: "Carrossel", formato: "retrato", capa: "img/trabalhos/voefly-amazonia-01.webp", galeria: ["img/trabalhos/voefly-amazonia-01.webp", "img/trabalhos/voefly-amazonia-02.webp", "img/trabalhos/voefly-amazonia-03.webp", "img/trabalhos/voefly-amazonia-04.webp", "img/trabalhos/voefly-amazonia-05.webp", "img/trabalhos/voefly-amazonia-06.webp"] },
     { grupo: "Voefly", slug: "voefly-nannai", titulo: "Nannai Resort & Spa", categoria: "Carrossel", formato: "retrato", capa: "img/trabalhos/voefly-nannai-01.webp", galeria: ["img/trabalhos/voefly-nannai-01.webp", "img/trabalhos/voefly-nannai-02.webp", "img/trabalhos/voefly-nannai-03.webp", "img/trabalhos/voefly-nannai-04.webp", "img/trabalhos/voefly-nannai-05.webp", "img/trabalhos/voefly-nannai-06.webp", "img/trabalhos/voefly-nannai-07.webp", "img/trabalhos/voefly-nannai-08.webp", "img/trabalhos/voefly-nannai-09.webp", "img/trabalhos/voefly-nannai-10.webp", "img/trabalhos/voefly-nannai-11.webp"] },
     { grupo: "Luiz Gregatti", slug: "depoimento-luis", titulo: "Depoimento — Luis", categoria: "Edição de vídeo", formato: "retrato", capa: "img/trabalhos/depoimento-luis.webp", loop: "media/trabalhos/depoimento-luis-loop.mp4", video: "media/trabalhos/depoimento-luis.mp4" },
@@ -598,7 +602,8 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
       var vid = el("video"); vid.muted = true; vid.loop = true; vid.playsInline = true; vid.preload = "metadata"; vid.poster = t.capa; vid.src = t.loop; vid.setAttribute("aria-hidden", "true"); vid.tabIndex = -1;
       vid.addEventListener("error", function () { vid.hidden = true; }); media.appendChild(vid);
     }
-    var tag = el("span", "wcard__tag", temVideo ? ICO_PLAY + " Vídeo" : ICO_FOTO + " " + (t.galeria ? t.galeria.length : 1) + (t.galeria && t.galeria.length > 1 ? " fotos" : " foto")); tag.setAttribute("aria-hidden", "true"); media.appendChild(tag);
+    // peça única (sem vídeo e com no máximo uma imagem) não leva etiqueta: "1 foto" não diz nada
+    if (temVideo || (t.galeria && t.galeria.length > 1)) { var tag = el("span", "wcard__tag", temVideo ? ICO_PLAY + " Vídeo" : ICO_FOTO + " " + t.galeria.length + " fotos"); tag.setAttribute("aria-hidden", "true"); media.appendChild(tag); }
     var title = el("div", "wcard__title", '<h3 class="t-sans"></h3><p class="t-sub"></p>');
     $("h3", title).textContent = t.titulo; $(".t-sub", title).textContent = t.categoria;
     btn.appendChild(media); btn.appendChild(title);
