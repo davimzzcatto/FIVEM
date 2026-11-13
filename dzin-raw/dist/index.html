@@ -157,7 +157,8 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 }
 .badge.is-on{ opacity: 1; transform: none; pointer-events: auto; }
 .badge > svg{ position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 14s linear infinite; }
-.badge > svg text{ font-family: var(--f-display); font-weight: 800; font-size: 13.5px; letter-spacing: .12em; text-transform: uppercase; fill: var(--ink); }
+/* duas voltas de "Role para ver •" fecham o círculo (r 36 = 226 de perímetro): sem sobra que grude o fim no começo */
+.badge > svg text{ font-family: var(--f-display); font-weight: 800; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; fill: var(--ink); }
 .badge__core{ width: 42px; height: 42px; border-radius: 50%; background: var(--blue); color: var(--white); display: grid; place-items: center; }
 @keyframes spin{ to{ transform: rotate(360deg); } }
 
@@ -334,7 +335,7 @@ html.over-dark .badge > svg text{ fill: var(--bg); }
 <button class="badge" type="button" aria-label="Rolar para a próxima seção">
   <svg viewBox="0 0 100 100" aria-hidden="true">
     <defs><path id="badge-circle" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs>
-    <text><textPath href="#badge-circle">Rola pra ver • Rola pra ver • Rola pra ver •</textPath></text>
+    <text><textPath href="#badge-circle" textLength="225.5" lengthAdjust="spacing">Role para ver&#160;•&#160;Role para ver&#160;•&#160;</textPath></text>
   </svg>
   <span class="badge__core"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>
 </button>
