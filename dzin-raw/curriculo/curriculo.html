@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Currículo — Davi Mazzucatto</title>
+<style>
+  /* Inter estática (Fontsource): a versão variável do Google Fonts vira fonte Type 3 no PDF. */
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 400; src: url("https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/files/inter-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 500; src: url("https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/files/inter-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 600; src: url("https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/files/inter-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 700; src: url("https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/files/inter-latin-700-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-style: normal; font-weight: 800; src: url("https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/files/inter-latin-800-normal.woff2") format("woff2"); }
+  /* Currículo em A4, uma página. Fonte do PDF baixado em contrate.davimazzucatto.art.
+     Para gerar de novo: node curriculo/gerar-pdf.js (depois python3 build.py). */
+  @page { size: A4; margin: 0; }
+  :root { --ink: #111; --ink-2: #444; --ink-3: #6b6b6b; --rule: #d9d9d9; --blue: #0033FF; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 210mm; min-height: 297mm; padding: 15mm 17mm 13mm;
+    font-family: "Inter", Arial, sans-serif; font-size: 9.6pt; line-height: 1.45; color: var(--ink);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  header { padding-bottom: 5mm; border-bottom: 2px solid var(--ink); }
+  h1 { margin: 0; font-size: 25pt; line-height: 1; font-weight: 800; letter-spacing: -.02em; }
+  .cargo { margin: 2.2mm 0 0; font-size: 11pt; font-weight: 500; color: var(--blue); }
+  .contato { margin: 3.4mm 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 1mm 0; font-size: 9pt; color: var(--ink-2); }
+  .contato li + li::before { content: "·"; margin: 0 2.4mm; color: var(--ink-3); }
+  .contato strong { font-weight: 600; color: var(--ink); }
+
+  section { margin-top: 5.2mm; }
+  h2 {
+    margin: 0 0 2.4mm; padding-bottom: 1.2mm; border-bottom: 1px solid var(--rule);
+    font-size: 8.6pt; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--ink);
+  }
+  p { margin: 0; }
+  .resumo { color: var(--ink-2); }
+
+  .item + .item { margin-top: 3.6mm; }
+  .item__topo { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+  .item__empresa { font-weight: 700; font-size: 10.2pt; }
+  .item__funcao { font-weight: 500; color: var(--ink-2); }
+  .item__data { flex: none; font-size: 8.8pt; font-weight: 600; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  ul.lista { margin: 1.4mm 0 0; padding-left: 4.2mm; color: var(--ink-2); }
+  ul.lista li { margin: .6mm 0; padding-left: .6mm; }
+  ul.lista li::marker { color: var(--ink-3); }
+
+  .duas { display: grid; grid-template-columns: 1fr 1fr; gap: 0 9mm; }
+  .linha { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+  .linha + .linha { margin-top: 1.8mm; }
+  .linha .nome { font-weight: 600; }
+  .linha .onde { color: var(--ink-2); }
+  .linha .data { flex: none; font-size: 8.8pt; font-weight: 600; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
+  .tags { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 1.6mm; }
+  .tags li { padding: .9mm 2.4mm; border: 1px solid var(--rule); border-radius: 1mm; font-size: 8.8pt; font-weight: 500; }
+  .tags li span { color: var(--ink-3); font-weight: 400; }
+
+  footer { margin-top: 6mm; padding-top: 3mm; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; font-size: 8.6pt; color: var(--ink-3); }
+  footer a { color: var(--blue); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Davi Mazzucatto</h1>
+  <p class="cargo">Designer · Motion designer · Editor de vídeo · Fotógrafo</p>
+  <ul class="contato">
+    <li><strong>WhatsApp:</strong> <a href="https://wa.me/5518997695327">(18) 99769-5327</a></li>
+    <li><strong>Portfólio:</strong> <a href="https://davimazzucatto.art">davimazzucatto.art</a></li>
+    <li>Birigui (SP)</li>
+    <li>11/09/2006 (20 anos)</li>
+  </ul>
+  <ul class="contato">
+    <li><strong>Disponibilidade:</strong> Birigui, Araçatuba ou trabalho remoto</li>
+  </ul>
+</header>
+
+<section>
+  <h2>Resumo profissional</h2>
+  <p class="resumo">Designer, motion designer e editor de vídeo, trabalhando na área desde 2021 com social media, e-commerce e eventos. Hoje faz os same days dos eventos, motion graphics, peças institucionais e social media no Grupo Fly. Busca uma oportunidade em agência, para atender diversas marcas e cases, ou em produtora, para trabalhar mais perto das câmeras.</p>
+</section>
+
+<section>
+  <h2>Experiência profissional</h2>
+
+  <div class="item">
+    <div class="item__topo">
+      <div><span class="item__empresa">Grupo Fly</span> <span class="item__funcao">— Design, motion design e edição de vídeo</span></div>
+      <div class="item__data">01/2025 – atual</div>
+    </div>
+    <ul class="lista">
+      <li>Edição de same days e aftermovies dos eventos Fly Scale, que acontecem todo mês.</li>
+      <li>Peças e vídeos para ações institucionais internas, como Outubro Rosa, Novembro Azul e Setembro Amarelo.</li>
+      <li>Social media, carrosséis e motion para o Grupo Fly, suas marcas e Luiz Gregatti.</li>
+      <li>Design para eventos, como as placas de premiação e os crachás do Viajaflux Summit.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item__topo">
+      <div><span class="item__empresa">Hubwisen</span> <span class="item__funcao">— Design para e-commerce</span></div>
+      <div class="item__data">02/2023 – 12/2024</div>
+    </div>
+    <ul class="lista">
+      <li>Imagens still de produto, capas e identidades visuais.</li>
+      <li>Artes necessárias para cada loja virtual.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="item__topo">
+      <div><span class="item__empresa">Grupo Eco</span> <span class="item__funcao">— Design gráfico e social media</span></div>
+      <div class="item__data">2021 – 2023</div>
+    </div>
+    <ul class="lista">
+      <li>Peças para impressão e cardápios.</li>
+      <li>Conteúdo para social media.</li>
+      <li>Primeiros trabalhos com vídeo e motion design.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="duas">
+  <section>
+    <h2>Formação</h2>
+    <div class="linha"><span class="nome">Ensino Médio completo</span></div>
+    <div class="linha"><span class="onde">Pretende cursar graduação em Publicidade e Propaganda</span></div>
+  </section>
+
+  <section>
+    <h2>Áreas de atuação</h2>
+    <ul class="tags">
+      <li>Design gráfico</li><li>Motion design</li><li>Edição de vídeo</li><li>Fotografia</li><li>Social media</li>
+    </ul>
+  </section>
+</div>
+
+<section>
+  <h2>Cursos</h2>
+  <div class="linha"><span><span class="nome">Photoshop e Manipulação de Imagem (básico)</span> <span class="onde">— Senai</span></span><span class="data">07/2021</span></div>
+  <div class="linha"><span><span class="nome">Web Design</span> <span class="onde">— Cenaic Cursos, Birigui</span></span><span class="data">11/2018 – 02/2020</span></div>
+  <div class="linha"><span><span class="nome">Design Gráfico</span> <span class="onde">— Cenaic Cursos, Birigui</span></span><span class="data">03/2017 – 02/2019</span></div>
+</section>
+
+<section>
+  <h2>Ferramentas</h2>
+  <ul class="tags">
+    <li>Adobe Photoshop</li><li>Adobe After Effects</li><li>Adobe Premiere Pro</li><li>Adobe Lightroom</li><li>Adobe Illustrator <span>(básico)</span></li><li>CorelDraw</li>
+  </ul>
+</section>
+
+<footer>
+  <span>Portfólio completo, com vídeos e projetos:</span>
+  <a href="https://davimazzucatto.art">davimazzucatto.art</a>
+</footer>
+
+</body>
+</html>

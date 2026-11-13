@@ -11,6 +11,9 @@ index.html mais os parciais contrate.html (marcação) e contrate.css: hero e
 rodapé, scripts) é o mesmo. O vercel.json faz contrate.davimazzucatto.art
 servir essa página na raiz.
 
+O botão "Baixar currículo em PDF" aponta para curriculo/davi-mazzucatto-curriculo.pdf,
+que sai de curriculo/curriculo.html via "node curriculo/gerar-pdf.js".
+
     python3 build.py                      # caminhos relativos
     python3 build.py https://dzin.com.br  # og:image e canonical absolutos
 """
@@ -96,6 +99,11 @@ def main() -> None:
         {"source": "/", "has": [{"type": "host", "value": f"{SUB_CONTRATE}.davimazzucatto.art"}], "destination": f"/{SUB_CONTRATE}/index.html"},
     ]}, indent=1), encoding="utf-8")
     shutil.copytree(AQUI / "img", DIST / "img")
+    # PDF do currículo (gerado por curriculo/gerar-pdf.js), baixado pelo botão da página contrate
+    pdf = AQUI / "curriculo" / "davi-mazzucatto-curriculo.pdf"
+    if pdf.exists():
+        (DIST / "curriculo").mkdir()
+        shutil.copy2(pdf, DIST / "curriculo" / pdf.name)
     if (AQUI / "media").exists():
         shutil.copytree(AQUI / "media", DIST / "media")
 
