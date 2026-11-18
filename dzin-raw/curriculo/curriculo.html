@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Currículo — Davi Mazzucatto</title>
+<title>Currículo — Davi Soares Bento</title>
 <style>
   /* Inter estática (Fontsource): a versão variável do Google Fonts vira fonte Type 3 no PDF. */
   @font-face { font-family: "Inter"; font-style: normal; font-weight: 400; src: url("https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/files/inter-latin-400-normal.woff2") format("woff2"); }
@@ -17,8 +17,8 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    width: 210mm; padding: 13mm 17mm 10mm;
-    font-family: "Inter", Arial, sans-serif; font-size: 9.6pt; line-height: 1.45; color: var(--ink);
+    width: 210mm; padding: 12mm 17mm 8mm;
+    font-family: "Inter", Arial, sans-serif; font-size: 9.6pt; line-height: 1.4; color: var(--ink);
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
   a { color: inherit; text-decoration: none; }
@@ -31,7 +31,7 @@
   .contato li + li::before { content: "·"; margin: 0 2.4mm; color: var(--ink-3); }
   .contato strong { font-weight: 600; color: var(--ink); }
 
-  section { margin-top: 4.6mm; }
+  section { margin-top: 4.2mm; }
   h2 {
     margin: 0 0 2.4mm; padding-bottom: 1.2mm; border-bottom: 1px solid var(--rule);
     font-size: 8.6pt; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--ink);
@@ -39,7 +39,7 @@
   p { margin: 0; }
   .resumo { color: var(--ink-2); }
 
-  .item + .item { margin-top: 3.6mm; }
+  .item + .item { margin-top: 3.2mm; }
   .item__topo { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
   .item__empresa { font-weight: 700; font-size: 10.2pt; }
   .item__funcao { font-weight: 500; color: var(--ink-2); }
@@ -59,6 +59,10 @@
   .tags li { padding: .9mm 2.4mm; border: 1px solid var(--rule); border-radius: 1mm; font-size: 8.8pt; font-weight: 500; }
   .tags li span { color: var(--ink-3); font-weight: 400; }
 
+  .refs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 6mm; }
+  .ref__nome { font-weight: 600; }
+  .ref__papel { color: var(--ink-2); font-size: 8.8pt; line-height: 1.35; }
+  .ref__tel { margin-top: .5mm; font-weight: 600; font-variant-numeric: tabular-nums; }
   footer { margin-top: 5mm; padding-top: 3mm; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; font-size: 8.6pt; color: var(--ink-3); }
   footer a { color: var(--blue); font-weight: 600; }
 </style>
@@ -67,7 +71,7 @@
 
 <header>
  <div>
-  <h1>Davi Mazzucatto</h1>
+  <h1>Davi Soares Bento</h1>
   <p class="cargo">Designer · Motion designer · Editor de vídeo · Fotógrafo</p>
   <ul class="contato">
     <li><strong>WhatsApp:</strong> <a href="https://wa.me/5518997695327">(18) 99769-5327</a></li>
@@ -81,7 +85,7 @@
     <li><strong>Disponibilidade:</strong> Birigui, Araçatuba ou trabalho remoto</li>
   </ul>
  </div>
-  <img class="foto" src="foto.jpg" alt="Foto de Davi Mazzucatto">
+  <img class="foto" src="foto.jpg" alt="Foto de Davi Soares Bento">
 </header>
 
 <section>
@@ -158,10 +162,15 @@
   </ul>
 </section>
 
-<footer>
-  <span>Portfólio completo, com vídeos e projetos:</span>
-  <a href="https://davimazzucatto.art">davimazzucatto.art</a>
-</footer>
+<section>
+  <h2>Referências</h2>
+  <div class="refs">
+    <div><div class="ref__nome">Felipe Sartori</div><div class="ref__papel">Proprietário do Grupo Eco</div><div class="ref__tel">(18) 99743-4500</div></div>
+    <div><div class="ref__nome">Leonardo Mazzucatto</div><div class="ref__papel">Proprietário da Hubwisen</div><div class="ref__tel">(18) 99678-4287</div></div>
+    <div><div class="ref__nome">Giovana Fornazari</div><div class="ref__papel">Proprietária da Happier Films (freela: edição de reels de casamento)</div><div class="ref__tel">(17) 99201-4535</div></div>
+  </div>
+</section>
+
 
 </body>
 </html>

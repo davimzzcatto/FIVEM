@@ -11,7 +11,7 @@ index.html mais os parciais contrate.html (marcação) e contrate.css: hero e
 rodapé, scripts) é o mesmo. O vercel.json faz contrate.davimazzucatto.art
 servir essa página na raiz.
 
-O botão "Baixar currículo em PDF" aponta para curriculo/davi-mazzucatto-curriculo.pdf,
+O botão "Baixar currículo em PDF" aponta para curriculo/davi-soares-bento-curriculo.pdf,
 que sai de curriculo/curriculo.html via "node curriculo/gerar-pdf.js".
 
     python3 build.py                      # caminhos relativos
@@ -30,8 +30,8 @@ DESCRICAO = ("Davi Mazzucatto — design, motion design, edição de vídeo e fo
              "Seu negócio merece um criativo à altura.")
 OG_IMAGE = "img/retrato.webp"
 SUB_CONTRATE = "contrate"
-TITULO_CV = "Contrate Davi Mazzucatto"
-DESCRICAO_CV = ("Currículo de Davi Mazzucatto: 20 anos, Birigui (SP), design, motion design, "
+TITULO_CV = "Contrate Davi Soares"
+DESCRICAO_CV = ("Currículo de Davi Soares: 20 anos, Birigui (SP), design, motion design, "
                 "edição de vídeo e fotografia. Disponível para Birigui, Araçatuba ou remoto.")
 
 CABECA = """<!doctype html>
@@ -100,7 +100,7 @@ def main() -> None:
     ]}, indent=1), encoding="utf-8")
     shutil.copytree(AQUI / "img", DIST / "img")
     # PDF do currículo (gerado por curriculo/gerar-pdf.js), baixado pelo botão da página contrate
-    pdf = AQUI / "curriculo" / "davi-mazzucatto-curriculo.pdf"
+    pdf = AQUI / "curriculo" / "davi-soares-bento-curriculo.pdf"
     if pdf.exists():
         (DIST / "curriculo").mkdir()
         shutil.copy2(pdf, DIST / "curriculo" / pdf.name)
